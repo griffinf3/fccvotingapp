@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+  
+  <style>
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+      
+#pole{
+    margin:20px;
+}
+      
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+      
+#poll{
+    margin-left: 20px;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body onload="loaded()">
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="#">Post</a></li>
+        <li><a onclick = "checkPolls()">Polls</a></li>
+        <li><a onclick = "checkEdit()">Edit</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+      
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    
+  </div>
+<div id = "poll">
+    
+    <form action="/create" method="post">
+   Question:<br>
+  <input id="input1" type="text" name="question" value="What is your favorite ...?" size="30">
+        
+        <input type="checkbox" name="showcase" value="showcase" checked>Showcase on Home Page<br>
+        
+        
+        <br><br><br>
+   Options:<br>
+   <select id="myOptions" name="options[]" multiple="multiple">
+    <option value="Option1">Option 1</option>
+        </select>
+       
+   <input style="margin-left:130px;" type="submit" onclick="selectAll()" value="Post this Poll">
+     </form>   
+       
+ <div id="input2" style="display:none"><input id="newoption" type="text" name="option" value="" size="10"></div>
+    <button id= "add" onclick="doAdd()">Add</button> 
+    <button id= "edit" onclick="doEdit()">Edit</button> 
+    <button id= "delete" onclick="doDelete()">Delete</button> 
+    <button id="done" style="display:none" onclick="doDone()">Done</button> 
+</div>
+
+<footer class="container-fluid text-center">
+          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>
+<script>
+    function loaded() {
+   document.getElementById("myOptions").options[0].selected = true;  
+    }
+    
+    function checkEdit(){
+     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
+    if (totalPolls == 0) alert("There are no polls to edit."+ <%- JSON.stringify(totalPolls) %>);
+              else  window.location = "/edit";
+         }
+         
+  function checkPolls(){
+     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
+             if (totalPolls == 0) alert("No polls have been posted.");
+              else  window.location = "/view";
+         }
+    
+    function doDelete() {
+      if (document.getElementById("myOptions").length >1)
+      {
+      var x = document.getElementById("myOptions");
+      x.remove(x.selectedIndex);} 
+    }
+    
+    function doAdd() {
+      var x = document.getElementById("myOptions");
+      var option = document.createElement("option");
+      option.text = "Next Option";
+      x.add(option);
+        
+      var lg = document.getElementById("myOptions").length;
+        document.getElementById("myOptions").options[lg-1].selected = true;
+    }
+    
+    function doEdit() {
+        var x = document.getElementById("myOptions");
+     document.getElementById('newoption').value = x.options[x.selectedIndex].text;
+      document.getElementById('input2').style.display = 'block';
+      document.getElementById('edit').style.display = 'none';
+      document.getElementById('add').style.display = 'none';
+      document.getElementById('delete').style.display = 'none';
+      document.getElementById('done').style.display = 'block';
+        
+      var input2 = document.getElementById('newoption');
+        input2.focus();
+       input2.select();
+     //   document.getElementById("myOptions").options[0].selected = false; 
+    } 
+    
+    function doDone() {    
+    document.getElementById('input2').style.display = 'none';
+    document.getElementById('edit').style.display = 'inline';
+    document.getElementById('add').style.display = 'inline';
+    document.getElementById('delete').style.display = 'inline';
+    document.getElementById('done').style.display = 'none';     
+    }
+    
+    function selectAll() 
+    {var selectBox = document.getElementById("myOptions");
+      for (var i = 0; i < selectBox.options.length; i++) 
+        { selectBox.options[i].selected = true; } 
+    }
+    
+    newValue = document.getElementById('newoption'); 
+
+    newValue.onkeyup = function(){
+   // var i = document.getElementById("myOptions").selectedIndex;
+   // var o = document.getElementById("myOptions").options;    
+   // newValue2 = o[i].value; 
+       // console.log('nv:'+ newValue)
+    var x = document.getElementById("myOptions");
+    x.options[x.selectedIndex].text = newValue.value;
+    x.options[x.selectedIndex].value = newValue.value;  
+    }
+
+</script>
+</body>
+</html>
+
+  

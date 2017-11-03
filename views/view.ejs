@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+      
+button {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  line-height: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+  background: salmon;
+  border: none;
+}
+      
+.button {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  line-height: 20px;
+  font-weight: bold;
+  padding: 0 10px;
+  background: salmon;
+  border: none;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+</style>
+</head>
+<body onload=loaded();>
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/create">Post</a></li>
+        <li><a href="#">Polls</a></li>
+        <li><a href="/edit">Edit</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav> 
+   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    
+    
+    <div id="description"><p>(a Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
+  </div>
+<div style="margin:20px;">
+  <ul id="myList">
+</ul>
+</div>
+
+<footer class="container-fluid text-center">
+          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>
+
+</body>
+   <script>     
+    function loaded() {
+        
+       var loc = [];
+       var loc2 =[];
+       var voteBtn;
+       var deleteBtn;
+        
+     var ql = <%- JSON.stringify(questionlist) %>;
+     for (var q = 0; q < ql.length; q++)
+     { loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
+       //console.log(loc[q]);
+     }
+    
+     for (var r = 0; r < ql.length; r++)
+     {   loc2=loc[r]; 
+         voteBtn = document.createElement("a");
+         voteBtn.setAttribute("href", loc2);
+         voteBtn.setAttribute("class", 'button');
+         voteBtn.innerHTML = "Vote";
+        
+         var node = document.createElement("li");
+         textnode = document.createTextNode(ql[r]);
+         node.appendChild(textnode);  
+         
+          //var button = document.createElement("button"); 
+      
+      
+         deleteBtn = document.createElement("a");
+         deleteBtn.setAttribute("href","javascript:confirmIt("+r+");");
+         deleteBtn.setAttribute("class", 'button');
+         deleteBtn.innerHTML = "Delete";
+      
+          //button.innerHTML = "Delete";
+      
+
+      node.appendChild(deleteBtn);
+      //button.addEventListener ("click", function() {confirmIt();});
+         
+      node.appendChild(voteBtn);
+      
+     link = document.createElement("span");    
+     link.innerHTML = " Link: ";
+      node.appendChild(link);   
+     link = document.createElement("a"); 
+      loc2 = "https://fccvotinggriffinf3.herokuapp.com/" + loc2;
+     link.setAttribute("href", loc2);
+     link.innerHTML = loc2;
+         node.appendChild(link);
+             document.getElementById("myList").appendChild(node);     
+         
+        
+      }
+     
+}
+       
+function confirmIt(r) {
+    var ql = <%- JSON.stringify(questionlist) %>;
+    var locQuestion = ql[r]; 
+    var r = confirm("Are you sure you want to delete the poll, " + '"' + ql[r] + '"' + ", from the database?");
+  if (r == true)  window.location = "/delete/" + <%- JSON.stringify(username) %> + "/" + locQuestion; else window.location = "/view";
+}
+  
+//function vote(r) {
+    //loc = 
+ //   console.log('r:'+ r);
+  /// window.location = loc;
+  // window.open('localhost:3000/franklin/What is your favorite topic?', '_blank');
+//}
+       
+</script>
+ 
+    
+</html>

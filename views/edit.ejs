@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+</style>
+</head>
+<body onload="loaded()">
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/create">Post</a></li>
+        <li><a href="/view">Polls</a></li>
+        <li><a href="#">Edit</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    <div id="description"><p>(a Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
+  </div>
+<div style="margin:20px;">
+    <div>Please select and submit the poll you would like to edit.<br><div><span id="note">The Home Page will accomodate the viewing of up to 3 polls (first three if more than three have been marked for showcasing).</span></div><br><div>* Marked for showcasing on Home Page.</div>
+     <form action="/create2" method="post">
+   <select id="myPoll" name="question" multiple="multiple" onchange="changemade()">
+        </select>
+   <input id="sc" name="sc" value="" type="hidden"> 
+   <input id="qlist" name="qlist" value="" type="hidden"> 
+   <input id="editbtn" style="margin-left:130px;" type="submit" value="Submit">
+     </form>   
+</div>
+<footer class="container-fluid text-center">
+          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>
+
+</body>
+    <script>
+    function loaded(){
+       document.getElementById("editbtn").disabled=true; 
+       var ql = <%- JSON.stringify(questionlist) %>;
+       var ql2 = [];
+       for (i=0; i<ql.length; i++)      
+       {ql2.push(ql[i]);}
+       var ql3= JSON.stringify(ql2);      
+       document.getElementById('qlist').value = ql3;
+       var scl = <%- JSON.stringify(sclist) %>;
+      for (var q = 0; q < ql.length; q++)
+    { var option = document.createElement("option");
+      option.value= q+1;
+     if (scl[q]== true) option.innerHTML = '*' + ql[q];
+     else option.innerHTML = "&nbsp;" + ql[q];
+    document.getElementById("myPoll").appendChild(option);
+    }
+    }   
+        
+    function changemade(){   
+        document.getElementById('editbtn').disabled=false;
+        var scl = <%- JSON.stringify(sclist) %>;             
+        var s = document.getElementById("myPoll");
+        var o = s.options[s.selectedIndex].value;
+        document.getElementById("sc").value= scl[o-1];
+    }
+    
+    </script>
+</html>

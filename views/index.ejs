@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+  <style>
+ .dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}     
+            
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 500px; /* Should be removed. Only for demonstration */
+}
+
+#col1{
+  position:relative; 
+
+}
+
+#col2{
+   position:relative;  
+
+}
+
+#col3{
+   position:relative;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+      
+.row2{
+     margin:20px;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body onload=loaded();>
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a onclick = "checkPost()">Post</a></li>
+        <li><a onclick = "checkPolls()">Polls</a></li>
+        <li class="dropbtn"><div class="dropdown"> 
+            <a>Options</a>
+          <div class="dropdown-content">
+    <a id="hide1" onclick = "hide(1)">Hide Poll 2</a>
+    <a id="hide2" onclick = "hide(2)">Hide Poll 3</a>
+            </div></div></li>
+         <li><a onclick = "checkEdit()">Edit</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    
+    
+    <div id="description"><p>(a Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
+  </div>
+<div class="row" style="margin:20px;">
+  <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
+ 
+    <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
+     <div style="background-color:#aaa;" class="row2">
+         <ul id="myList1">
+         </ul>
+     </div> 
+      
+      <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var polls = <%- JSON.stringify(polls) %>;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
+//console.log('polls:'+ polls[0]);
+var labelsArray = [];
+var dataArray = [];   
+for (var i = 1; i< polls[0].options.length; i++)
+{labelsArray.push(polls[0].options[i].option);
+ dataArray.push(polls[0].options[i].votes)}
+    
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labelsArray,
+        datasets: [{
+            label: '# of Votes',
+            data: dataArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+});
+</script>
+      
+      
+    </div> 
+    
+ 
+    
+    
+    
+  <div id="col2" class="column" style="background-color:#bbb;">
+      <br>
+      <div style="display: inline"><h3 style="display: inline"><%= polls[1].question %></h3>
+          <span id="secondPost"></span></div>
+     <h4 style="background-color:#bbb;">Current Voting Tally: </h4> 
+     <div style="background-color:#bbb;"  class="row2">
+         <ul id="myList2">
+         </ul>
+     </div> 
+    
+    
+    <canvas id="myChart2" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart2").getContext('2d');
+var polls = <%- JSON.stringify(polls) %>;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
+var labelsArray = [];
+var dataArray = [];   
+for (var i = 1; i< polls[1].options.length; i++)
+{labelsArray.push(polls[1].options[i].option);
+ dataArray.push(polls[1].options[i].votes)}
+    
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labelsArray,
+        datasets: [{
+            label: '# of Votes',
+            data: dataArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+});
+</script>
+    
+ 
+    </div>
+  <div id ="col3" class="column" style="background-color:#ccc;">  
+      <br>
+    <div style="display: inline"><h3  style="display: inline"><%= polls[2].question %></h3>
+      <span id="thirdPost"></span></div>
+      
+      
+      
+     <h4 style="background-color:#ccc;">Current Voting Tally: </h4> 
+     <div style="background-color:#ccc;"  class="row2">
+         <ul id="myList3">
+         </ul>
+     </div>
+    
+    
+    <canvas id="myChart3" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart3").getContext('2d');
+var polls = <%- JSON.stringify(polls) %>;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
+var labelsArray = [];
+var dataArray = [];   
+for (var i = 1; i< polls[2].options.length; i++)
+{labelsArray.push(polls[2].options[i].option);
+ dataArray.push(polls[2].options[i].votes)}
+    
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labelsArray,
+        datasets: [{
+            label: '# of Votes',
+            data: dataArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+});
+</script>
+    
+    
+    
+    
+    
+    </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>
+    
+    <form id = "form1" action="/updateOptions" method="post">     
+    <input id= "option1" type="hidden" name="option1" value="" />
+    <input id= "option2" type="hidden" name="option2" value="" />
+    </form>
+
+</body>
+     <script>
+    var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
+    var status = <%- JSON.stringify(logstatus) %>;
+    function loaded() {
+    var polls = <%- JSON.stringify(polls) %>;
+     var q2 = polls[1].question;
+     var q3 = polls[2].question;
+     if (q2 == 'poll 2') 
+     {
+     var hideBtn = document.createElement("button");
+      hideBtn.innerHTML = "Hide";
+      //hideBtn.setAttribute('style', 'display: inline');  
+         
+      hideBtn.addEventListener ("click", function() {hide(1);});
+      
+      ///var postBtn = document.createElement("button");  
+     /// postBtn.innerHTML = "Post";
+     /// postBtn.addEventListener ("click", function() {post()});
+        
+      var node = document.getElementById("secondPost");
+      node.appendChild(hideBtn);}
+     /// node.appendChild(postBtn);
+       
+         if (q3 == 'poll 3') 
+     {
+      var hideBtn = document.createElement("button");
+      hideBtn.innerHTML = "Hide";
+      //hideBtn.setAttribute('style', 'display: inline');  
+      hideBtn.addEventListener ("click", function() {hide(2);});
+      
+     /// var postBtn = document.createElement("button");  
+    ///  postBtn.innerHTML = "Post";
+    ///  postBtn.addEventListener ("click", function() {post()});
+        
+      var node = document.getElementById("thirdPost");
+      node.appendChild(hideBtn);
+      ///node.appendChild(postBtn);  
+     }
+
+      
+     
+     //First question:
+      var q1 = polls[0].question;
+      var ops1 = polls[0].options;
+        if (polls[0].options.length <= 4)
+        {
+      for (var i = 1; i < polls[0].options.length; i++)
+        {var node = document.createElement("li");
+        textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
+      node.appendChild(textnode);     
+     document.getElementById("myList1").appendChild(node);  
+       }}
+      
+      //Second question:
+     
+      var ops2 = polls[1].options;
+        if (polls[1].options.length <= 4)
+        {
+      for (var i = 1; i < polls[1].options.length; i++)
+        {var node = document.createElement("li");
+        textnode = document.createTextNode(polls[1].options[i].option + ' - '  + polls[1].options[i].votes);
+      node.appendChild(textnode);     
+     document.getElementById("myList2").appendChild(node);  
+       }}
+        
+      //Third question:
+      //var polls = <%- JSON.stringify(polls) %>;
+      //var q3 = polls[2].question;
+      var ops1 = polls[2].options;
+        if (polls[2].options.length <= 4)
+        {
+      for (var i = 1; i < polls[2].options.length; i++)
+        {var node = document.createElement("li");
+        textnode = document.createTextNode(polls[2].options[i].option + ' - '  + polls[2].options[i].votes);
+       node.appendChild(textnode);     
+      document.getElementById("myList3").appendChild(node);  
+       }}
+   
+   // document.querySelector("#col2").style.display = op1;
+   // hide(1);
+    
+   // document.querySelector("#col3").style.display = op2;
+  //  hide(2);
+        
+    var op2 = <%- JSON.stringify(option2) %>; 
+   var op1 = <%- JSON.stringify(option1) %>;
+   if (op1 == 'none') (hide2(1));
+   if (op2 == 'none') (hide2(2));  
+    }
+         
+ function checkEdit(){
+             if (totalPolls == 0) alert("There are no polls to edit.");
+              else  window.location = "/edit";
+         }
+         
+  function checkPolls(){
+             if (totalPolls == 0) alert("No polls have been posted.");
+              else  window.location = "/view";
+         }
+         
+function checkPost(){
+    if (status == " Login/Signup"){alert("You cannot post a poll without first logging in.");}
+    else
+     window.location = "/create"
+}
+         
+function hide(num){
+   var status =  <%- JSON.stringify(logstatus) %>;
+   if (status == ' Log out')
+   {
+  var el = document.querySelector("#col1");
+  var el2 = document.querySelector("#col2");
+  var el3 = document.querySelector("#col3");
+    if (el2.style.display == '') el2.style.display = 'block';
+    if (el3.style.display == '') el3.style.display = 'block';
+     ///var polls = <%- JSON.stringify(polls) %>;
+    /// var polls1 = polls[0];
+     ///var polls2 = polls[1];
+    /// var polls3 = polls[2];
+    // console.log('polls0optionslg:'+ polls[0].options.length);
+    // var status = <%- JSON.stringify(logstatus) %>;
+     
+    
+    if(num ==1)
+     {
+        
+     if (el2.style.display == 'none')
+     { 
+         el2.style.display = 'block';
+    document.getElementById("hide1").textContent="Hide Poll2";
+     if (el3.style.display == 'none')
+    {el.style.left="-150px";el2.style.left="-150px"; } else {  
+        
+       /// window.location = "/index";
+    }
+     }
+    else {
+    el2.style.display = 'none';
+    document.getElementById("hide1").textContent="Show Poll2";}    
+    if (el3.style.display == 'none')
+    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}
+     }
+    
+    
+    else
+     {
+     if (el3.style.display == 'none') {el3.style.display = 'block';
+    document.getElementById("hide2").textContent="Hide Poll3";
+    if (el2.style.display == 'none')
+    {el.style.left="-150px";el3.style.left="-150px";  } else {
+        
+       /// window.location = "/index";
+    }                                                                                                                                } 
+    else {el3.style.display = 'none';
+           document.getElementById("hide2").textContent="Show Poll3";}
+    if (el2.style.display == 'none')
+    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}          
+     }  
+    document.getElementById('option1').value = el2.style.display;
+    document.getElementById('option2').value = el3.style.display;
+    console.log(el2.style.display);
+    console.log(el3.style.display);
+    document.getElementById('form1').submit();
+   } else
+   {alert("Please login to utilize this feature.");}
+   
+}
+         
+function hide2(num){
+   var status =  <%- JSON.stringify(logstatus) %>;
+   if (status == ' Log out')
+   {
+  var el = document.querySelector("#col1");
+  var el2 = document.querySelector("#col2");
+  var el3 = document.querySelector("#col3");
+    if (el2.style.display == '') el2.style.display = 'block';
+    if (el3.style.display == '') el3.style.display = 'block';
+     ///var polls = <%- JSON.stringify(polls) %>;
+    /// var polls1 = polls[0];
+     ///var polls2 = polls[1];
+    /// var polls3 = polls[2];
+    // console.log('polls0optionslg:'+ polls[0].options.length);
+    // var status = <%- JSON.stringify(logstatus) %>;
+     
+    
+    if(num ==1)
+     {
+        
+     if (el2.style.display == 'none')
+     { 
+         el2.style.display = 'block';
+    document.getElementById("hide1").textContent="Hide Poll2";
+     if (el3.style.display == 'none')
+    {el.style.left="-150px";el2.style.left="-150px"; } else {  
+        
+       /// window.location = "/index";
+    }
+     }
+    else {
+        
+        
+        el2.style.display = 'none';
+        
+            document.getElementById("hide1").textContent="Show Poll2";}
+         
+         
+    if (el3.style.display == 'none')
+    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}
+     }
+    
+    
+    else
+     {
+     if (el3.style.display == 'none') {el3.style.display = 'block';
+    document.getElementById("hide2").textContent="Hide Poll3";
+    if (el2.style.display == 'none')
+    {el.style.left="-150px";el3.style.left="-150px";  } else {
+        
+       /// window.location = "/index";
+    }                                                                                                                                } 
+        else {el3.style.display = 'none';
+           document.getElementById("hide2").textContent="Show Poll3";}
+    if (el2.style.display == 'none')
+    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}          
+     }  
+    //document.getElementById('option1').value = el2.style.display;
+   // document.getElementById('option2').value = el3.style.display;
+  //  document.getElementById('form1').submit();
+   } else
+   {alert("Please login to create and view polls.");}
+   
+}
+</script>
+</html>
