@@ -247,7 +247,14 @@ app.post('/voting', function(req, res) {
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    res.send('voting');
+    
+    User.findOne({ 'local.username' : username}, function(err, user) {    
+           if (err) {}
+           else
+            {res.send('user:' + username);}});
+    
+    
+    
 });  
     
   
