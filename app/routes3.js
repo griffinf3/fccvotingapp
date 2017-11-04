@@ -250,12 +250,17 @@ app.post('/voting', function(req, res) {
     var option = req.body.option;
     
 //record this vote if both the username and question can be found in the polls collection.
-res.send('username'+ username);
+//res.send('username'+ username);
     
-    
+    User.findOne({ 'local.username' : username}, function(err, user) {    
+           if (err) {}
+           else
+            if (user) {res.send("user:"+ user);}
+            else {res.send("no user:");}}
     
     
  // res.redirect('/'); 
+);
 });
      
 app.get('/delete/*', function(req, res) {
