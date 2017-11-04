@@ -473,7 +473,7 @@ app.get('/loginSuccess', function(req, res, next) {
                       if (err) {}
                         else
                         { if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
-                          else {res.send('no doc');}
+                          else {res.send('question');}
                         }
                     });
             }
