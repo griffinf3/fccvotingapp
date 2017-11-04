@@ -259,18 +259,11 @@ app.post('/voting', function(req, res) {
                     var update = { $inc: { 'poll.options.$.votes': 1 }};
                     var options = { multi: false};
 
-                    //Poll.update(conditions, update, options, callback);
-            
-            
-                    res.send('OK');
-            
-            
-            
+                    Poll.update(conditions, update, options, callback);
+                    function callback (err, numAffected) {res.send('numaffected'+ numAffected.n);}
+
             }
-            }});
-    
-    
-    
+            }});  
 });  
     
   
