@@ -247,7 +247,8 @@ app.post('/voting', function(req, res) {
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    var loggedInUserId = req.user._id;
+    if (req.user) {var loggedInUserId = req.user._id;}
+    else {var loggedInUserId = 'no logged in user';}
     res.send('loggedinId'+ loggedInUserId);
    });  
     
