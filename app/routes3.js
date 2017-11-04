@@ -6,8 +6,28 @@ module.exports = function(app, passport) {
 
     
 app.get('/test', function(req, res){
-                 res.send('test') ;         
-                           });
+    
+    
+    var options = [{}]; 
+  for (i=0; i<3; i++)
+  {
+    options.push({option: "option" + i, votes: 0});
+  }
+var newPollUser = new Poll(
+                           {
+                       userid: "59fd98473f157b001242bf51",
+                       poll: {question: 'first question',
+                              showcase: true,
+                              options: [options]}   
+                            }
+                       );  
+                         
+                    // save  
+                         newPollUser.post('save', function(err) {
+                              if (err) throw err;
+							  
+							   res.send('OK');});});
+  
  
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
