@@ -472,12 +472,44 @@ app.get('/loginSuccess', function(req, res, next) {
                     Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
-                        {if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
+                        {if (doc) {
+                            
+                             var lg = doc.poll.options.length;
+                                var optionlist = [];
+                                var votelist = [];
+                                var optionslist = [{}];
+                                for (i=1; i<lg; i++)
+                                    
+                                {optionlist.push(doc.poll.options[i].option);
+                                votelist.push(doc.poll.options[i].votes);
+    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
+                                
+                                res.render('voting.ejs', {question: question, username: username, 
+                                                          optionlist: optionlist, votelist: votelist,
+                                                         optionslist: optionslist});
+                            
+                           }   
                           else {
                                Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {  if (err) {}
                         else {  
-                          if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
-                          else {res.send(_qUrl);  }    
+                          if (doc) {
+                              
+                               var lg = doc.poll.options.length;
+                                var optionlist = [];
+                                var votelist = [];
+                                var optionslist = [{}];
+                                for (i=1; i<lg; i++)
+                                    
+                                {optionlist.push(doc.poll.options[i].option);
+                                votelist.push(doc.poll.options[i].votes);
+    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
+                                
+                                res.render('voting.ejs', {question: question, username: username, 
+                                                          optionlist: optionlist, votelist: votelist,
+                                                         optionslist: optionslist});
+                              
+                         }   
+                          else {send('could not locate question in the database; please report this error');}    
                         }});} 
                               }
                         });
