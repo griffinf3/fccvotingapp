@@ -261,6 +261,7 @@ app.post('/voting', function(req, res) {
                   //user found; now look to see if there is a question created by this user in the polls collection?
                      var id = user._id;  
                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
+                   var update = { $inc: { 'poll.options.$.votes': 1 }};
                      res.redirect('/'); 
 
                      
