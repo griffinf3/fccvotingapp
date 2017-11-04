@@ -473,8 +473,8 @@ app.get('/loginSuccess', function(req, res, next) {
                     Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
-                        { if (doc) {res.send('OK the doc is:' + doc); }   
-       
+                        { if (doc) {}   
+                          else res.send('OK the doc is:' + doc); 
                         }
                     });
             }
