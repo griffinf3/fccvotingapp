@@ -292,28 +292,15 @@ app.post('/voting', function(req, res) {
                    
                          
                      }
-                    //res.redirect('/'); 
+                     res.redirect('/'); 
 
                      
             }
-            else {
-                
-                
-                //res.redirect('/'); 
-            
-            
-            }}
+            else {res.redirect('/'); }}
     
-    if (req.user)
-    {res.redirect('/'); }
-    else {
-        
-  
-   }
+    
  
 );
-    
-    
 });
      
 app.get('/delete/*', function(req, res) {
