@@ -4,36 +4,6 @@ var Option     = require('../app/models/option');
 
 module.exports = function(app, passport) {
 
-    
-app.get('/test', function(req, res){  
-    var options = [{}]; 
-  for (i=0; i<3; i++)
-  {
-    options.push({option: "option" + i, votes: 0});
-  }
-    
-
-var newPollUser = new Poll(
-                           {
-                       userid: "59fd98473f157b001242bf51",
-                       poll: {question: 'first question',
-                              showcase: true,
-                              options: options}   
-                            }
-                       );
-    
-//newPollUser.post('save', function(err) {
-                           //   if (err) throw err;
-   newPollUser.save(function(err) {
-                           if (err) throw err; 
-    
-    
-							  
-							   res.send('OK');});
-});
-
-  
- 
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
 var allPolls = [{}];
@@ -230,36 +200,18 @@ app.post('/create', isLoggedIn2, function(req, res) {
 var question = req.body.question;
 var options = [{}]; 
   for (i=0; i<req.body.options.length; i++)
-  {
-    options.push({option: req.body.options[i], votes: 0});
-  }
+  {options.push({option: req.body.options[i], votes: 0});}
 var showCase =  req.body.showcase;
 var SC= false;
 if (showCase =='showcase') SC = true;
-              
-Poll.findOne({ '_id' :  req.user._id }, function(err, doc) {    
-                  if (err) {}
-                 else
-                 { 
-                     if (doc) {    
-                     return (null, false);       
-                     }
-                     else{
+// create new poll document for the user.  
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}});  
                          
-                       // create new poll document for the user.  
-                       var newPollUser = new Poll(
-                           {
-                       userid: req.user._id,
-                       poll: {question: question,
-                              showcase: SC,
-                              options: options}   
-                            }
-                       );  
-                         
-                    // save  
-                         newPollUser.post('save', function(err) {
+// save  
+newPollUser.save(function(err) {
                               if (err) throw err;
-                        res.redirect('/');});}}});});
+                        res.redirect('/');});
+});
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
     var questionNo = req.body.question;
