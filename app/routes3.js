@@ -466,27 +466,21 @@ app.get('/loginSuccess', function(req, res, next) {
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            {    
-              if (user) {
+            { if (user) {
                      var question = qUrl.substring(n+1);
-                     var id = user._id;   
-        
-Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
-                      if (err) {}
-                        else
-                        {  if (doc) {
-                            var lg = doc.poll.options.length;
-                                var optionlist = [];
-                                var votelist = [];
-                                var optionslist = [{}];
-                                for (i=1; i<lg; i++)
-                                {optionlist.push(doc.poll.options[i].option);
-                                votelist.push(doc.poll.options[i].votes);
-    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
-                            
-                             res.send('OK');    
-                        }
-                        }});}}});}); 
+                     var id = user._id; 
+                     
+              
+            }
+    
+    
+    
+    
+    
+    }});
+    res.send('OK the username is:' + username);  
+    
+    }); 
     
     app.post('/*', function(req, res, next) { 
         
