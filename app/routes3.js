@@ -297,12 +297,17 @@ allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: nul
  allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
 allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};   
         
-        
-        
-        
-        
-        
-        
+        User.findOne({ 'local.username' : username}, function(err, user) {    
+           if (err) {}
+           else
+            {
+            if (user) 
+              { }
+        else {}
+            }
+        });
+ 
+
         res.send('notloggedin');
         //user is not logged in.
 }});
