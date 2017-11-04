@@ -5,28 +5,16 @@ var Option     = require('../app/models/option');
 module.exports = function(app, passport) {
 
     
-app.get('/test', function(req, res){
-    
-    
+app.get('/test', function(req, res){  
     var options = [{}]; 
   for (i=0; i<3; i++)
   {
     options.push({option: "option" + i, votes: 0});
   }
-var newPollUser = new Poll(
-                           {
-                       userid: "59fd98473f157b001242bf51",
-                       poll: {question: 'first question',
-                              showcase: true,
-                              options: [options]}   
-                            }
-                       );  
-                         
-                    // save  
-                         newPollUser.post('save', function(err) {
-                              if (err) throw err;
-							  
-							   res.send('OK');});});
+    
+res.send('OK');
+});
+
   
  
 // normal routes ===============================================================
