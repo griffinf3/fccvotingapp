@@ -461,16 +461,15 @@ app.get('/loginSuccess', function(req, res, next) {
      var n = qUrl.indexOf("/");
      var username = qUrl.substring(0, n);
      var sc = req.body.showcase; 
-        
+     var question = qUrl.substring(n+1);  
         
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
             { if (user) {
-                    var question = qUrl.substring(n+1);
                     var id = user._id; 
                 
-                    Poll.findOne({ 'userid' : id, 'poll.question' : 'What is your favorite car?'}, function(err, doc) {    
+                    Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
                         { if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
