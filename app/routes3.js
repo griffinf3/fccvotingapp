@@ -4,8 +4,12 @@ var Option     = require('../app/models/option');
 
 module.exports = function(app, passport) {
 
+    
+app.get('/test', function(req, res){
+                 res.send('test') ;         
+                           });
+ 
 // normal routes ===============================================================
-
 app.get('/', isLoggedIn, function(req, res) {
 var allPolls = [{}];
 var op1;
