@@ -12,6 +12,16 @@ app.get('/test', function(req, res){
     options.push({option: "option" + i, votes: 0});
   }
     
+
+var newPollUser = new Poll(
+                           {
+                       userid: "59fd98473f157b001242bf51",
+                       poll: {question: 'first question',
+                              showcase: true,
+                              options: options}   
+                            }
+                       );
+    
 res.send('OK');
 });
 
