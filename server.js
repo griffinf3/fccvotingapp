@@ -1,7 +1,4 @@
 // server.js
-
-// set up ======================================================================
-// get all the tools we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 3000;
@@ -15,7 +12,8 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI); 
+//mongoose.connect(process.env.MONGODB_URI); 
+mongoose.connect(process.env.MONGOLAB_URI); 
 
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -29,7 +27,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'nobigdeal', // session secret
     resave: true,
     saveUninitialized: true
 }));
