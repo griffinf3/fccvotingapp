@@ -470,8 +470,9 @@ app.get('/loginSuccess', function(req, res, next) {
                    //  var question = qUrl.substring(n+1);
                     // var id = user._id; 
                      
-                  res.send('OK the username is:' + user.local.username); 
+                  res.send('OK the userinfo is:' + user); 
             }
+ 
     });
     }); 
     
