@@ -302,7 +302,24 @@ allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: nul
            else
             {
             if (user) 
-              { }
+              {
+              Poll.find({ 'userid' :  user._id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {}
+                 else {
+                     
+                     
+                     
+                     
+                     
+                 }
+              
+              
+              
+              
+              });
+              
+              
+              }
         else {}
             }
         });
