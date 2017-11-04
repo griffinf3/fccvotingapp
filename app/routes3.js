@@ -22,7 +22,14 @@ var newPollUser = new Poll(
                             }
                        );
     
-res.send('OK');
+//newPollUser.post('save', function(err) {
+                           //   if (err) throw err;
+   newPollUser.save(function(err) {
+                           if (err) throw err; 
+    
+    
+							  
+							   res.send('OK');});
 });
 
   
