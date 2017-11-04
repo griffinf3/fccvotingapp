@@ -306,7 +306,16 @@ app.post('/voting', function(req, res) {
     
     if (req.user)
     {res.redirect('/'); }
-    else {res.redirect('/viewOne'); }
+    else {
+        
+         var allPolls = [{}];
+allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+ allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+        
+        res.render('viewOne.ejs', {polls: allPolls });
+  
+   }
  
 );
     
