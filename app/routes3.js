@@ -243,7 +243,18 @@ newPollUser.save(function(err) {
                         }});  
 }); 
        
-app.post('/voting', function(req, res) { 
+app.post('/voting', function(req, res) {
+    
+    var question= req.body.question;
+    var username = req.body.username;
+    var option = req.body.option;
+    
+//record this vote if both the username and question can be found in the polls collection.
+User.findOne({ 'local.username' : username}, function(err, user) { }
+    
+    
+    
+    
   res.redirect('/'); 
 });
      
