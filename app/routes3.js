@@ -454,7 +454,14 @@ app.get('/loginSuccess', function(req, res, next) {
         });
     });
     
-    app.get('/*', function(req, res, next) {    
+    app.get('/*', function(req, res, next) {   
+        
+     var _qUrl = req.url;   
+     var qUrl = decodeURIComponent(_qUrl.substring(1));
+     var n = qUrl.indexOf("/");
+     var username = qUrl.substring(0, n);
+     var sc = req.body.showcase; 
+   
      res.send('OK');
 }); 
     
