@@ -255,11 +255,36 @@ app.post('/voting', function(req, res) {
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            if (user) {res.send("user:"+ user);}
-            else {res.send("no user:");}}
+            if (user) {
+                
+                
+                  //user found; now look to see if there is a question created by this user in the polls collection?
+                     var id = user._id;     
+                     var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
+                     var update = { $inc: { 'poll.options.$.votes': 1 }};
+                     var options = { multi: false};
+
+                     Poll.update(conditions, update, options, callback);
+                     function callback (err, numAffected) {
+                       if (numAffected.n == 0)
+                           //try again using a trailing question mark.
+                       { var conditions = {'userid' : id, 'poll.question' : question+ '?', 'poll.options.option':option};
+                        var update = { $inc: { 'poll.options.$.votes': 1 }};
+                        var options = { multi: false};
+                        Poll.update(conditions, update, options, callback);
+                       function callback (err, numAffected) {if (numAffected.n == 0)
+                       {alert("Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database."); }
+                            else {alert("The option you selected for this poll has been recorded.");}}
+                       }  
+                        else {alert("The option you selected for this poll has been recorded.");}} 
+                
+                    
+                
+            }
+            else {}}
     
     
- // res.redirect('/'); 
+ res.redirect('/'); 
 );
 });
      
