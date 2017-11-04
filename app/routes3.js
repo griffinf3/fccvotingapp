@@ -260,7 +260,7 @@ app.post('/voting', function(req, res) {
                     var options = { multi: false};
 
                     Poll.update(conditions, update, options, callback);
-                    function callback (err, numAffected) {res.send('numaffected'+ numAffected.n);}
+                    function callback (err, numAffected) {res.send('question'+ question);}
 
             }
             }});  
