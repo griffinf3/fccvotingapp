@@ -264,22 +264,7 @@ app.post('/voting', function(req, res) {
                      var update = { $inc: { 'poll.options.$.votes': 1 }};
                      var options = { multi: false};
 
-                     Poll.update(conditions, update, options, callback);
-                     function callback (err, numAffected) {
-                       if (numAffected.n == 0)
-                           //try again using a trailing question mark.
-                       { var conditions = {'userid' : id, 'poll.question' : question+ '?', 'poll.options.option':option};
-                        var update = { $inc: { 'poll.options.$.votes': 1 }};
-                        var options = { multi: false};
-                        Poll.update(conditions, update, options, callback);
-                       function callback (err, numAffected) {if (numAffected.n == 0)
-                       {alert("Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database."); }
-                            else {alert("The option you selected for this poll has been recorded.");}}
-                       }  
-                        else {alert("The option you selected for this poll has been recorded.");}} 
-                
-                    
-                
+                     
             }
             else {}}
     
