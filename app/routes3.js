@@ -247,24 +247,9 @@ app.post('/voting', function(req, res) {
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    
-    User.findOne({ 'local.username' : username}, function(err, user) {    
-           if (err) {}
-           else
-            {
-            
-            if (user) {
-                     var id = user._id;     
-                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
-                    var update = { $inc: { 'poll.options.$.votes': 1 }};
-                    var options = { multi: false};
-
-                    Poll.update(conditions, update, options, callback);
-                    function callback (err, numAffected) {res.send('question'+ question);}
-
-            }
-            }});  
-});  
+    var loggedInUserId = req.user._id;
+    res.send('loggedinId'+ loggedInUserId);
+   });  
     
   
 app.get('/delete/*', function(req, res) {
@@ -464,7 +449,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                                          optionslist: optionslist});
                               
                          }   
-                          else {send('could not locate question in the database; please report this error');}    
+                          else {res.send('could not locate question in the database; please report this error');}    
                         }});} 
                               }
                         });
