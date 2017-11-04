@@ -257,17 +257,14 @@ app.post('/voting', function(req, res) {
            else
             if (user) {
                 
-                
-                  //user found; now look to see if there is a question created by this user in the polls collection?
-                     var id = user._id;     
-
+res.redirect('/');
 
                      
             }
-            else {}}
+            else {res.redirect('/');}}
     
     
- res.redirect('/'); 
+  
 );
 });
      
