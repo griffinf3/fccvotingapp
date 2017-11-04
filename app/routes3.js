@@ -473,7 +473,7 @@ app.get('/loginSuccess', function(req, res, next) {
                     Poll.find({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
-                        { if (doc) {res.send('OK, the id is:' + id); }   
+                        { if (doc) {res.send('OK, the doc0 is:' + doc[0]); }   
                           else {}
                         }
                     });
