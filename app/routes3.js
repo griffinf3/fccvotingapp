@@ -470,11 +470,11 @@ app.get('/loginSuccess', function(req, res, next) {
                     var question = qUrl.substring(n+1);
                     var id = user._id; 
                 
-                    Poll.find({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
+                    Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
-                        { if (doc) {res.send('OK, the doc0 is:' + doc[0]); }   
-                          else {}
+                        { if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
+                          else {res.send('no doc');}
                         }
                     });
             }
