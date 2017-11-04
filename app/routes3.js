@@ -466,20 +466,13 @@ app.get('/loginSuccess', function(req, res, next) {
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            { if (user) {
-                     var question = qUrl.substring(n+1);
-                     var id = user._id; 
+            { //if (user) {
+                   //  var question = qUrl.substring(n+1);
+                    // var id = user._id; 
                      
-              
+                  res.send('OK the userinfo is:' + user); 
             }
-    
-    
-    
-    
-    
-    }});
-    res.send('OK the username is:' + username);  
-    
+    });
     }); 
     
     app.post('/*', function(req, res, next) { 
