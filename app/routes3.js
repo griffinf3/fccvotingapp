@@ -248,9 +248,18 @@ app.post('/voting', function(req, res) {
     var username = req.body.username;
     var option = req.body.option;
     
-    
+//record this vote if both the username and question can be found in the polls collection.
+User.findOne({ 'local.username' : username}, function(err, user) { 
+
+ if (err) {}
+    else if (user) {alert("Wehaveauser.");}    
+   
+    else {//cannot register the vote since username could not be found.
+                   //notify the user that the URL username is not registered in the database.
+         alert("Please check the accuracy of your voting link. The username specified in your URL could not be found in the database.");
+           }});
 //Now send the user to the home page. The routing will take care of both cases (user logged in and not logged in).  
-    res.redirect('/');
+  res.redirect('/'); 
 });
      
 app.get('/delete/*', function(req, res) {
