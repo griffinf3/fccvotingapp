@@ -251,7 +251,23 @@ app.post('/voting', function(req, res) {
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            {res.send('user:' + username);}});
+            {
+            
+            if (user) {
+                     var id = user._id;     
+                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
+                    var update = { $inc: { 'poll.options.$.votes': 1 }};
+                    var options = { multi: false};
+
+                    //Poll.update(conditions, update, options, callback);
+            
+            
+                    res.send('OK');
+            
+            
+            
+            }
+            }});
     
     
     
