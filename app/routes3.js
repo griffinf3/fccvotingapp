@@ -250,7 +250,7 @@ app.post('/voting', function(req, res) {
     var option = req.body.option;
     
 //record this vote if both the username and question can be found in the polls collection.
-
+res.send('username'+ username);
     
     
     
