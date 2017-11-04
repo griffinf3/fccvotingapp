@@ -472,15 +472,18 @@ app.get('/loginSuccess', function(req, res, next) {
                     Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
                       if (err) {}
                         else
-                        { if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
-                          else {res.send(_qUrl);}
-                        }
-                    });
-            }
+                        {if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
+                          else {
+                               Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {  if (err) {}
+                        else {  
+                          if (doc) {res.send('OK, the docpoll is:' + doc.poll); }   
+                          else {res.send(_qUrl);  }    
+                        }});} 
+                              }
+                        });
+            }}});});
  
-    }});
-    }); 
-    
+
     app.post('/*', function(req, res, next) { 
         
      var _qUrl = req.url;   
