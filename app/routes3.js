@@ -469,11 +469,17 @@ app.get('/loginSuccess', function(req, res, next) {
             { if (user) {
                     var question = qUrl.substring(n+1);
                     var id = user._id; 
-                     
-                  res.send('OK the question is:' + question); }
+                
+                    Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {    
+                       res.send('OK the question is:' + question); 
+                        }
+                    });
             }
  
-    });
+    }});
     }); 
     
     app.post('/*', function(req, res, next) { 
