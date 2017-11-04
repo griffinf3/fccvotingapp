@@ -276,10 +276,17 @@ app.post('/voting', function(req, res) {
                          var options = { multi: false};
                          Poll.update(conditions, update, options, callback2);
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
-                       {alert("Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database."); }
-                            else {alert("The option you selected for this poll has been recorded.");}}
+                       {
+                           //polling question could not be found;
+                       }
+                            else {
+                                //alert("The option you selected for this poll has been recorded.");
+                            
+                            }}
                        }  
-                        else {alert("The option you selected for this poll has been recorded.");}
+                        else {
+                           // alert("The option you selected for this poll has been recorded.");
+                        }
                          
                      
                    
