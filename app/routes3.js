@@ -247,12 +247,39 @@ app.post('/voting', function(req, res) {
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    if (req.user) {var loggedInUserId = req.user._id;}
-    else {var loggedInUserId = 'no logged in user';}
-    res.send('loggedinId'+ loggedInUserId);
-   });  
     
-  
+//record this vote if both the username and question can be found in the polls collection.
+User.findOne({ 'local.username' : username}, function(err, user) {   
+    if (err) {}
+           else if (user) {
+      //user found; now look to see if there is a question created by this user in the polls collection?
+                     var id = user._id;     
+                     var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
+                     var update = { $inc: { 'poll.options.$.votes': 1 }};
+                     var options = { multi: false};
+
+                     Poll.update(conditions, update, options, callback);
+                     function callback (err, numAffected) {
+                       if (numAffected.n == 0)
+                           //try again using a trailing question mark.
+                       { var conditions = {'userid' : id, 'poll.question' : question+ '?', 'poll.options.option':option};
+                        var update = { $inc: { 'poll.options.$.votes': 1 }};
+                        var options = { multi: false};
+                        Poll.update(conditions, update, options, callback);
+                       function callback (err, numAffected) {if (numAffected.n == 0)
+                       {alert("Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database."); }
+                            else {alert("The option you selected for this poll has been recorded.");}}
+                       }  
+                        else {alert("The option you selected for this poll has been recorded.");}}}
+    else {//cannot register the vote since username could not be found.
+                   //notify the user that the URL username is not registered in the database.
+         alert("Please check the accuracy of your voting link. The username specified in your URL could not be found in the database.");}}); 
+    
+     
+//Now send the user to the home page. The routing will take care of both cases (user logged in and not logged in).  
+    res.redirect('/');
+});
+     
 app.get('/delete/*', function(req, res) {
      var _qUrl = req.url;
      var locSuffix = decodeURIComponent(_qUrl.substring(8)); 
