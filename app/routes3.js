@@ -255,7 +255,7 @@ res.send('username'+ username);
     
     
     
-  res.redirect('/'); 
+ // res.redirect('/'); 
 });
      
 app.get('/delete/*', function(req, res) {
