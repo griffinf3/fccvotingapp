@@ -252,13 +252,11 @@ app.post('/voting', function(req, res) {
 //record this vote if both the username and question can be found in the polls collection.
 //res.send('username'+ username);
     
-    User.findOne({ 'local.username' : username}, function(err, user) {    
+    User.findOne({'local.username' : username}, function(err, user) {    
            if (err) {}
            else
             if (user) {
-                
-                
-                  //user found; now look to see if there is a question created by this user in the polls collection?
+//user found; now look to see if there is a question created by this user in the polls collection?
                      var id = user._id;  
                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
                    var update = { $inc: { 'poll.options.$.votes': 1 }};
@@ -281,51 +279,47 @@ app.post('/voting', function(req, res) {
                        }
                             else {
                                 //alert("The option you selected for this poll has been recorded.");
-                            
-                            }}
+                                                       }}
                        }  
                         else {
                            // alert("The option you selected for this poll has been recorded.");
-                        }
-                         
-                     
-                   
-                         
-                     }
-                    //res.redirect('/'); 
-
-                     
-            }
-            else {
-                
-                
-                //res.redirect('/'); 
-            
-            
-            }}
-    
-  
- 
-);
-    
+                        }}}
+            else { 
+                //no username found.
+            }});
     
   if (req.user)
     {res.redirect('/'); }
     else {
-        
+        //user is not logged in.
          var allPolls = [{}];
 allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
  allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};       
         
-        
-        
-        
-        res.render('viewOne.ejs', {polls: allPolls });
-    
-   }    
-    
-});
+User.findOne({ 'local.username' : username}, function(err, user) {    
+           if (err) {}
+           else
+            {    
+              if (user) 
+              {     
+              Poll.find({ 'userid' :  user._id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {}
+                 else
+                 {if (doc)                     
+                    {
+                     var opts = [{}]; 
+                        for (var j=1; j<doc[0].poll.options.length; j++ )
+                     {
+                        opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});
+                     }
+                     allPolls[0] = {question: question, options: opts};
+                     res.render('viewOne.ejs', {polls: allPolls });     
+                    }
+                     else res.redirect('/'); 
+                 }});}  
+            else res.redirect('/'); 
+}});}});
      
 app.get('/delete/*', function(req, res) {
      var _qUrl = req.url;
