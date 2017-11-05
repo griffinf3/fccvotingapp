@@ -362,7 +362,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
             });
 }});
      
-app.get('/delete/*', function(req, res) {
+app.get('/delete/*', isLoggedIn, function(req, res) {
      var _qUrl = req.url;
      var locSuffix = decodeURIComponent(_qUrl.substring(8)); 
      var n = locSuffix.indexOf("/");
