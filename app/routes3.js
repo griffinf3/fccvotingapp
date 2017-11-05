@@ -540,7 +540,7 @@ app.get('/loginSuccess', function(req, res, next) {
                             
                            }   
                           else {
-                               Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {  if (err) {}
+                               Poll.findOne({ 'userid' : id, 'poll.question' : question + '?'}, function(err, doc) {  if (err) {}
                         else {  
                           if (doc) {
                               
@@ -554,7 +554,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                 votelist.push(doc.poll.options[i].votes);
     optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
                                 
-                                res.render('voting.ejs', {question: question, username: username, 
+                                res.render('voting.ejs', {question: question + '?', username: username, 
                                                           optionlist: optionlist, votelist: votelist,
                                                          optionslist: optionslist});
                               
