@@ -252,12 +252,12 @@ app.post('/voting', function(req, res) {
 //record this vote if both the username and question can be found in the polls collection.
 //res.send('username'+ username);
     
-    User.findOne({'local.username' : username}, function(err, user) {    
-           if (err) {}
+User.findOne({'local.username' : username}, function(err, user) {    
+           if (err) {res.send('error0');}
            else
             if (user) {
 //user found; now look to see if there is a question created by this user in the polls collection?
-                     var id = user._id;  
+                   var id = user._id;  
                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
                    var update = { $inc: { 'poll.options.$.votes': 1 }};
                     var options = { multi: false};
@@ -297,14 +297,15 @@ allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: nul
  allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
 allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};   
         
-User.findOne({ 'local.username' : username}, function(err, user) {    
-           if (err) {}
+User.findOne({'local.username' : username}, function(err, userdoc) {    
+           if (err) { res.send('error1');}
            else
             {
-            if (user) 
+            if (userdoc) 
               {//the user exists but does the poll exist?
-                 Poll.findOne({ 'userid' :  user._id, 'poll.question' : question}, function(err, doc) {    
-                  if (err) {}
+                var id = userdoc._id;
+                 Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {res.send('error2');}
                   else 
                   if (doc) {
                       //the question was found
@@ -312,7 +313,7 @@ User.findOne({ 'local.username' : username}, function(err, user) {
                   }
                     else 
                     {//the question was not found but try with the question mark appended.
-                        Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {}
+                        Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
                       else { 
                       if (doc){
                           //the question was found
