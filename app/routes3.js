@@ -297,32 +297,46 @@ allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: nul
  allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
 allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};   
         
-        User.findOne({ 'local.username' : username}, function(err, user) {    
+User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
             {
             if (user) 
-              {
-              Poll.find({ 'userid' :  user._id, 'poll.question' : question}, function(err, doc) {    
+              {//the user exists but does the poll exist?
+                 Poll.findOne({ 'userid' :  user._id, 'poll.question' : question}, function(err, doc) {    
                   if (err) {}
-                 else {
-                     
-                     
-                     
-                     
-                     
-                 }
+                  else 
+                  if (doc) {
+                      //the question was found
+                      
+                  }
+                    else 
+                    {//the question was not found but try with the question mark appended.
+                        Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {}
+                      else { 
+                      if (doc){
+                          //the question was found
+                          
+                      } else {
+                          //no luck with finding the poll the user was looking for,
+                          
+                      }
+                      }                                                                                   
+                                                                                                         
+                    });}
               
               
+                  });
               
               
-              });
-              
-              
+                }
+                else {
+                   //no user with this username 
+                    
+                }
               }
-        else {}
-            }
-        });
+        
+            });
  
 
         res.send('notloggedin');
