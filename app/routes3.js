@@ -330,7 +330,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                       if (doc){
                           //the question was found with ? added.
                            var opts = [{}];
-                           for (var j=1; j<doc[0].poll.options.length; j++ )
+                           for (var j=1; j<3; j++ )
                         {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
                         allPolls[0] = {question: question, options: opts};
                           
