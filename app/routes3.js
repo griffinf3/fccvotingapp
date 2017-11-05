@@ -41,13 +41,13 @@ Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                      { op1 = doc[0].option1;
                      op2 = doc[0].option2;
                       
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls });
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
                      }
                  else
                     {
                      op1 = 'block';
                      op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls });}}});});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
@@ -100,7 +100,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
                     allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
                     allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};     
         req.logout();
-        res.render('index.ejs',{ logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls: 0});
+        res.render('index.ejs',{ logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls: 0, alertMessage: ''});
     }); 
     
 // =============================================================================
@@ -244,7 +244,10 @@ newPollUser.save(function(err) {
 }); 
        
 app.post('/voting', function(req, res) {
-    
+    var message1 = 'Your vote has been recorded.';
+    var message2 = 'Please check the accuracy of your voting link. The username specified in your URL could not be found in the database.';
+    var message3 = 'Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database.';
+    var message;
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
@@ -276,16 +279,21 @@ User.findOne({'local.username' : username}, function(err, user) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found;
+                           message = message3;
                        }
                             else {
-                                //alert("The option you selected for this poll has been recorded.");
+                                //vote recorded."
+                                message = message1;
+                                
                                                        }}
                        }  
                         else {
-                           // alert("The option you selected for this poll has been recorded.");
+                            //vote recorded."
+                                message = message1;
                         }}}
             else { 
                 //no username found.
+                 message = message2;
             }});
     
   if (req.user)
@@ -309,18 +317,26 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                   else 
                   if (doc) {
                       //the question was found
-                      res.send('question found');
+                         var opts = [{}];
+                        for (var j=1; j<doc[0].poll.options.length; j++ )
+                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
                   }
                     else 
                     {//the question was not found but try with the question mark appended.
                         Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
                       else { 
                       if (doc){
-                          //the question was found
-                           res.send('question found with ? added');
+                          //the question was found with ? added.
+                           var opts = [{}];
+                        for (var j=1; j<doc[0].poll.options.length; j++ )
+                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message});    
                       } else {
                           //no luck with finding the poll the user was looking for,
-                           res.send('question not found');
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});};     
                       }
                       }                                                                                   
                                                                                                          
@@ -333,15 +349,11 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                 }
                 else {
                    //no user with this username 
-                     res.send('user not found');
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});};  
                 }
               }
         
             });
- 
-
-        //res.send('notloggedin');
-        //user is not logged in.
 }});
      
 app.get('/delete/*', function(req, res) {
@@ -604,7 +616,7 @@ function isLoggedIn(req, res, next) {
     allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
     allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
     allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-    res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0});};
+    res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: ''});};
 
 function isLoggedIn2(req, res, next) {
     // if user is authenticated in the session, carry on 
