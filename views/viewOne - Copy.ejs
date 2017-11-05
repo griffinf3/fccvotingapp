@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>View Voing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+  <style>
+ .dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}     
+      
+      
+      
+      
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 500px; /* Should be removed. Only for demonstration */
+    margin-left: 250px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+      
+.row2{
+     margin:20px;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body onload=loaded();>
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/create">Post</a></li>
+        <li><a href="/view">Polls</a></li>
+        <li><a href="/edit">Edit</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li> 
+            </li>
+      </ul>
+        
+         <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
+      </ul>
+        
+        
+        
+    </div>
+  </div>
+</nav>   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    
+    
+    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and solicit and view participant responses)</p></div>
+  </div>
+<div class="row" style="margin:20px;">
+  <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
+    <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
+     <div style="background-color:#aaa;" class="row2">
+         <ul id="myList1">
+         </ul>
+     </div> 
+      
+      <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var polls = <%- JSON.stringify(polls) %>;
+//var opt3 = polls[0].options[3].option;
+var v1 = polls[0].options[3].votes;
+var labelsArray = [];
+var dataArray = [];   
+for (var i = 1; i< polls[0].options.length; i++)
+{labelsArray.push(polls[0].options[i].option);
+ dataArray.push(polls[0].options[i].votes)}
+    
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labelsArray,
+        datasets: [{
+            label: '# of Votes',
+            data: dataArray,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize: 1
+                }
+            }]
+        }
+    }
+});
+</script>
+      
+      
+    </div> 
+
+
+</div>
+
+<footer class="container-fluid text-center">
+          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>
+
+</body>
+     <script>
+    function loaded() {
+     var polls = <%- JSON.stringify(polls) %>;
+     
+     //First question:
+      var q1 = polls[0].question;
+      var ops1 = polls[0].options;
+      for (var i = 1; i < polls[0].options.length; i++)
+        {var node = document.createElement("li");
+        textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
+      node.appendChild(textnode);     
+     document.getElementById("myList1").appendChild(node);  
+       } 
+    }       
+</script>
+</html>

@@ -47,10 +47,7 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }     
-      
-      
-      
-      
+    
 #siteName{
     font-size: 300%;
 }
@@ -117,131 +114,11 @@ body {
 </style>
 </head>
 <body onload=loaded();>
-
-   <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/create">Post</a></li>
-        <li><a href="/view">Polls</a></li>
-        <li><a href="/edit">Edit</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li> 
-            </li>
-      </ul>
-        
-         <ul class="nav navbar-nav navbar-right">
-        <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
-      </ul>
-        
-        
-        
-    </div>
-  </div>
-</nav>   
-<div class="header">
-    <div class="container text-center">
-<div id="siteName" style="display: inline">Post-n-Poll</div>
-<div style="display: inline">&copy;</div>
-</div>
-    
-    
-    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and solicit and view participant responses)</p></div>
-  </div>
-<div class="row" style="margin:20px;">
-  <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
-    <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
-     <div style="background-color:#aaa;" class="row2">
-         <ul id="myList1">
-         </ul>
-     </div> 
-      
-      <canvas id="myChart" width="400" height="400"></canvas>
-<script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var polls = <%- JSON.stringify(polls) %>;
-//var opt3 = polls[0].options[3].option;
-var v1 = polls[0].options[3].votes;
-var labelsArray = [];
-var dataArray = [];   
-for (var i = 1; i< polls[0].options.length; i++)
-{labelsArray.push(polls[0].options[i].option);
- dataArray.push(polls[0].options[i].votes)}
-    
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: labelsArray,
-        datasets: [{
-            label: '# of Votes',
-            data: dataArray,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true,
-                    stepSize: 1
-                }
-            }]
-        }
-    }
-});
-</script>
-      
-      
-    </div> 
-
-
-</div>
-
-<footer class="container-fluid text-center">
-          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
-<div style="display: inline">&copy;</div>
-</footer>
-
+   test
 </body>
      <script>
     function loaded() {
-     var polls = <%- JSON.stringify(polls) %>;
-     
-     //First question:
-      var q1 = polls[0].question;
-      var ops1 = polls[0].options;
-      for (var i = 1; i < polls[0].options.length; i++)
-        {var node = document.createElement("li");
-        textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
-      node.appendChild(textnode);     
-     document.getElementById("myList1").appendChild(node);  
-       } 
+    
     }       
 </script>
 </html>
