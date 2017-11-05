@@ -114,7 +114,53 @@ body {
 </style>
 </head>
 <body onload=loaded();>
-   test
+
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/create">Post</a></li>
+        <li><a href="/view">Polls</a></li>
+        <li><a href="/edit">Edit</a></li>
+      </ul>
+         <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+      </ul>
+        
+        
+        
+    </div>
+  </div>
+</nav>   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
+    
+    
+    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and solicit and view participant responses)</p></div>
+  </div>
+<div class="row" style="margin:20px;">
+  <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
+    <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
+     <div style="background-color:#aaa;" class="row2">
+         <ul id="myList1">
+         </ul>
+     </div>  
+    
+    </div>   
+     </div> 
+    
 </body>
      <script>
     function loaded() {
