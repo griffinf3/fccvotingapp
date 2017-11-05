@@ -125,19 +125,21 @@ body {
       </button>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
+        
+        
+        
+        <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
-        <li><a href="/create">Post</a></li>
-        <li><a href="/view">Polls</a></li>
-        <li><a href="/edit">Edit</a></li>
+        <li><a onclick = "checkPost()">Post</a></li>
+        <li><a onclick = "checkPolls()">Polls</a></li>
+        <li><a onclick = "checkEdit()">Edit</a></li>
       </ul>
+
          <ul class="nav navbar-nav navbar-right">
         <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>' Login/Signup'</a></li>
       </ul>
-        
-        
-        
+           
     </div>
   </div>
 </nav>   
@@ -146,9 +148,7 @@ body {
 <div id="siteName" style="display: inline">Post-n-Poll</div>
 <div style="display: inline">&copy;</div>
 </div>
-    
-    
-    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and solicit and view participant responses)</p></div>
+    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
   </div>
 <div class="row" style="margin:20px;">
   <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
@@ -165,6 +165,17 @@ body {
      <script>
     function loaded() {
         alert(<%- JSON.stringify(alertMessage) %>);
-        }       
+              
+         function checkEdit(){
+             alert("There are no polls to edit.");
+         }
+         
+  function checkPolls(){
+             alert("No polls have been posted.");
+         }
+         
+function checkPost(){
+alert("You cannot post a poll without first logging in.");
+}}       
 </script>
 </html>
