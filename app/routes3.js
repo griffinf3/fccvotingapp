@@ -332,7 +332,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                            var opts = [{}];
                            for (var j=1; j<3; j++ )
                         {
-                           // opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});
+                            opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
                         
                         }
                         //allPolls[0] = {question: question, options: opts};
