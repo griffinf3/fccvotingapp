@@ -308,7 +308,7 @@ User.findOne({ 'local.username' : username}, function(err, user) {
                   else 
                   if (doc) {
                       //the question was found
-                      
+                      res.send('question found');
                   }
                     else 
                     {//the question was not found but try with the question mark appended.
@@ -316,10 +316,10 @@ User.findOne({ 'local.username' : username}, function(err, user) {
                       else { 
                       if (doc){
                           //the question was found
-                          
+                           res.send('question found');
                       } else {
                           //no luck with finding the poll the user was looking for,
-                          
+                           res.send('question not found');
                       }
                       }                                                                                   
                                                                                                          
@@ -332,14 +332,14 @@ User.findOne({ 'local.username' : username}, function(err, user) {
                 }
                 else {
                    //no user with this username 
-                    
+                     res.send('user not found');
                 }
               }
         
             });
  
 
-        res.send('notloggedin');
+        //res.send('notloggedin');
         //user is not logged in.
 }});
      
