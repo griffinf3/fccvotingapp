@@ -338,8 +338,8 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                         allPolls[0] = {question: question, options: opts};
                           
                           
-                        //res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
-                          res.send('OK');
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
+                         // res.send('OK');
                       } else {
                           //no luck with finding the poll the user was looking for,
                           res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});     
