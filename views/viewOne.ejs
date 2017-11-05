@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>View Voing</title>
+  <title>View Voting</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -220,6 +220,19 @@ for (var i = 1; i< polls[0].options.length; i++)
      <script>
     function loaded() {
         alert(<%- JSON.stringify(alertMessage) %>);
+        var polls = <%- JSON.stringify(polls) %>;
+              
+     
+//First question:
+        if (polls[0].options.length <= 4)
+        {
+      for (var i = 1; i < polls[0].options.length; i++)
+        {var node = document.createElement("li");
+        textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
+      node.appendChild(textnode);     
+     document.getElementById("myList1").appendChild(node);  
+       }}           
+            
 } 
                     
          function checkEdit(){
@@ -232,6 +245,9 @@ for (var i = 1; i< polls[0].options.length; i++)
          
 function checkPost(){
 alert("You cannot post a poll without first logging in.");
-}                          
+} 
+
+        
+        
 </script>
 </html>
