@@ -317,7 +317,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                       else { 
                       if (doc){
                           //the question was found
-                           res.send('question found');
+                           res.send('question found with ? added');
                       } else {
                           //no luck with finding the poll the user was looking for,
                            res.send('question not found');
