@@ -336,7 +336,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                         res.render('viewOne.ejs', {polls: allPolls, alertMessage: message});    
                       } else {
                           //no luck with finding the poll the user was looking for,
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});};     
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});     
                       }
                       }                                                                                   
                                                                                                          
@@ -349,7 +349,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                 }
                 else {
                    //no user with this username 
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});};  
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});  
                 }
               }
         
