@@ -335,7 +335,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                             opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
                         
                         }
-                        //allPolls[0] = {question: question, options: opts};
+                        allPolls[0] = {question: question, options: opts};
                           
                           
                         //res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
