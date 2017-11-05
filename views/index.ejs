@@ -242,11 +242,9 @@ var myChart = new Chart(ctx, {
     
     </div>
 </div>
-
-<footer class="container-fluid text-center">
-  <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
-<div style="display: inline">&copy;</div>
-</footer>
+  <footer class="container-fluid text-center">  
+    <% include partials/footer %>
+  </footer> 
     
     <form id = "form1" action="/updateOptions" method="post">     
     <input id= "option1" type="hidden" name="option1" value="" />
