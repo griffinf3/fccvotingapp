@@ -26,7 +26,7 @@ var allPolls = [{}];
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res, next) {
 var allPolls = req.allPolls;
-res.send('OK'+ allPolls[0]);
+res.send('OK'+ req);
 
 });
 
