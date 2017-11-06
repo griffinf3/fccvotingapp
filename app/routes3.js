@@ -23,7 +23,7 @@ var requestTime = function (req, res, next) {
 
 app.use(requestTime)
 
-app.get('/', function (req, res) {
+app.get('/', isLoggedIn, function (req, res) {
   var responseText = 'Hello World!<br>'
   responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
