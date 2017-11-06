@@ -16,23 +16,23 @@ var Polls = [{}];
  next();
 }
 
-var requestTime = function (req, res, next) {
+var all3Polls = function (req, res, next) {
     var Polls = [{}];
-  //req.requestTime = Date.now();
+  //req.all3Polls = Date.now();
     Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
     Polls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
     Polls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
     
-  req.requestTime = Polls;
+  req.all3Polls = Polls;
   
   next()
 }
 
-app.use(requestTime)
+app.use(all3Polls)
 
 app.get('/', isLoggedIn, function (req, res) {
   var responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.requestTime[0].question + '</small>'
+  responseText += '<small>Requested at: ' + req.all3Polls[0].question + '</small>'
   res.send(responseText)
 })
 
