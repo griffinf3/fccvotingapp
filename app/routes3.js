@@ -5,28 +5,22 @@ var Option     = require('../app/models/option');
 
 
 module.exports = function(app, passport) {
-
-    
- var requestTime = function (req, res, next) {
-  req.requestTime = Date.now()
-  next()
-}   
-    
+  
     
 var allPolls = function (req, res, next){
-var allPolls = [{}];
-                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
- req.allPolls = allPolls; 
+var Polls = [{}];
+                    Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+                    Polls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+                    Polls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+ req.allPolls = Polls; 
  next();
 }
     
     
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res, next) {
-var allPolls = req.allPolls;
-res.send('OK'+ req);
+var Polls = req.allPolls;
+res.send('OK'+ Polls);
 
 });
 
