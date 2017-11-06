@@ -14,7 +14,8 @@ module.exports = function(app, passport) {
     
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
-var allPolls = allPolls();
+var allPolls = [];
+ allPolls = allPolls();
 var op1;
 var op2;
 var totalPolls;
