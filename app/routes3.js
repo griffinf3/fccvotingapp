@@ -594,7 +594,13 @@ app.get('/loginSuccess', function(req, res, next) {
             {   
                 if (user) { 
                             var id = user._id;
-                            Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    res.send('OK');
+                            Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                            if (err) {}
+                            else
+                              { if (doc) {
+                                  res.send('OK');
+                                                }
+                           }
                           });
                         }
                        else  {res.redirect('/');}
