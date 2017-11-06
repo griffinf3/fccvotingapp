@@ -6,13 +6,10 @@ module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
-var allPolls = [{}];
 var op1;
 var op2;
 var totalPolls;
-                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+var allPolls = allPolls();  
 
 Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
@@ -95,10 +92,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
     app.get('/signlog', isLoggedIn2, function(req, res) {
-    var allPolls = [{}];    
-    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};     
+    var allPolls = allPolls();     
         req.logout();
         res.render('index.ejs',{ logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls: 0, alertMessage: ''});
     }); 
@@ -300,10 +294,7 @@ User.findOne({'local.username' : username}, function(err, user) {
     {res.redirect('/'); }
     else {
         
-        var allPolls = [{}];
-allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
- allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};   
+var allPolls = allPolls();    
         
 User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
@@ -618,10 +609,7 @@ function isLoggedIn(req, res, next) {
     {return next();}
            
 // if they aren't redirect them to the home page
-     var allPolls = [{}];
-    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+    var allPolls = allPolls(); 
     res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: ''});};
 
 function isLoggedIn2(req, res, next) {
@@ -631,5 +619,12 @@ function isLoggedIn2(req, res, next) {
     // if they aren't redirect them to the home page
     res.render('signlog.ejs');}
 
+function allPolls(){
+    var allPolls = [{}];
+                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+ return allPolls;     
+}
 
 
