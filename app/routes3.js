@@ -598,7 +598,7 @@ app.get('/loginSuccess', function(req, res, next) {
                             if (err) {}
                             else
                               { if (doc) {
-                                  res.send('OK'+ doc.poll);
+                                  res.send('OK' + 'id:'+ id+ 'question'+ question);
                                                 }
                            }
                           });
