@@ -184,7 +184,7 @@ if (maxY <= 10) sSize = 1;
 else sSize = 5; 
     //ceil(maxY/10);
          
-         var myChart = new Chart(ctx, {
+var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: labelsArray,
@@ -215,7 +215,7 @@ else sSize = 5;
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
-                    stepSize: 5
+                    stepSize: sSize
                 }
             }]
         }
