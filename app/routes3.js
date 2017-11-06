@@ -594,11 +594,11 @@ app.get('/loginSuccess', function(req, res, next) {
             {   
                 if (user) { 
                             var id = user._id;
-                            Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                            Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
                             if (err) {}
                             else
                               { if (doc) {
-                                  res.send('OK'+ doc[0].poll.options.length);
+                                  res.send('OK'+ doc.poll.options.length);
                                                 }
                            }
                           });
