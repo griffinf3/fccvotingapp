@@ -591,19 +591,7 @@ app.get('/loginSuccess', function(req, res, next) {
      User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            {   
-                if (user) { 
-                            var id = user._id;
-                            Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
-                            if (err) {}
-                            else
-                              { if (doc) {
-                                  res.send('OK');
-                                                }
-                           }
-                          });
-                        }
-                       else  {res.redirect('/');}
+            {  res.send('OK' + user._id); 
             }});});
 }
 
