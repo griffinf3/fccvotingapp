@@ -16,45 +16,9 @@ module.exports = function(app, passport) {
 app.get('/', isLoggedIn, function(req, res) {
 var allPolls = [];
  allPolls[0] = allPolls();
-var op1;
-var op2;
-var totalPolls;
-
-
-Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-                 if (err) {}
-                 else
-                 { totalPolls = polls.length; 
-				  var count = 1;
-                     for (var i=0; i<totalPolls; i++)
-					 {
-					    if (polls[i].poll.showcase == true && count <=3)  
-                         {var opts = [{}];                               
-                          for (var j=1; j<polls[i].poll.options.length; j++ )
-                        {opts.push({option:    polls[i].poll.options[j].option,votes:                                                 polls[i].poll.options[j].votes});
-                        }
-                        allPolls[count-1] = {question: polls[i].poll.question, options: opts};
-						count = count + 1;
-						} 
-				     }
-				  }
-				  });
-               
-Option.find({ 'userid' :  req.user._id }, function(err, doc) {
-                  if (err) {}
-                  else
-                  {
-                  if (doc.length >=1)
-                     { op1 = doc[0].option1;
-                     op2 = doc[0].option2;
-                      
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
-                     }
-                 else
-                    {
-                     op1 = 'block';
-                     op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
+ res.send(allPolls[0]);}
+     
+       );
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
