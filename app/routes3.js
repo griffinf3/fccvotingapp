@@ -25,7 +25,7 @@ app.use(requestTime)
 
 app.get('/', isLoggedIn, function (req, res) {
   var responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  responseText += '<small>Requested at: ' + req.allPolls + '</small>'
   res.send(responseText)
 })
 
