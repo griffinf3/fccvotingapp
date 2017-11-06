@@ -321,62 +321,8 @@ var allPolls = req.all3Polls;
     
     
 if (!req.user)
-   {
-User.findOne({'local.username' : username}, function(err, userdoc) {    
-           if (err) { res.send('error1');}
-           else
-            {
-            if (userdoc) 
-              {//the user exists but does the poll exist?
-                var id = userdoc._id;
-                 Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
-                  if (err) {res.send('error2');}
-                  else 
-                  if (doc) {
-                      //the question was found
-                         var opts = [{}];
-                        for (var j=1; j<doc[0].poll.options.length; j++ )
-                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
-                        allPolls[0] = {question: question, options: opts};
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
-                  }
-                    else 
-                    {//the question was not found but try with the question mark appended.
-                        Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
-                      else { 
-                      if (doc){
-                          //the question was found with ? added.
-                           var opts = [{}];
-                           for (var j=1; j<3; j++ )
-                        {
-                            opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
-                        
-                        }
-                        allPolls[0] = {question: question, options: opts};
-                          
-                          
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
-                         // res.send('OK');
-                      } else {
-                          //no luck with finding the poll the user was looking for,
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
-                      }
-                      }                                                                                   
-                                                                                                         
-                    });}
-              
-              
-                  });
-              
-              
-                }
-                else {
-                   //no user with this username 
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});  
-                }
-              }
-        
-            });}
+   {res.send('user not logged in');
+}
 });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
