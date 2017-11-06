@@ -260,7 +260,6 @@ app.post('/voting', function(req, res) {
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    var message = "no message yet";
     var message1 = 'Your vote has been recorded.';
     var message2 = "There was an error in recording this vote."
 //record this vote if both the username and question can be found in the polls collection.
@@ -289,29 +288,35 @@ User.findOne({'local.username' : username}, function(err, user) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found;
-                           message = message2;
+                           if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message2;
+                            res.redirect(redirectSuffix);} 
                        }
                             else {
                                 //vote recorded."
-                                message = message1;
+                               if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message1;
+                            res.redirect(redirectSuffix);} 
                                                        }}
                        }  
                         else {
                             //vote recorded."
-                                message = message1;
+                               if (req.user)
+                           {
+                            var redirectSuffix = '/?alertMessage=' + message1;
+                            res.redirect(redirectSuffix);} 
                         }}}
             else { 
                 //no username found.
-                 message = message2;
+                 if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message2;
+                            res.redirect(redirectSuffix);} 
             }});
     
-  if (req.user)
-    {
-        //
-    var redirectSuffix = '/?alertMessage=' + message;
-    res.redirect(redirectSuffix); 
-    }
-    else {
+
 var allPolls = req.all3Polls;   
         
 User.findOne({'local.username' : username}, function(err, userdoc) {    
@@ -330,7 +335,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                         for (var j=1; j<doc[0].poll.options.length; j++ )
                         {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
                         allPolls[0] = {question: question, options: opts};
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
                   }
                     else 
                     {//the question was not found but try with the question mark appended.
@@ -347,11 +352,11 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                         allPolls[0] = {question: question, options: opts};
                           
                           
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
                          // res.send('OK');
                       } else {
                           //no luck with finding the poll the user was looking for,
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});     
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
                       }
                       }                                                                                   
                                                                                                          
@@ -364,12 +369,12 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                 }
                 else {
                    //no user with this username 
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});  
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});  
                 }
               }
         
             });
-}});
+});
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
      var _qUrl = req.url;
