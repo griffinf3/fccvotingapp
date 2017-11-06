@@ -25,7 +25,7 @@ var allPolls = [{}];
     
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res, next) {
-allPolls = req.allPolls;
+var allPolls = req.allPolls;
 var op1;
 var op2;
 var totalPolls;
