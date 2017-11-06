@@ -7,7 +7,7 @@ var allPolls = [{}];
                     allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
                     allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
                     allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
- return allPolls;     
+ return allPolls[0];     
 }
 
 module.exports = function(app, passport) {
@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
 var allPolls = [];
- allPolls = allPolls();
+ allPolls[0] = allPolls();
 var op1;
 var op2;
 var totalPolls;
