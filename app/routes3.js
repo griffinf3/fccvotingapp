@@ -598,12 +598,9 @@ app.get('/loginSuccess', function(req, res, next) {
                             if (err) {}
                             else
                               { if (doc) {
-                                 for (var i = 1; i<doc.poll.options.length; i++)
-                                 {opt = {option: doc.poll.options[i].option}
-                                 
+                                 for (var i = 1; i<doc[0].poll.options.length; i++)
+                                 {opt = {option: doc[0].poll.options[i].option}
                                  ops.push(opt); 
-                                 var conditions = {'userid' : id, 'poll.question' : question};
-                                
                                  }
                                  
                                  
