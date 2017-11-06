@@ -337,8 +337,8 @@ if (!req.user)
                         for (var j=1; j<doc.poll.options.length; j++ )
                         {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
                         
-                      res.send('docOK'+ doc.poll.options.length);
-                       // res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
+                      //res.send('docOK'+ doc.poll.options.length);
+                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
                          
                   }
                   else { res.send('noPoll');}});
