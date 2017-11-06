@@ -17,10 +17,11 @@ var Polls = [{}];
 }
 
 var requestTime = function (req, res, next) {
+    var Polls = [{}];
   //req.requestTime = Date.now();
-    req.requestTime = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+    Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
     
-  
+  req.requestTime = Polls[0];
   
   next()
 }
@@ -29,7 +30,7 @@ app.use(requestTime)
 
 app.get('/', isLoggedIn, function (req, res) {
   var responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  responseText += '<small>Requested at: ' + req.requestTime.question + '</small>'
   res.send(responseText)
 })
 
