@@ -255,10 +255,14 @@ var myChart = new Chart(ctx, {
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
-    if (alertMessage != undefined)
-    var message = <%- JSON.stringify(alertMessage) %>;
+    
+    
     function loaded() {
-    var polls = <%- JSON.stringify(polls) %>;
+     var polls = <%- JSON.stringify(polls) %>;
+     
+     if (<%- JSON.stringify(alertMessage) %> != undefined)
+    var message = <%- JSON.stringify(alertMessage) %>;
+     
      var q2 = polls[1].question;
      var q3 = polls[2].question;
      if (q2 == 'poll 2') 
