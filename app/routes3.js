@@ -332,9 +332,13 @@ if (!req.user)
                   if (err) {res.send('error2');}
                   else 
                   if (doc) {
-                      res.send('docOK');
-                      
-                      
+                     //the question was found
+                         var opts = [{}];
+                        for (var j=1; j<doc[0].poll.options.length; j++ )
+                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
+                         
                   }
                   else { res.send('noPoll');}});
               }
