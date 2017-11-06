@@ -598,11 +598,7 @@ app.get('/loginSuccess', function(req, res, next) {
                             if (err) {}
                             else
                               { if (doc) {
-                                 
-                                 
-                                 
-                                 
-                                  res.send('OK');
+                                  res.send('OK'+ doc[0].poll.options.length);
                                                 }
                            }
                           });
