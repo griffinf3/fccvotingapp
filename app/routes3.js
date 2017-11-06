@@ -250,14 +250,12 @@ newPollUser.save(function(err) {
 }); 
        
 app.post('/voting', function(req, res) {
-    var message1 = 'Your vote has been recorded.';
-    var message2 = 'Please check the accuracy of your voting link. The username specified in your URL could not be found in the database.';
-    var message3 = 'Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database.';
-    var message;
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    
+    var message;
+    var message1 = 'Your vote has been recorded.';
+    var message2 = "There was an error in recording this vote."
 //record this vote if both the username and question can be found in the polls collection.
 //res.send('username'+ username);
     
@@ -265,11 +263,10 @@ User.findOne({'local.username' : username}, function(err, user) {
            if (err) {res.send('error0');}
            else
             if (user) {
-//user found; now look to see if there is a question created by this user in the polls collection?
                    var id = user._id;  
                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
                    var update = { $inc: { 'poll.options.$.votes': 1 }};
-                    var options = { multi: false};
+                   var options = { multi: false};
 
                      Poll.update(conditions, update, options, callback);
                      function callback (err, numAffected) {
@@ -285,12 +282,11 @@ User.findOne({'local.username' : username}, function(err, user) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found;
-                           message = message3;
+                           message = message2;
                        }
                             else {
                                 //vote recorded."
                                 message = message1;
-                                
                                                        }}
                        }  
                         else {

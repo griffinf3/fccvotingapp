@@ -255,7 +255,10 @@ var myChart = new Chart(ctx, {
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
+    var message = <%- JSON.stringify(logstatus) %>;
+    
     function loaded() {
+    if (message != '') alert(message);
     var polls = <%- JSON.stringify(polls) %>;
      var q2 = polls[1].question;
      var q3 = polls[2].question;
