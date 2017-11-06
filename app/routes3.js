@@ -336,6 +336,7 @@ if (!req.user)
                          var opts = [{}];
                         for (var j=1; j<doc.poll.options.length; j++ )
                         {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1});      
                   }
                   else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
