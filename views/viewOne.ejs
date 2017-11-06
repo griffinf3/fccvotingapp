@@ -17,7 +17,7 @@
 }
 
 .column {
-    margin-left: 320px;
+    margin-left: 330px;
 }
   </style>
 </head>
@@ -70,7 +70,7 @@ var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[0].options.length; i++)
 {labelsArray.push(polls[0].options[i].option);
- dataArray.push(polls[0].options[i].votes)
+ dataArray.push(polls[0].options[i].votes);
 if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;
 } 
 var sSize;
