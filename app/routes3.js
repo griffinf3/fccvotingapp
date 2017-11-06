@@ -17,18 +17,17 @@ var Polls = [{}];
 }
 
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now();
-  next();
+  req.requestTime = Date.now()
+  next()
 }
-    
-    
-// normal routes ===============================================================
-app.get('/', isLoggedIn, function(req, res) {
-//var Polls = req.allPolls;
-var reqtime = req.requestTime;
-res.send('OK'+ req.requestTime);
 
-});
+app.use(requestTime)
+
+app.get('/', function (req, res) {
+  var responseText = 'Hello World!<br>'
+  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
+  res.send(responseText)
+})
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
