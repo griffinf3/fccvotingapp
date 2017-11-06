@@ -592,10 +592,14 @@ app.get('/loginSuccess', function(req, res, next) {
            if (err) {}
            else if (user)  
     
-            { var id = user._id;
-                
-                res.send('OK' + id + 'question'+ question); 
-            }});});
+            { var id = user._id;  
+             Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                            if (err) {}
+                            else
+                              { if (doc) {
+                                    res.send('OK1'); }
+                               else res.send('OK2');
+            }});}});});
 }
 
 // route middleware to make sure a user is logged in
