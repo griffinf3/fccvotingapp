@@ -181,7 +181,8 @@ if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;
 } 
 var sSize;
 if (maxY <= 10) sSize = 1;
-else sSize = ceil(maxY/10);
+else sSize = 5; 
+    //ceil(maxY/10);
          
          var myChart = new Chart(ctx, {
     type: 'bar',
