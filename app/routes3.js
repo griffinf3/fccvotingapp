@@ -336,22 +336,39 @@ if (!req.user)
                          var opts = [{}];
                         for (var j=1; j<doc.poll.options.length; j++ )
                         {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
-                        
-                      //res.send('docOK'+ doc.poll.options.length);
-                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
-                         
+                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1});      
                   }
-                  else { res.send('noPoll');}});
+                  else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
+                      else { 
+                      if (doc){
+                          //the question was found with ? added.
+                           var opts = [{}];
+                           for (var j=1; j<doc.poll.options.length; j++ )
+                        {
+                            opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
+                        
+                        }
+                        allPolls[0] = {question: question, options: opts};  
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
+                      } else {
+                          //no luck with finding the poll the user was looking for,
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
+                      }
+                      }                                                                                   
+                                                                                                         
+                    });}
+                 });
+              
               }
                 else {
                    //no user with this username 
-                    res.send('no username');
+                    res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2}); 
                 }
               }
         
-            });
-}
-});
+            });}
+    
+   });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
      var _qUrl = req.url;
