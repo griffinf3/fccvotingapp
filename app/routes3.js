@@ -21,10 +21,10 @@ app.get('/', isLoggedIn, function (req, res) {
    var message = req.param.alertMessage;
    // console.log('message'+ message);
    var aM ='';
-   if (message != undefined)
-      // aM = message;
-       aM = "testingthis";
-    
+   if (message != undefined && message != '')
+       aM = message; else  aM = "no message"; 
+      
+  
 var allPolls = req.all3Polls;  
 var op1;
 var op2;
