@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 app.get('/', isLoggedIn, function(req, res) {
 var allPolls = [];
  allPolls[0] = allPolls();
- res.send(allPolls[0]);}
+ res.send('OK');}
      
        );
 
