@@ -597,17 +597,8 @@ app.get('/loginSuccess', function(req, res, next) {
                             Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
                             if (err) {}
                             else
-                              { if (doc) {
-                                options = doc.poll.options;
-                                for (var i = 1; i<doc.poll.options.length; i++)
-                                {opt = {option: doc.poll.options[i].option}
-                                ops.push(opt); 
-                                var conditions = {'userid' : id, 'poll.question' : question};
-                                 var update = { $set:{'poll.showcase': sc}};
-                                 Poll.update(conditions, update, callback);  
-                                 function callback (err, numAffected) {}  
-                               }
-                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc,  qlist:qlist});}
+                              { if (doc) {res.send('OK');
+                                                }
                            }
                           });
                         }
