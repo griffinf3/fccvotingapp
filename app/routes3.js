@@ -318,7 +318,10 @@ User.findOne({'local.username' : username}, function(err, user) {
     
 
 var allPolls = req.all3Polls;   
-        
+    
+    
+if (!req.user)
+   {
 User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
            else
@@ -373,7 +376,7 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                 }
               }
         
-            });
+            });}
 });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
