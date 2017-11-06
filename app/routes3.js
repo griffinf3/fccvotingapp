@@ -591,30 +591,8 @@ app.get('/loginSuccess', function(req, res, next) {
      User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            {    
-              if (user) { 
-                          var id = user._id;
-                          Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
-                           if (err) {}
-                           else
-                           { if (doc) {
-                               options = doc[0].poll.options;
-                               for (var i = 1; i<doc[0].poll.options.length; i++)
-                                {opt = {option: doc[0].poll.options[i].option}
-                                ops.push(opt); 
-                                var conditions = {'userid' : id, 'poll.question' : question};
-                                 var update = { $set:{'poll.showcase': sc}};
-                                 Poll.update(conditions, update, callback);  
-                                 function callback (err, numAffected) {}
-                                 
-                           }
-                            res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc,  qlist:qlist});  
-                           }
-                           }
-                          });
-                        }
-            else  {res.redirect('/');}
-                        
+            {    res.send('Ok');
+              
              }
      });});
                                       
