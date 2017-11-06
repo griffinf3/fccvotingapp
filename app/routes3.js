@@ -24,7 +24,7 @@ var requestTime = function (req, res, next) {
     
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
-var Polls = req.allPolls;
+//var Polls = req.allPolls;
 var reqtime = req.requestTime;
 res.send('OK'+ reqtime);
 
