@@ -305,7 +305,12 @@ User.findOne({'local.username' : username}, function(err, user) {
             }});
     
   if (req.user)
-    {res.redirect('/?alertMessage=' + message); }
+    {
+        //
+        //res.redirect('/?alertMessage=' + message);
+    res.redirect('/?alertMessage=test');
+    
+    }
     else {
 var allPolls = req.all3Polls;   
         
