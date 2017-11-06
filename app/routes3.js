@@ -210,6 +210,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
 app.post('/create', isLoggedIn2, function(req, res) { 
+var id = req.user._id;      
 var question = req.body.question;
 var options = [{}]; 
   for (i=0; i<req.body.options.length; i++)
@@ -217,9 +218,28 @@ var options = [{}];
 var showCase =  req.body.showcase;
 var SC= false;
 if (showCase =='showcase') SC = true;
+// delete poll with the same name.
+    
+Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                           if (err) {}
+                           else
+                           if (doc) {
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
+    if(err){throw err;}});
+    } 
+    else
+   {Poll.find({ 'userid' : id, 'poll.question': question+ '?'}, function(err, doc)                             {if (err) {}
+    else if (doc) {
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
+    if(err){throw err;}});} 
+    else {
+        //could not find document to delete
+}}):}});
+                                 
+
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}});  
-                         
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}}); 
+                       
 // save  
 newPollUser.save(function(err) {
                               if (err) throw err;
