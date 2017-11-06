@@ -15,12 +15,18 @@ var Polls = [{}];
  req.allPolls = Polls; 
  next();
 }
+
+var requestTime = function (req, res, next) {
+  req.requestTime = Date.now()
+  next()
+}
     
     
 // normal routes ===============================================================
-app.get('/', isLoggedIn, function(req, res, next) {
+app.get('/', isLoggedIn, function(req, res) {
 var Polls = req.allPolls;
-res.send('OK'+ Polls);
+var reqtime = req.requestTime;
+res.send('OK'+ reqtime);
 
 });
 
