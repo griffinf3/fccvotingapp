@@ -17,7 +17,11 @@ var Polls = [{}];
 }
 
 var requestTime = function (req, res, next) {
-  req.requestTime = Date.now()
+  //req.requestTime = Date.now();
+    req.requestTime = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+    
+  
+  
   next()
 }
 
@@ -25,7 +29,7 @@ app.use(requestTime)
 
 app.get('/', isLoggedIn, function (req, res) {
   var responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.allPolls + '</small>'
+  responseText += '<small>Requested at: ' + req.requestTime + '</small>'
   res.send(responseText)
 })
 
