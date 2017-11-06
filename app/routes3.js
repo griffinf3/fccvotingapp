@@ -19,8 +19,8 @@ app.use(all3Polls)
 
 app.get('/', isLoggedIn, function (req, res) {
    var message = req.param.alertMessage;
-   var aM;
-   if (message != undefined && message != '')
+   var aM ='';
+   if (message != undefined)
        aM = message;
     
 var allPolls = req.all3Polls;  
