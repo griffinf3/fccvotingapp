@@ -591,8 +591,11 @@ app.get('/loginSuccess', function(req, res, next) {
      User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
            else
-            {    res.send('Ok');
-              
+            {   
+                if (user) { 
+                          var id = user._id;
+                            res.send('Ok1');}
+                else  {res.redirect('/');}
              }
      });});
                                       
