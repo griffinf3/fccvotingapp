@@ -590,8 +590,11 @@ app.get('/loginSuccess', function(req, res, next) {
      var question = qUrl.substring(n+1);
      User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
-           else
-            {  res.send('OK' + user._id); 
+           else if (user)  
+    
+            { var id = user._id;
+                
+                res.send('OK' + id + 'question'+ question); 
             }});});
 }
 
