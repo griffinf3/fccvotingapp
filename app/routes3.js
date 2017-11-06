@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
-var allPolls = [{}];
+var allPolls = allPolls();
 var op1;
 var op2;
 var totalPolls;
@@ -631,5 +631,11 @@ function isLoggedIn2(req, res, next) {
     // if they aren't redirect them to the home page
     res.render('signlog.ejs');}
 
-
+function allPolls(){
+var allPolls = [{}];
+                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+ return allPolls;     
+}
 
