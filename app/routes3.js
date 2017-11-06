@@ -6,35 +6,57 @@ var Option     = require('../app/models/option');
 
 module.exports = function(app, passport) {
   
-    
-var allPolls = function (req, res, next){
-var Polls = [{}];
-                    Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    Polls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    Polls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
- req.allPolls = Polls; 
- next();
-}
-
 var all3Polls = function (req, res, next) {
     var Polls = [{}];
-  //req.all3Polls = Date.now();
     Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
     Polls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-    Polls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-    
+    Polls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};    
   req.all3Polls = Polls;
-  
   next()
 }
 
 app.use(all3Polls)
 
 app.get('/', isLoggedIn, function (req, res) {
-  var responseText = 'Hello World!<br>'
-  responseText += '<small>Requested at: ' + req.all3Polls[0].question + '</small>'
-  res.send(responseText)
-})
+var allPolls = req.all3Polls;  
+var op1;
+var op2;
+var totalPolls;
+
+Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length; 
+				  var count = 1;
+                     for (var i=0; i<totalPolls; i++)
+					 {
+					    if (polls[i].poll.showcase == true && count <=3)  
+                         {var opts = [{}];                               
+                          for (var j=1; j<polls[i].poll.options.length; j++ )
+                        {opts.push({option:    polls[i].poll.options[j].option,votes:                                                 polls[i].poll.options[j].votes});
+                        }
+                        allPolls[count-1] = {question: polls[i].poll.question, options: opts};
+						count = count + 1;
+						} 
+				     }
+				  }
+				  });
+               
+Option.find({ 'userid' :  req.user._id }, function(err, doc) {
+                  if (err) {}
+                  else
+                  {
+                  if (doc.length >=1)
+                     { op1 = doc[0].option1;
+                     op2 = doc[0].option2;
+                      
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
+                     }
+                 else
+                    {
+                     op1 = 'block';
+                     op2 = 'block';   
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
