@@ -333,10 +333,7 @@ if (!req.user)
                   else 
                   if (doc) {
                      //the question was found
-                         var opts = [{}];
-                        for (var j=1; j<doc[0].poll.options.length; j++ )
-                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
-                        allPolls[0] = {question: question, options: opts};
+
                       res.send('docOK');
                        // res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
                          
