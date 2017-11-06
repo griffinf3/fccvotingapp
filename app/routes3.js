@@ -321,7 +321,30 @@ var allPolls = req.all3Polls;
     
     
 if (!req.user)
-   {res.send('user not logged in');
+   {User.findOne({'local.username' : username}, function(err, userdoc) {    
+           if (err) { res.send('error1');}
+           else
+            {
+            if (userdoc) 
+              {//the user exists but does the poll exist?
+                var id = userdoc._id;
+                 Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {res.send('error2');}
+                  else 
+                  if (doc) {
+                      res.send('docOK');
+                      
+                      
+                  }
+                  else { res.send('noPoll');}});
+              }
+                else {
+                   //no user with this username 
+                    res.send('no username');
+                }
+              }
+        
+            });
 }
 });
      
