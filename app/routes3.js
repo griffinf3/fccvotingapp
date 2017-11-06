@@ -18,6 +18,11 @@ var all3Polls = function (req, res, next) {
 app.use(all3Polls)
 
 app.get('/', isLoggedIn, function (req, res) {
+   var message = req.param.alertMessage;
+   var aM;
+   if (message != undefined && message != '')
+       aM = message;
+    
 var allPolls = req.all3Polls;  
 var op1;
 var op2;
@@ -50,13 +55,13 @@ Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                      { op1 = doc[0].option1;
                      op2 = doc[0].option2;
                       
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: aM});
                      }
                  else
                     {
                      op1 = 'block';
                      op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: aM});}}});});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
@@ -299,7 +304,7 @@ User.findOne({'local.username' : username}, function(err, user) {
             }});
     
   if (req.user)
-    {res.redirect('/'); }
+    {res.redirect('/?alertMessage=' + message); }
     else {
 var allPolls = req.all3Polls;   
         
