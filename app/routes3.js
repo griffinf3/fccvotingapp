@@ -603,9 +603,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                  
                                  ops.push(opt); 
                                  var conditions = {'userid' : id, 'poll.question' : question};
-                                 var update = { $set:{'poll.showcase': sc}};
-                                 Poll.update(conditions, update, callback);  
-                                 function callback (err, numAffected) {}  
+                                
                                  }
                                  
                                  
