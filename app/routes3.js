@@ -3,6 +3,14 @@ var Poll       = require('../app/models/poll');
 var Option     = require('../app/models/option');
 
 module.exports = function(app, passport) {
+    
+function allPolls(){
+var allPolls = [{}];
+                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
+ return allPolls;     
+}
 
 // normal routes ===============================================================
 app.get('/', isLoggedIn, function(req, res) {
@@ -629,11 +637,5 @@ function isLoggedIn2(req, res, next) {
     // if they aren't redirect them to the home page
     res.render('signlog.ejs');}
 
-function allPolls(){
-var allPolls = [{}];
-                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
- return allPolls;     
-}
+
 
