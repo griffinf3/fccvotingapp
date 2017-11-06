@@ -414,10 +414,16 @@ app.get('/delete/*', isLoggedIn, function(req, res) {
     }
     if(doc){
         res.redirect('/view');
-    }else{     
-        res.redirect('/view');
-        //we have an error
-    }}); }}});});
+    }else{      
+        Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc) {
+    if(err){
+        throw err;
+    }
+    if(doc){res.redirect('/view');} else {
+        //there was an error findng and removing the document.
+        res.redirect('/view');}
+        
+    });}});}}});});
     
     
      
