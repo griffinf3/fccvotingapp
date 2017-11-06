@@ -10,9 +10,7 @@ var allPolls = allPolls();
 var op1;
 var op2;
 var totalPolls;
-                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+
 
 Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
