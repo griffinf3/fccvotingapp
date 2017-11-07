@@ -240,13 +240,9 @@ if (showCase =='showcase') SC = true;
         //could not find document to delete
 }});}});
             
-    
-    
-    
-                       
 
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}}); 
                        
 // save  
 newPollUser.save(function(err) {
