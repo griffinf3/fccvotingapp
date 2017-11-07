@@ -22,7 +22,7 @@ app.get('/', isLoggedIn, function (req, res) {
    // console.log('message'+ message);
    var aM ='';
    if (message != undefined && message != '')
-       aM = message; else  aM = "no message"; 
+       aM = message; else  aM = ""; 
       
   
 var allPolls = req.all3Polls;  
