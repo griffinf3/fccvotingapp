@@ -217,10 +217,13 @@ function findDelete(req, res, next) {
     
     
     
+    
+    
+    
     return next();
 }
     
-app.post('/create', isLoggedIn2, function(req, res) { 
+app.post('/create', {isLoggedIn2, findDelete}, function(req, res) { 
 var id = req.user._id;      
 var question = req.body.question;
 var options = [{}]; 
