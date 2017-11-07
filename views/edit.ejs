@@ -112,7 +112,7 @@ body {
       option.value= q+1;
      if (publ[q]== true) pre = '^'; else pre = '&nbsp;';
      if (scl[q]== true) pre = pre + '*'; else pre = pre + '&nbsp;';
-     option.innerHTML = pre + ql[q];
+     option.innerHTML = pre + '&nbsp;' + ql[q];
     document.getElementById("myPoll").appendChild(option);
     }
     }   
