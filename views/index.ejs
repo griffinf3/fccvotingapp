@@ -52,18 +52,14 @@
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
-var maxY = 0;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
+//console.log('polls:'+ polls[0]);
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[0].options.length; i++)
 {labelsArray.push(polls[0].options[i].option);
- dataArray.push(polls[0].options[i].votes);
- if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;
-}
-    
-var sSize;
-if (maxY <= 10) sSize = 1;
-else sSize = Math.ceil(maxY/10);
+ dataArray.push(polls[0].options[i].votes)}
     
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -96,7 +92,7 @@ var myChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
-                    stepSize: sSize
+                    stepSize: 1
                 }
             }]
         }
@@ -126,17 +122,13 @@ var myChart = new Chart(ctx, {
 <script>
 var ctx = document.getElementById("myChart2").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
-var maxY = 0;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[1].options.length; i++)
 {labelsArray.push(polls[1].options[i].option);
- dataArray.push(polls[1].options[i].votes);
- if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
-    
-var sSize;
-if (maxY <= 10) sSize = 1;
-else sSize = Math.ceil(maxY/10);
+ dataArray.push(polls[1].options[i].votes)}
     
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -169,7 +161,7 @@ var myChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
-                    stepSize: sSize
+                    stepSize: 1
                 }
             }]
         }
@@ -197,17 +189,13 @@ var myChart = new Chart(ctx, {
 <script>
 var ctx = document.getElementById("myChart3").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
-var maxY = 0;
+//var opt3 = polls[0].options[3].option;
+//var v1 = polls[0].options[3].votes;
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[2].options.length; i++)
 {labelsArray.push(polls[2].options[i].option);
- dataArray.push(polls[2].options[i].votes);
- if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
-
-var sSize;
-if (maxY <= 10) sSize = 1;
-else sSize = Math.ceil(maxY/10);
+ dataArray.push(polls[2].options[i].votes)}
     
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -240,7 +228,7 @@ var myChart = new Chart(ctx, {
             yAxes: [{
                 ticks: {
                     beginAtZero:true,
-                    stepSize: sSize
+                    stepSize: 1
                 }
             }]
         }
@@ -267,17 +255,8 @@ var myChart = new Chart(ctx, {
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
-    
-    
     function loaded() {
-     var polls = <%- JSON.stringify(polls) %>;
-     var aM = <%- JSON.stringify(alertMessage) %>;
-     if (aM != undefined && aM != '') alert(aM);
-     //var message = <%- JSON.stringify(alertMessage) %>;
-     
-        //console.log('message'+ aM);
-     
-     
+    var polls = <%- JSON.stringify(polls) %>;
      var q2 = polls[1].question;
      var q3 = polls[2].question;
      if (q2 == 'poll 2') 

@@ -1,9 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
-    <% include partials/head %>
-<style>
-    #siteName{
+<head>
+  <title>View Voting</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+  <style>
+ .dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}     
+    
+#siteName{
+    font-size: 300%;
 }
       
 #copyright{
@@ -13,13 +59,70 @@
   
 #footer{
    position: relative;
-   left: -20px;    
+   left: -20px; 
+    
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
 }
 
-.column {
-    margin-left: 330px;
+body {
+    margin: 0;
 }
-  </style>
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    height: 500px; /* Should be removed. Only for demonstration */
+    margin-left: 300px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+      
+.row2{
+     margin:20px;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+</style>
 </head>
 <body onload=loaded();>
 
@@ -47,13 +150,14 @@
            
     </div>
   </div>
-</nav>  
-    
-    
- <header>
-    <% include partials/header %>
-</header>    
-
+</nav>   
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div id="copyright" style="display: inline">&copy;</div>
+</div>
+    <div id="description"><p>(A Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
+  </div>
 <div class="row" style="margin:20px;">
   <div id="col1" class="column" style="background-color:#aaa;"><h3><%= polls[0].question %></h3>
     <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
@@ -66,18 +170,19 @@
 var ctx = document.getElementById("myChart").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
 var maxY = 0;
+
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[0].options.length; i++)
 {labelsArray.push(polls[0].options[i].option);
- dataArray.push(polls[0].options[i].votes);
+ dataArray.push(polls[0].options[i].votes)
 if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;
 } 
 var sSize;
-if (maxY <= 10) sSize = 1;
-else sSize = Math.ceil(maxY/10);
+if maxY <= 10 sSize = 1;
+else sSize = ceil(maxY/10);
          
-var myChart = new Chart(ctx, {
+         var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: labelsArray,
@@ -119,9 +224,10 @@ var myChart = new Chart(ctx, {
      </div> 
   
     
-<footer class="container-fluid text-center">  
-    <% include partials/footer %>
-  </footer>    
+ <footer id="footer" class="container-fluid text-center">
+          <div style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
+</footer>   
 </body>
      <script>
     function loaded() {
