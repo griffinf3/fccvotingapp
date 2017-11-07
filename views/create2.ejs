@@ -123,6 +123,7 @@ body {
       option.value = q+1;
       option.innerHTML = ol[q].option;
       document.getElementById("myOptions").appendChild(option);
+      console.log('index'+ q +'option' + ol[q].option);
     }
    document.getElementById("myOptions").options[0].selected = true;  
   var sc = <%= sc %>;
