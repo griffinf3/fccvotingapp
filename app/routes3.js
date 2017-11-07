@@ -221,24 +221,7 @@ var showCase =  req.body.showcase;
 var SC= false;
 if (showCase =='showcase') SC = true;
 // delete poll with the same name.
-  
-  Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
-                           if (err) {}
-                           else
-                           if (doc) {
-    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
-    if(err){throw err;}});
-    } 
-    else
-   {Poll.find({ 'userid' : id, 'poll.question': question+ '?'}, function(err, doc, next)                             {if (err) {}
-    else if (doc) {
-    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
-    if(err){throw err;}});} 
-    else {
-        next();
-}});}});    
-    
-    
+   
 // create new poll document for the user.  
 var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}});  
                          
