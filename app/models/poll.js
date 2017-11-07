@@ -12,7 +12,7 @@ var pollSchema = mongoose.Schema({
     question:  String,
     showcase:  Boolean,
     options: [{}],
-    public: boolean
+    public: Boolean
   }
 });
 
