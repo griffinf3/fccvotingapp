@@ -85,6 +85,8 @@ body {
    <select id="myPoll" name="question" multiple="multiple" onchange="changemade()">
         </select>
    <input id="sc" name="sc" value="" type="hidden"> 
+    <input id="pub" name="pub" value="" type="hidden"> 
+         
    <input id="qlist" name="qlist" value="" type="hidden"> 
    <input id="editbtn" style="margin-left:130px;" type="submit" value="Submit">
      </form>   
@@ -119,10 +121,12 @@ body {
         
     function changemade(){   
         document.getElementById('editbtn').disabled=false;
-        var scl = <%- JSON.stringify(sclist) %>;             
+        var publ = <%- JSON.stringify(publist) %>;
+        var scl = <%- JSON.stringify(sclist) %>;
         var s = document.getElementById("myPoll");
         var o = s.options[s.selectedIndex].value;
         document.getElementById("sc").value= scl[o-1];
+        document.getElementById("pub").value= publ[o-1];
     }
     
     </script>

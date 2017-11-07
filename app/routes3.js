@@ -257,6 +257,7 @@ res.redirect('/');
  app.post('/create2', isLoggedIn2, function(req, res) { 
     var questionNo = req.body.question;
     var sc =  req.body.sc;
+    var pub = req.body.pub;
     var qlist = JSON.parse(req.body.qlist);   
     var id = req.user._id;
     var username = req.user.local.username;
@@ -275,7 +276,7 @@ res.redirect('/');
                                 ops.push(opt); 
                                 }
                         
-                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, qlist:qlist}); 
+                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub:pub, qlist:qlist}); 
                             }
                             else  {
                                //We should probably never come here.
