@@ -39,7 +39,11 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="/create">Post</a></li>
-        <li><a href="#">Polls</a></li>
+              <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Local</a>
+    <a id="poll2" onclick = "pollType(2)">Other</a>
+            </div></div></li> 
         <li><a href="/edit">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -133,12 +137,12 @@ function confirmIt(r) {
   if (r == true)  window.location = "/delete/" + <%- JSON.stringify(username) %> + "/" + locQuestion; else window.location = "/view";
 }
   
-//function vote(r) {
-    //loc = 
- //   console.log('r:'+ r);
-  /// window.location = loc;
-  // window.open('localhost:3000/franklin/What is your favorite topic?', '_blank');
-//}
+function pollType(num){
+     if (num == 2) {
+         checkPolls()   
+     }
+     else {window.location = "/view2";}   
+ }
        
 </script>
  
