@@ -227,24 +227,7 @@ var id = req.user._id;
 }
     
 app.post('/create', findDelete, function(req, res) { 
-var id = req.user._id;      
-var question = req.body.question;
-var options = [{}]; 
-  for (i=0; i<req.body.options.length; i++)
-  {options.push({option: req.body.options[i], votes: 0});}
-var showCase =  req.body.showcase;
-var SC= false;
-if (showCase =='showcase') SC = true;
-// delete poll with the same name.
-  
-// create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
-                       
-// save  
-newPollUser.save(function(err) {
-                              if (err) throw err;
-                      res.redirect('/');
-});
+res.send('deletion complete');
 });
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
