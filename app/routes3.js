@@ -109,10 +109,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
     app.get('/signlog', isLoggedIn2, function(req, res) {
-    var allPolls = [{}];    
-    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};     
+    var allPolls = req.all3Polls;         
         req.logout();
         res.render('index.ejs',{ logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls: 0, alertMessage: ''});
     }); 
@@ -159,6 +156,10 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
         }); 
        
     });
+    
+    app.get('/view2', function(req, res) { 
+    res.send('will want to go to view2');
+});
     
     app.get('/view', isLoggedIn, function(req, res) { 
                     var id = req.user._id;
