@@ -213,6 +213,13 @@ app.get('/view', isLoggedIn, function(req, res) {
                         }});
     });
     
+function findDelete(req, res, next) {
+    
+    
+    
+    return next();
+}
+    
 app.post('/create', isLoggedIn2, function(req, res) { 
 var id = req.user._id;      
 var question = req.body.question;
