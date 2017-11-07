@@ -228,13 +228,13 @@ return next();
     
 app.post('/create', findDelete, function(req, res) { 
     var id = req.user._id;      
-var question = req.body.question;
-var options = [{}]; 
+    var question = req.body.question;
+    var options = [{}]; 
   for (i=0; i<req.body.options.length; i++)
   {options.push({option: req.body.options[i], votes: 0});}
-var showCase =  req.body.showcase;
-var SC= false;
-if (showCase =='showcase') SC = true; 
+    var showCase =  req.body.showcase;
+    var SC= false;
+    if (showCase =='showcase') SC = true; 
 // create new poll document for the user.  
 var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
                        
@@ -244,7 +244,7 @@ newPollUser.save(function(err) {
 //res.redirect('/');
    
 });
-  res(send)(options);   
+  res.send(options);   
     
     
     
