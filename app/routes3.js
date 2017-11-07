@@ -214,16 +214,16 @@ app.get('/view', isLoggedIn, function(req, res) {
     });
     
 function findDelete(req, res, next) {
-var id = req.user._id;      
+    var id = req.user._id;      
     var question = req.body.question;
     Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc, next) {
     if(err)throw err;
 	else if (!doc) {
     Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc, next) {
-    if(err)throw err; else {res.send('deletion1');;}});    
-    }
-    else return next();    
-    });
+    if(err)throw err;});    
+    }  
+    });   
+return next(); 
 }
     
 app.post('/create', findDelete, function(req, res) { 
