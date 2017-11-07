@@ -88,8 +88,8 @@ body {
    Question:<br>
   <input id="input1" type="text" name="question" value="" size="30" />
   <input id="checkbox" type="checkbox" name="showcase" value="showcase"/>Showcase on Home Page
-        <button style="margin-left:80px"><a class="botton" onclick="apply()">Update Showcase Option</a></button><br>
-        <input style="margin-left: 247px; margin-top:5px;" id="checkbox2" type="checkbox" name="pubvis" value="pubvis"/>Visible to other postnpoll users<button style="margin-left:60px; margin-top:5px;"><a class="botton" onclick="apply()">Update viewing option</a></button>
+        <button style="margin-left:80px"><a class="button" onclick="apply()">Update Showcase Option</a></button><br>
+        <input style="margin-left: 247px; margin-top:5px;" id="checkbox2" type="checkbox" name="pubvis" value="pubvis"/>Visible to other postnpoll users<button style="margin-left:55px; margin-top:5px;"><a class="button" onclick="apply()">Update viewing option</a></button>
         <br><br><br>
    Options:<br>
    <select id="myOptions" name="options[]" multiple="multiple">
@@ -98,7 +98,11 @@ body {
     <form id = "form2" action="" method="post">
      <input id="showcase" type="hidden" name="sc" value="" size="30" />
     <input id="qlist" type="hidden" name="qlist" value="" size="30" /> 
-    </form>   
+    </form> 
+    <form id = "form3" action="" method="post">
+     <input id="pubvis" type="hidden" name="pub" value="" size="30" />
+    <input id="qlist" type="hidden" name="qlist" value="" size="30" /> 
+    </form> 
  <div id="input2" style="display:none"><input id="newoption" type="text" name="option" value="" size="10"></div>       
  <div style="margin-top:5px;"><button id="done" style="display:none" onclick="doDone()">Done</button> 
     <button id="cancel" style="display:none" onclick="doCancel()">Cancel</button></div>  
@@ -116,7 +120,8 @@ body {
     var newValue = document.getElementById('newoption'); 
     var origValue;
     var qlist=<%- JSON.stringify(qlist) %>;
-    function loaded() {
+    
+   function loaded() {
    document.getElementById("input1").value =<%- JSON.stringify(question) %>; 
     var ol = <%- JSON.stringify(options) %>;
     for (var q = 0; q < ol.length; q++)
@@ -127,9 +132,10 @@ body {
       console.log('index'+ q +'option' + ol[q].option);
     }
    document.getElementById("myOptions").options[0].selected = true;  
-  var sc = <%= sc %>;
-               if (sc == true){ document.getElementById('checkbox').checked = true;}
-    }
+   var sc = <%= sc %>;
+               if (sc == true){ document.getElementById('checkbox').checked = true;
+   var pub = <%= pub %>;
+               if (pub == true){ document.getElementById('checkbox2').checked = true;}}}
     
     function doDelete() {
       if (document.getElementById("myOptions").length >1)
@@ -242,10 +248,23 @@ body {
         var question = <%- JSON.stringify(question) %>;
         var username = <%- JSON.stringify(username) %>;
         if (document.getElementById('checkbox').checked == true) scOption = true; else scOption = false;
+        
         document.getElementById('showcase').value = scOption;
         document.getElementById('qlist').value = qlist;
         document.getElementById('form2').action = '/' + username + '/' + question; 
         document.getElementById('form2').submit();
+    }
+    
+     function apply2(){
+        var pubOption;
+        var question = <%- JSON.stringify(question) %>;
+        var username = <%- JSON.stringify(username) %>;
+        if (document.getElementById('checkbox2').checked == true) pubOption = true; else pubOption = false;
+        
+        document.getElementById('pubvis').value = pubOption;
+        document.getElementById('qlist').value = qlist;
+        document.getElementById('form3').action = '/' + username + '/' + question; 
+        document.getElementById('form3').submit();
     }
 </script>
 </body>
