@@ -225,13 +225,12 @@ if (showCase =='showcase') SC = true;
 // delete poll with the same name.
   
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}}); 
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
                        
 // save  
 newPollUser.save(function(err) {
                               if (err) throw err;
-                      //  res.redirect('/');
-    res.send(newPollUser);
+                      res.redirect('/');
 });
 });
       
