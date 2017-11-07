@@ -240,14 +240,14 @@ if (showCase =='showcase') SC = true;
         //could not find document to delete
 }});}});
             
-
+ res.send('userid:' + req.user._id + 'question:' + question + 'showcase:' + SC + 'options:' + options + 'public:' + true);
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
+///var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
                        
 // save  
-newPollUser.save(function(err) {
-                              if (err) throw err;
-                        res.redirect('/');});
+///newPollUser.save(function(err) {
+                              ///if (err) throw err;
+                       /// res.redirect('/');});
 });
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
