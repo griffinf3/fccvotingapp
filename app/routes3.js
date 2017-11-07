@@ -55,13 +55,13 @@ Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                      { op1 = doc[0].option1;
                      op2 = doc[0].option2;
                       
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: aM});
                      }
                  else
                     {
                      op1 = 'block';
                      op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: aM});}}});});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
