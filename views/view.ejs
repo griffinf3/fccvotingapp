@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <% include partials/head %>
-</head>
-<style>
-    button {
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+#siteName{
+    font-size: 300%;
+}
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+      
+button {
   margin-left: 20px;
   margin-bottom: 10px;
   line-height: 20px;
@@ -23,7 +50,23 @@
   background: salmon;
   border: none;
 }
+
+/* Style the header */
+.header {
+    background-color: #f1f1f1;
+    padding: 50px;
+    text-align: center;
+}
+
+/* Style the footer */
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
 </style>
+</head>
 <body onload=loaded();>
 
    <nav class="navbar navbar-inverse">
@@ -39,11 +82,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="/create">Post</a></li>
-              <li class="dropbtn"><div class="dropdown"><a>Polls</a>
-         <div class="dropdown-content">
-    <a id="poll1" onclick = "pollType(1)">Local</a>
-    <a id="poll2" onclick = "pollType(2)">Other</a>
-            </div></div></li> 
+        <li><a href="#">Polls</a></li>
         <li><a href="/edit">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -54,17 +93,23 @@
   </div>
 </nav> 
    
- <header>
-    <% include partials/header %>
-</header> 
+<div class="header">
+    <div class="container text-center">
+<div id="siteName" style="display: inline">Post-n-Poll</div>
+<div style="display: inline">&copy;</div>
+</div>
     
+    
+    <div id="description"><p>(a Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
+  </div>
 <div style="margin:20px;">
   <ul id="myList">
 </ul>
 </div>
 
-<footer class="container-fluid text-center"> 
-    <% include partials/footer %>
+<footer class="container-fluid text-center">
+          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
+<div style="display: inline">&copy;</div>
 </footer>
 
 </body>
@@ -131,9 +176,12 @@ function confirmIt(r) {
   if (r == true)  window.location = "/delete/" + <%- JSON.stringify(username) %> + "/" + locQuestion; else window.location = "/view";
 }
   
-function pollType(num){
-     if (num == 2) {window.location = "/view2";}   
- }
+//function vote(r) {
+    //loc = 
+ //   console.log('r:'+ r);
+  /// window.location = loc;
+  // window.open('localhost:3000/franklin/What is your favorite topic?', '_blank');
+//}
        
 </script>
  

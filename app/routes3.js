@@ -22,7 +22,7 @@ app.get('/', isLoggedIn, function (req, res) {
    // console.log('message'+ message);
    var aM ='';
    if (message != undefined && message != '')
-       aM = message; else  aM = ""; 
+       aM = message; else  aM = "no message"; 
       
   
 var allPolls = req.all3Polls;  
@@ -159,11 +159,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
        
     });
     
-app.get('/view2', function(req, res) { 
-    res.send('will want to go to view2');
-});
-    
-app.get('/view', isLoggedIn, function(req, res) { 
+    app.get('/view', isLoggedIn, function(req, res) { 
                     var id = req.user._id;
                     var username = req.user.local.username;
                     Poll.find({ 'userid' : id}, function(err, doc) {    
@@ -240,6 +236,10 @@ if (showCase =='showcase') SC = true;
         //could not find document to delete
 }});}});
             
+    
+    
+    
+                       
 
 // create new poll document for the user.  
 var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}}); 
@@ -247,9 +247,7 @@ var newPollUser = new Poll({userid: req.user._id, poll: {question: question, sho
 // save  
 newPollUser.save(function(err) {
                               if (err) throw err;
-                      //  res.redirect('/');
-    res.send(newPollUser);
-});
+                        res.redirect('/');});
 });
       
  app.post('/create2', isLoggedIn2, function(req, res) { 

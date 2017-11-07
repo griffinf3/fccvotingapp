@@ -19,12 +19,9 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a onclick = "checkPost()">Post</a></li>
-        <li class="dropbtn"><div class="dropdown"><a>Polls</a>
-         <div class="dropdown-content">
-    <a id="poll1" onclick = "pollType(1)">Local</a>
-    <a id="poll2" onclick = "pollType(2)">Other</a>
-            </div></div></li> 
-        <li class="dropbtn"><div class="dropdown"><a>Options</a>
+        <li><a onclick = "checkPolls()">Polls</a></li>
+        <li class="dropbtn"><div class="dropdown"> 
+            <a>Options</a>
           <div class="dropdown-content">
     <a id="hide1" onclick = "hide(1)">Hide Poll 2</a>
     <a id="hide2" onclick = "hide(2)">Hide Poll 3</a>
@@ -135,7 +132,7 @@ var dataArray = [];
 for (var i = 1; i< polls[1].options.length; i++)
 {labelsArray.push(polls[1].options[i].option);
  dataArray.push(polls[1].options[i].votes);
- if (polls[1].options[i].votes>maxY) maxY = polls[1].options[i].votes;}
+ if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
     
 var sSize;
 if (maxY <= 10) sSize = 1;
@@ -206,7 +203,7 @@ var dataArray = [];
 for (var i = 1; i< polls[2].options.length; i++)
 {labelsArray.push(polls[2].options[i].option);
  dataArray.push(polls[2].options[i].votes);
- if (polls[2].options[i].votes>maxY) maxY = polls[2].options[i].votes;}
+ if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
 
 var sSize;
 if (maxY <= 10) sSize = 1;
@@ -365,15 +362,6 @@ var myChart = new Chart(ctx, {
    if (op1 == 'none') (hide2(1));
    if (op2 == 'none') (hide2(2));  
     }
-         
- function pollType(num){
-     if (num == 1) {
-         checkPolls()   
-     }
-     else {window.location = "/view2";}   
- }
-         
-          
          
  function checkEdit(){
              if (totalPolls == 0) alert("There are no polls to edit.");
