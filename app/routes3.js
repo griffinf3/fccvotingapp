@@ -222,7 +222,7 @@ var id = req.user._id;
     Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc, next) {
     if(err)throw err; else {res.send('deletion1');;}});    
     }
-    else res.send('deletion2');;    
+    else return next();    
     });
 }
     
