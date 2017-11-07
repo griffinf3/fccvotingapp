@@ -19,9 +19,12 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a onclick = "checkPost()">Post</a></li>
-        <li><a onclick = "checkPolls()">Polls</a></li>
-        <li class="dropbtn"><div class="dropdown"> 
-            <a>Options</a>
+        <li class="dropbtn"><div class="dropdown"><a onclick = "checkPolls()">Polls</a>
+            <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Local</a>
+    <a id="poll2" onclick = "pollType(2)">Other</a>
+            </div></div></li> 
+        <li class="dropbtn"><div class="dropdown"><a>Options</a>
           <div class="dropdown-content">
     <a id="hide1" onclick = "hide(1)">Hide Poll 2</a>
     <a id="hide2" onclick = "hide(2)">Hide Poll 3</a>
