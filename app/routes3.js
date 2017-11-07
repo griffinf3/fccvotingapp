@@ -230,12 +230,12 @@ if (showCase =='showcase') SC = true;
     if(err){throw err;}});
     } 
     else
-   {Poll.find({ 'userid' : id, 'poll.question': question+ '?'}, function(err, doc)                             {if (err) {}
+   {Poll.find({ 'userid' : id, 'poll.question': question+ '?'}, function(err, doc, next)                             {if (err) {}
     else if (doc) {
     Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
     if(err){throw err;}});} 
     else {
-        //could not find document to delete
+        next();
 }});}});    
     
     
