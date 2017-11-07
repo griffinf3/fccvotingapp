@@ -159,6 +159,10 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
        
     });
     
+app.get('/view2', function(req, res) { 
+    res.send('will want to go to view2');
+});
+    
 app.get('/view', isLoggedIn, function(req, res) { 
                     var id = req.user._id;
                     var username = req.user.local.username;
