@@ -11,8 +11,7 @@ var pollSchema = mongoose.Schema({
   poll: {
     question:  String,
     showcase:  Boolean,
-    options: [{}]
-      ///: [{ option: String, votes: Number }]
+    options: [{}] 
   }
 });
 
