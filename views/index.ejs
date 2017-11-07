@@ -132,7 +132,7 @@ var dataArray = [];
 for (var i = 1; i< polls[1].options.length; i++)
 {labelsArray.push(polls[1].options[i].option);
  dataArray.push(polls[1].options[i].votes);
- if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
+ if (polls[1].options[i].votes>maxY) maxY = polls[1].options[i].votes;}
     
 var sSize;
 if (maxY <= 10) sSize = 1;
@@ -203,7 +203,7 @@ var dataArray = [];
 for (var i = 1; i< polls[2].options.length; i++)
 {labelsArray.push(polls[2].options[i].option);
  dataArray.push(polls[2].options[i].votes);
- if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;}
+ if (polls[2].options[i].votes>maxY) maxY = polls[2].options[i].votes;}
 
 var sSize;
 if (maxY <= 10) sSize = 1;
