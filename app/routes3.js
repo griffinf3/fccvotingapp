@@ -200,7 +200,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var questionlist = [];
                                 var sclist = [];
-                                var plist = [];
+                                var publist = [];
                                 for (i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)
