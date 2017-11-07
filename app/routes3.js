@@ -200,11 +200,14 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var questionlist = [];
                                 var sclist = [];
+                                var plist = [];
                                 for (i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)
-                                sclist.push(doc[i].poll.showcase)} 
-                                if (lg>0)res.render('edit.ejs', {questionlist: questionlist, username:username, sclist: sclist}); else res.redirect('/');
+                                sclist.push(doc[i].poll.showcase)
+                                publist.push(doc[i].poll.public)
+                                } 
+                                if (lg>0)res.render('edit.ejs', {questionlist: questionlist, username:username, sclist: sclist, publist: publist}); else res.redirect('/');
                             }
                             
                             else  {
