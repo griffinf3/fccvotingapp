@@ -120,7 +120,7 @@ body {
     var ol = <%- JSON.stringify(options) %>;
     for (var q = 0; q < ol.length; q++)
     { var option = document.createElement("option");
-      option.value = q+1;
+      option.value = ol[q].option;;
       option.innerHTML = ol[q].option;
       document.getElementById("myOptions").appendChild(option);
       console.log('index'+ q +'option' + ol[q].option);
