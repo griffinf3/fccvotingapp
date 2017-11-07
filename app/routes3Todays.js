@@ -2,8 +2,10 @@ var User       = require('../app/models/user');
 var Poll       = require('../app/models/poll');
 var Option     = require('../app/models/option');
 
-module.exports = function(app, passport) {
 
+
+module.exports = function(app, passport) {
+  
 var all3Polls = function (req, res, next) {
     var Polls = [{}];
     Polls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: 0}, {option: 'option 2', votes: 0}, {option: 'option 3', votes: 0}]};
@@ -27,9 +29,6 @@ var allPolls = req.all3Polls;
 var op1;
 var op2;
 var totalPolls;
-                    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
 
 Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
@@ -58,13 +57,13 @@ Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                      { op1 = doc[0].option1;
                      op2 = doc[0].option2;
                       
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: ''});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls: totalPolls, alertMessage: aM});
                      }
                  else
                     {
                      op1 = 'block';
                      op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: ''});}}});});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: aM});}}});});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
@@ -112,10 +111,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
     app.get('/signlog', isLoggedIn2, function(req, res) {
-    var allPolls = [{}];    
-    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-                    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};     
+    var allPolls = req.all3Polls;         
         req.logout();
         res.render('index.ejs',{ logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls: 0, alertMessage: ''});
     }); 
@@ -163,7 +159,11 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
        
     });
     
-    app.get('/view', isLoggedIn, function(req, res) { 
+app.get('/view2', function(req, res) { 
+    res.send('will want to go to view2');
+});
+    
+app.get('/view', isLoggedIn, function(req, res) { 
                     var id = req.user._id;
                     var username = req.user.local.username;
                     Poll.find({ 'userid' : id}, function(err, doc) {    
@@ -214,6 +214,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
 app.post('/create', isLoggedIn2, function(req, res) { 
+var id = req.user._id;      
 var question = req.body.question;
 var options = [{}]; 
   for (i=0; i<req.body.options.length; i++)
@@ -221,13 +222,34 @@ var options = [{}];
 var showCase =  req.body.showcase;
 var SC= false;
 if (showCase =='showcase') SC = true;
+// delete poll with the same name.
+  
+  Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                           if (err) {}
+                           else
+                           if (doc) {
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
+    if(err){throw err;}});
+    } 
+    else
+   {Poll.find({ 'userid' : id, 'poll.question': question+ '?'}, function(err, doc)                             {if (err) {}
+    else if (doc) {
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc) {
+    if(err){throw err;}});} 
+    else {
+        //could not find document to delete
+}});}});
+            
+
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}});  
-                         
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options}}); 
+                       
 // save  
 newPollUser.save(function(err) {
                               if (err) throw err;
-                        res.redirect('/');});
+                      //  res.redirect('/');
+    res.send(newPollUser);
+});
 });
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
@@ -261,14 +283,11 @@ newPollUser.save(function(err) {
 }); 
        
 app.post('/voting', function(req, res) {
-    var message1 = 'Your vote has been recorded.';
-    var message2 = 'Please check the accuracy of your voting link. The username specified in your URL could not be found in the database.';
-    var message3 = 'Please check the accuracy of your voting link. The polling question specified in your URL could not be found in the database.';
-    var message;
     var question= req.body.question;
     var username = req.body.username;
     var option = req.body.option;
-    
+    var message1 = 'Your vote has been recorded.';
+    var message2 = "There was an error in recording this vote."
 //record this vote if both the username and question can be found in the polls collection.
 //res.send('username'+ username);
     
@@ -276,11 +295,10 @@ User.findOne({'local.username' : username}, function(err, user) {
            if (err) {res.send('error0');}
            else
             if (user) {
-//user found; now look to see if there is a question created by this user in the polls collection?
                    var id = user._id;  
                    var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
                    var update = { $inc: { 'poll.options.$.votes': 1 }};
-                    var options = { multi: false};
+                   var options = { multi: false};
 
                      Poll.update(conditions, update, options, callback);
                      function callback (err, numAffected) {
@@ -296,33 +314,40 @@ User.findOne({'local.username' : username}, function(err, user) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found;
-                           message = message3;
+                           if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message2;
+                            res.redirect(redirectSuffix);} 
                        }
                             else {
                                 //vote recorded."
-                                message = message1;
-                                
+                               if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message1;
+                            res.redirect(redirectSuffix);} 
                                                        }}
                        }  
                         else {
                             //vote recorded."
-                                message = message1;
+                               if (req.user)
+                           {
+                            var redirectSuffix = '/?alertMessage=' + message1;
+                            res.redirect(redirectSuffix);} 
                         }}}
             else { 
                 //no username found.
-                 message = message2;
+                 if (req.user)
+                           { 
+                            var redirectSuffix = '/?alertMessage=' + message2;
+                            res.redirect(redirectSuffix);} 
             }});
     
-  if (req.user)
-    {res.redirect('/'); }
-    else {
-        
-        var allPolls = [{}];
-allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
- allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};   
-        
-User.findOne({'local.username' : username}, function(err, userdoc) {    
+
+var allPolls = req.all3Polls;   
+    
+    
+if (!req.user)
+   {User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
            else
             {
@@ -333,51 +358,44 @@ User.findOne({'local.username' : username}, function(err, userdoc) {
                   if (err) {res.send('error2');}
                   else 
                   if (doc) {
-                      //the question was found
+                     //the question was found
                          var opts = [{}];
-                        for (var j=1; j<doc[0].poll.options.length; j++ )
-                        {opts.push({option: doc[0].poll.options[j].option, votes: doc[0].poll.options[j].votes});}
+                        for (var j=1; j<doc.poll.options.length; j++ )
+                        {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
                         allPolls[0] = {question: question, options: opts};
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
+                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1});      
                   }
-                    else 
-                    {//the question was not found but try with the question mark appended.
-                        Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
+                  else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
                       else { 
                       if (doc){
                           //the question was found with ? added.
                            var opts = [{}];
-                           for (var j=1; j<3; j++ )
+                           for (var j=1; j<doc.poll.options.length; j++ )
                         {
                             opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
                         
                         }
-                        allPolls[0] = {question: question, options: opts};
-                          
-                          
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message}); 
-                         // res.send('OK');
+                        allPolls[0] = {question: question, options: opts};  
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
                       } else {
                           //no luck with finding the poll the user was looking for,
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});     
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
                       }
                       }                                                                                   
                                                                                                          
                     });}
+                 });
               
-              
-                  });
-              
-              
-                }
+              }
                 else {
                    //no user with this username 
-                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message});  
+                    res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2}); 
                 }
               }
         
-            });
-}});
+            });}
+    
+   });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
      var _qUrl = req.url;
@@ -398,10 +416,16 @@ app.get('/delete/*', isLoggedIn, function(req, res) {
     }
     if(doc){
         res.redirect('/view');
-    }else{     
-        res.redirect('/view');
-        //we have an error
-    }}); }}});});
+    }else{      
+        Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc) {
+    if(err){
+        throw err;
+    }
+    if(doc){res.redirect('/view');} else {
+        //there was an error findng and removing the document.
+        res.redirect('/view');}
+        
+    });}});}}});});
     
     
      
@@ -598,34 +622,52 @@ app.get('/loginSuccess', function(req, res, next) {
      var question = qUrl.substring(n+1);
      User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
-           else
-            {    
-              if (user) { 
-                          var id = user._id;
-                          Poll.find({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
-                           if (err) {}
-                           else
-                           { if (doc) {
-                               options = doc[0].poll.options;
-                               for (var i = 1; i<doc[0].poll.options.length; i++)
-                                {opt = {option: doc[0].poll.options[i].option}
+           else if (user)  
+            { //user found.
+                var id = user._id;  
+                Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
+                            if (err) {}
+                            else
+                              { if (doc) {   
+                                options = doc.poll.options;
+                                for (var i = 1; i<doc.poll.options.length; i++)
+                                {opt = {option: doc.poll.options[i].option}
                                 ops.push(opt); 
                                 var conditions = {'userid' : id, 'poll.question' : question};
+                                var update = { $set:{'poll.showcase': sc}};
+                                Poll.update(conditions, update, callback);  
+                                function callback (err, numAffected) {}  
+                               }
+ res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, qlist:qlist});     
+                              }
+                               else {
+                                   //append question mark to question and search again.
+                                Poll.findOne({ 'userid' : id, 'poll.question': question + '?'},                                             function(err, doc) {
+                                    
+                                    if (err) {}
+                               else { if (doc) {   
+                               options = doc.poll.options;
+                               for (var i = 1; i<doc.poll.options.length; i++)
+                                {opt = {option: doc.poll.options[i].option}
+                                ops.push(opt); 
+                                var conditions = {'userid' : id, 'poll.question' : question+ '?'};
                                  var update = { $set:{'poll.showcase': sc}};
                                  Poll.update(conditions, update, callback);  
-                                 function callback (err, numAffected) {}
-                                 
-                           }
-                            res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc,  qlist:qlist});  
-                           }
-                           }
-                          });
-                        }
-            else  {res.redirect('/');}
-                        
-             }
-     });});
-                                      
+                                 function callback (err, numAffected) {}  
+                               }
+                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc,  qlist:qlist}); 
+                                
+                            }
+                               else {
+                                  //question not found in database. 
+                                   res.redirect('/');
+                                   
+                               }}});}}});}
+             else {
+                 //user not found.
+                 res.redirect('/');
+             }});});
+    
 }
 
 // route middleware to make sure a user is logged in
@@ -635,10 +677,7 @@ function isLoggedIn(req, res, next) {
     {return next();}
            
 // if they aren't redirect them to the home page
-     var allPolls = [{}];
-    allPolls[0] = {question: 'poll 1', options: [{}, {option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-    allPolls[1] =  {question: 'poll 2', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
-    allPolls[2] =  {question: 'poll 3', options: [{},{option: 'option 1', votes: null}, {option: 'option 2', votes: null}, {option: 'option 3', votes: null}]};
+   var allPolls = req.all3Polls;
     res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: ''});};
 
 function isLoggedIn2(req, res, next) {
