@@ -19,8 +19,8 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a onclick = "checkPost()">Post</a></li>
-        <li class="dropbtn"><div class="dropdown"><a onclick = "checkPolls()">Polls</a>
-            <div class="dropdown-content">
+        <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
     <a id="poll1" onclick = "pollType(1)">Local</a>
     <a id="poll2" onclick = "pollType(2)">Other</a>
             </div></div></li> 
@@ -365,6 +365,15 @@ var myChart = new Chart(ctx, {
    if (op1 == 'none') (hide2(1));
    if (op2 == 'none') (hide2(2));  
     }
+         
+ function pollType(num){
+     if (num == 1) {
+         checkPolls()   
+     }
+     else {window.location = "/view2";}   
+ }
+         
+          
          
  function checkEdit(){
              if (totalPolls == 0) alert("There are no polls to edit.");
