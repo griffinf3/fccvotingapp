@@ -213,7 +213,21 @@ app.get('/view', isLoggedIn, function(req, res) {
                         }});
     });
     
-app.post('/create', isLoggedIn2, function(req, res) { 
+function findDelete(req, res, next) {
+    var id = req.user._id;      
+    var question = req.body.question;
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc, next) {
+    if(err)throw err;
+	else if (!doc) {
+    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc, next) {
+    if(err)throw err; else {return next();}});    
+    }
+    else return next();    
+    });
+    
+}
+    
+app.post('/create', {isLoggedIn2, findDelete}, function(req, res) { 
 var id = req.user._id;      
 var question = req.body.question;
 var options = [{}]; 
