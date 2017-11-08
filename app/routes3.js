@@ -172,11 +172,15 @@ app.get('/view', isLoggedIn, function(req, res) {
                             
                                 var lg = doc.length;
                                 var questionlist = [];
-                                var str ='';
+                                var str =''; 
+                                for (var i=0; i<lg; i++)
+                                {str = str+ '::' + id + ':';}
                             
                             
                             
-                            res.send('public'+ lg); 
+                            
+                            
+                            res.send('public'+str); 
                                 }
                             
 
@@ -191,7 +195,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                             if (doc) {
                                 var lg = doc.length;
                                 var questionlist = [];
-                                for (i=0; i<lg; i++)
+                                for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
                                 res.render('view.ejs', {questionlist: questionlist, username:username, type: type});
