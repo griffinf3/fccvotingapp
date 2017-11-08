@@ -76,18 +76,7 @@
        var voteBtn;
        var deleteBtn;
      var type = <%- JSON.stringify(type) %>;  
-     if (type == "public") {qnlist = <%- JSON.stringify(qnamelist) %>;
-             var q;  
-             var n;
-             var ql =[];
-             var nl = [];
-             for (var i = 0; i<qnlist.length; i++)            
-             {q = qnlist.question;
-              ql.push(q);
-              n = qnlist.username;
-              nl.push(n);
-             }}
-         else var ql = <%- JSON.stringify(questionlist) %>;
+   
          }
        
 </script>
