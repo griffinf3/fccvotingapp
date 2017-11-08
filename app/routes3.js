@@ -169,30 +169,22 @@ app.get('/view', isLoggedIn, function(req, res) {
                       if (err) {}
                         else
                         {if (doc) {
-                            
                                 var lg = doc.length;
-                                var questionlist = [];
-                                var str =''; 
+                                var qnamelist = [];
+                                var qnameobj = {};
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
-                                questionlist.push(doc[i].poll.question);
-                                
                                 User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
-                      if (err) {} else { res.send('public' + puser.local.username);
-                          
-                          
-                          //var pusername = psuer.local.username;
-                      }
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                });}}
-                          // res.render('view.ejs', {questionlist: questionlist, username:pusername, type: type});
-                                             }}});}
+                      if (err) {} else { 
+                          //res.send('public' + puser.local.username);  
+                          var pusername = psuer.local.username;
+                          qnameobj = {question: doc[i].poll.question, username: pusername};
+                          questionlist.push(qnameobj);
+                         
+                      }});}} 
+                            //res.render('view.ejs', {qnamelist: qnamelist, type: type});
+                            res.send(qnamelist);
+                        }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
