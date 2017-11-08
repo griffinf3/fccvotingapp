@@ -164,11 +164,11 @@ app.get('/view', isLoggedIn, function(req, res) {
                     var id = req.user._id;
                     var username = req.user.local.username;
                     if (type== 'public')
-                    {   
-                    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                    {Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
                         {if (doc) {
+                            
                           var namelist = [];
                           var nameobj = {};
                             User.find({},function(err, puser) {    
@@ -180,18 +180,16 @@ app.get('/view', isLoggedIn, function(req, res) {
                           var lg = doc.length;
                           var qnamelist = [];
                           var qnameobj = {};
-                          for (var i=0; i<lg; i++)
-                                {if (doc[i].userid != id){
-                                 var pid= doc[i].userid;
-                                 var pq = doc[i].poll.question;
-                                 var nobj = namelist.filter(function (namelist) {return namelist.id == pid });
-                                 qnameobj = {username: nobj.username, question = pq};
-                                 qnamelist.push(qnameobj);
-                                                
-                    }} 
-                            //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                           res.send('public'+ ':' nobj);
-                        }}});}
+                            
+                            res.send('public'+ ':' namelist);
+                            
+                            
+                            
+                        }}});
+                        
+                        
+                        
+                    }
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
