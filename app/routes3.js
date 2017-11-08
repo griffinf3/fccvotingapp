@@ -168,7 +168,15 @@ app.get('/view', isLoggedIn, function(req, res) {
                     Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
-                        {if (doc) {res.send('public'); 
+                        {if (doc) {
+                            
+                                var lg = doc.length;
+                                var questionlist = [];
+                                var str ='';
+                            
+                            
+                            
+                            res.send('public'+ lg); 
                                 }
                             
 
