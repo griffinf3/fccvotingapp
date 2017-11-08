@@ -75,10 +75,11 @@
        var loc2 =[];
        var voteBtn;
        var deleteBtn;
+       var qnlist = [];
        var ql;
     var viewtype = <%- JSON.stringify(viewtype) %>; 
     if (viewtype == "public") qnlist = <%- JSON.stringify(qnamelist) %>;
-     else var ql = <%- JSON.stringify(questionlist) %>;
+     else ql = <%- JSON.stringify(questionlist) %>;
      for (var q = 0; q < ql.length; q++)
      { loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
        //console.log(loc[q]);
