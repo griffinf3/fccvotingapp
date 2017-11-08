@@ -173,22 +173,19 @@ app.get('/view', isLoggedIn, function(req, res) {
                             
                           var namelist = [];
                           var nameobj = {};
-                         User.find({},function(err, puser, callback) { 
+                         User.find({},function(err, puser) { 
                                  if (err) {} else { 
                                    for (var i = 0; i< puser.length; i++)  
                                    {pusername = puser[i].local.username;
                                     nameobj = {id: puser[i]._id, username: pusername};
                                     namelist.push(nameobj); } 
-                                      req.namelist = namelist;      
+                                      callback("",namelist);      
                                       }
                                 
                             });
                             
-                          function callback (res, req){ 
-                            var nlist = req.namelist;
-                           
-                          
-                          res.send('OK'); 
+                          function callback (error, list){ 
+                          res.send(list); 
                           
                           }     
                         
