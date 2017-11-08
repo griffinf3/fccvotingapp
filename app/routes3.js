@@ -643,7 +643,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                  var update = { $set:{'poll.showcase': sc}};}
                                 else if (pub != '')      
                                 {sc = doc.poll.showcase;
-                                    var update = { $set:{'poll.showcase': pub}};
+                                    var update = { $set:{'poll.public': pub}};
                                     
                                 }
                                 Poll.update(conditions, update, callback);  
@@ -667,7 +667,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                  var update = { $set:{'poll.showcase': sc}};}
                                 else if (pub != '')      
                                 {sc = doc.poll.showcase;
-                                    var update = { $set:{'poll.showcase': pub}};
+                                    var update = { $set:{'poll.public': pub}};
                                     
                                 }
                                  Poll.update(conditions, update, callback);  
