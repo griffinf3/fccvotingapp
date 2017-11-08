@@ -183,7 +183,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ lg);
+                            res.send('public'+ doc[0].userid + ':' + doc[1].userid) + ':'+ id;
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
