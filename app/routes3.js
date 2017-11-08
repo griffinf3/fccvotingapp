@@ -168,9 +168,16 @@ app.get('/view', isLoggedIn, function(req, res) {
                     Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
-                        {
+                        {if (doc) {
+                                var lg = doc.length;
+                                var questionlist = [];
+                                var str ='';
+                                for (i=0; i<lg; i++)
+                                {
+                                str = str+ '::' + id + ':' + userid;
+                                }res.send('public'+ str); }
                             
-                           res.send('public'+ doc);
+
                             
                          }
                     });}
