@@ -158,14 +158,35 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
         }); 
        
     });
-    
-app.get('/view2', function(req, res) { 
-    res.redirect('/view');
-});
-    
+        
 app.get('/view', isLoggedIn, function(req, res) { 
+                    var type = req.param('type');
                     var id = req.user._id;
+    
+                    if (type== 'public')
+                    { 
                     var username = req.user.local.username;
+                    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {    
+                            if (doc) {
+                                var lg = doc.length;
+                                var questionlist = [];
+                                for (i=0; i<lg; i++)
+                                {
+                                if (userid != id)
+                                questionlist.push(doc[i].poll.question)
+                                
+                                }                         
+                                res.render('view.ejs', {questionlist: questionlist, username:username, type: type});
+                            }
+                            else  {
+                               //We should probably never come here.
+                               // res.send(question);
+                                res.redirect('/');}}});}
+                    else
+                    {var username = req.user.local.username;
                     Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
                         else
@@ -176,18 +197,12 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 for (i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                                res.render('view.ejs', {questionlist: questionlist, username:username});
+                                res.render('view.ejs', {questionlist: questionlist, username:username, type: type});
                             }
                             else  {
                                //We should probably never come here.
                                // res.send(question);
-                                res.redirect('/');
-                
-                                }
-                
-                        }});
-        
-        });
+                                res.redirect('/');}}});}});
     
  app.get('/edit', isLoggedIn, function(req, res) {
                     var id = req.user._id;

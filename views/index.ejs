@@ -370,7 +370,7 @@ var myChart = new Chart(ctx, {
      if (num == 1) {
          checkPolls()   
      }
-     else {window.location = "/view2";}   
+     else {window.location = "/view?type=public";}   
  }
          
           
@@ -382,7 +382,7 @@ var myChart = new Chart(ctx, {
          
   function checkPolls(){
              if (totalPolls == 0) alert("No polls have been posted.");
-              else  window.location = "/view";
+              else  window.location = "/view?type=local";
          }
          
 function checkPost(){
