@@ -195,8 +195,10 @@ app.get('/view', isLoggedIn, function(req, res) {
                             qnamelist.push(qnameobj);
                                                 
                     }}  
-                              res.send(list);
+                             
+                              var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
                               
+                               res.send(obj1);
                               }
                         
                             
