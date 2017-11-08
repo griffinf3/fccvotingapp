@@ -172,7 +172,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var qnamelist = [];
                                 var qnameobj = {};
-                                var pid = doc[0].userid;
+                                var pid = doc[1].userid;
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
                                     
