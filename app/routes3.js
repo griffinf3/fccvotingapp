@@ -173,23 +173,24 @@ app.get('/view', isLoggedIn, function(req, res) {
                             
                           var namelist = [];
                           var nameobj = {};
-                            User.find({},function(err, puser) { 
+                         User.find({},function(err, puser, callback) { 
                                  if (err) {} else { 
                                    for (var i = 0; i< puser.length; i++)  
                                    {pusername = puser[i].local.username;
                                     nameobj = {id: puser[i]._id, username: pusername};
                                     namelist.push(nameobj); } 
-                                            res.send(namelist); 
+                                      req.namelist = namelist;      
                                       }
                                 
                             });
                             
+                          function callback (res, req){ 
+                            var nlist = req.namelist;
+                            var lg = doc.length;
+                            var qnamelist = [];
+                            var qnameobj = {};
                             
-                          var lg = doc.length;
-                          var qnamelist = [];
-                          var qnameobj = {};
-                            
-                          for (var i=0; i<lg; i++)
+                            for (var i=0; i<lg; i++)
                           {if (doc[i].userid != id){
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
@@ -197,7 +198,11 @@ app.get('/view', isLoggedIn, function(req, res) {
                                  qnameobj = {username: nobj.username, question: pq};
                                  qnamelist.push(qnameobj);
                                                 
-                    }}       
+                    }} 
+                          
+                          res.send(namelist); 
+                          
+                          }     
                         
                             
                         }}});
