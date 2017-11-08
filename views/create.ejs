@@ -18,7 +18,11 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="#">Post</a></li>
-        <li><a onclick = "checkPolls()">Polls</a></li>
+                  <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Local</a>
+    <a id="poll2" onclick = "pollType(2)">Other</a>
+            </div></div></li> 
         <li><a onclick = "checkEdit()">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -67,6 +71,13 @@
    document.getElementById("myOptions").options[0].selected = true;  
     }
     
+    function pollType(num){
+     if (num == 1) {
+         checkPolls()   
+     }
+     else {window.location = "/view?type=public";}   
+ }
+    
     function checkEdit(){
      var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     if (totalPolls == 0) alert("There are no polls to edit.");
@@ -76,7 +87,7 @@
   function checkPolls(){
      var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
              if (totalPolls == 0) alert("No polls have been posted.");
-              else  window.location = "/view";
+              else  window.location = "/view?type=local";
          }
     
     function doDelete() {
