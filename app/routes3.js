@@ -160,10 +160,10 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
         
 app.get('/view', isLoggedIn, function(req, res) { 
-                    var type = req.param('type');
+                    var viewtype = req.param('type');
                     var id = req.user._id;
                     var username = req.user.local.username;
-                    if (type== 'public')
+                    if (viewtype== 'public')
                     {
                         Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
@@ -197,7 +197,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                     }}  
                              
                              // var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
-                              res.render('view.ejs', {qnamelist: qnamelist, type: type});
+                              res.render('view.ejs', {qnamelist: JSON.parse(qnamelist), viewtype: viewtype});
                              // res.send(qnamelist + ':' + type);
                               }
                         
@@ -218,7 +218,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                                res.render('view.ejs', {questionlist: questionlist, username:username, type: type});
+                                res.render('view.ejs', {questionlist: questionlist, username:username, viewtype: viewtype});
                             }
                             else  {
                                //We should probably never come here.
