@@ -160,7 +160,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
     });
     
 app.get('/view2', function(req, res) { 
-    res.send('will want to go to view2');
+    res.redirect('/view');
 });
     
 app.get('/view', isLoggedIn, function(req, res) { 
