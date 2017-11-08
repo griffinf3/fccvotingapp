@@ -191,7 +191,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
                        var nobj = list.filter(function (list) {return list.id == pid });
-                            qnameobj = {username: nobj[i].username, question: pq};
+                            qnameobj = {username: nobj[0].username, question: pq};
                             qnamelist.push(qnameobj);
                                                 
                     }}  
