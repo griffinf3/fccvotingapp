@@ -197,7 +197,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                     }}  
                              
                              // var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
-                              res.render('view.ejs', {qnamelist: JSON.parse(qnamelist), viewtype: viewtype});
+                              res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype});
                              // res.send(qnamelist + ':' + type);
                               }
                         
@@ -218,7 +218,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                                res.render('view.ejs', {questionlist: questionlist, username:username, viewtype: viewtype});
+                                res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype});
                             }
                             else  {
                                //We should probably never come here.
