@@ -186,21 +186,9 @@ app.get('/view', isLoggedIn, function(req, res) {
                             
                           function callback (res, req){ 
                             var nlist = req.namelist;
-                            var lg = doc.length;
-                            var qnamelist = [];
-                            var qnameobj = {};
-                            
-                            for (var i=0; i<lg; i++)
-                          {if (doc[i].userid != id){
-                                 var pid= doc[i].userid;
-                                 var pq = doc[i].poll.question;
-                       var nobj = namelist.filter(function (namelist) {return namelist.id == pid });
-                                 qnameobj = {username: nobj.username, question: pq};
-                                 qnamelist.push(qnameobj);
-                                                
-                    }} 
+                           
                           
-                          res.send(namelist); 
+                          res.send(nlist); 
                           
                           }     
                         
