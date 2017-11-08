@@ -186,7 +186,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ ':' + qnamelist);
+                            res.send('public'+ ':' + pid + ':' + id);
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
