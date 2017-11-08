@@ -197,7 +197,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                     }}  
                              
                              // var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
-                              res.render('view.ejs', {qnamelist, type: type});
+                              res.render('view.ejs', {qnamelist: qnamelist, type: type});
                               // res.send(qnamelist);
                               }
                         
