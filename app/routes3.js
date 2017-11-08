@@ -179,15 +179,25 @@ app.get('/view', isLoggedIn, function(req, res) {
                                    {pusername = puser[i].local.username;
                                     nameobj = {id: puser[i]._id, username: pusername};
                                     namelist.push(nameobj); } 
-                                      callback("",namelist);      
-                                      }
-                                
-                            });
+                                         callback("",namelist);}});
                             
-                          function callback (error, list){ 
-                          res.send(list); 
-                          
-                          }     
+                          function callback (error, list){    
+                          var lg = doc.length;
+                          var qnamelist = [];
+                          var qnameobj = {};
+                            
+                          for (var i=0; i<lg; i++)
+                          {if (doc[i].userid != id){
+                                 var pid= doc[i].userid;
+                                 var pq = doc[i].poll.question;
+                       var nobj = list.filter(function (list) {return list.id == pid });
+                            qnameobj = {username: nobj.username, question: pq};
+                            qnamelist.push(qnameobj);
+                                                
+                    }}  
+                              res.send(qnamelist);
+                              
+                              }
                         
                             
                         }}});
