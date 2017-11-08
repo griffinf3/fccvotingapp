@@ -164,31 +164,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                     var id = req.user._id;
                     var username = req.user.local.username;
                     if (type== 'public')
-                    {Poll.find({ 'poll.public' : true}, function(err, doc) {    
-                      if (err) {}
-                        else
-                        {if (doc) {
-                            
-                          var namelist = [];
-                          var nameobj = {};
-                            User.find({},function(err, puser) {    
-                               if (err) {} else {   
-                                   pusername = puser.local.username;
-                                   nameobj = {id: puser._id, username: pusername};
-                                   namelist.push(nameobj);   
-                             }});
-                          var lg = doc.length;
-                          var qnamelist = [];
-                          var qnameobj = {};
-                            
-                            res.send('public'+ ':' namelist);
-                            
-                            
-                            
-                        }}});
-                        
-                        
-                        
+                    {res.send('OK');
                     }
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
