@@ -174,7 +174,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var questionlist = [];
                                 var str =''; 
                                 for (var i=0; i<lg; i++)
-                                {str = str+ '::' + id + ':';}
+                                {str = str+ '::' + id + ':' + doc[i].userid;}
                             
                             
                             
