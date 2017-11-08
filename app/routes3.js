@@ -610,8 +610,7 @@ app.get('/loginSuccess', function(req, res, next) {
             }}});});
  
 
-    app.post('/*', function(req, res, next) { 
-        
+    app.post('/*', function(req, res) {    
      var _qUrl = req.url;   
      var qUrl = decodeURIComponent(_qUrl.substring(1));
      var n = qUrl.indexOf("/");
@@ -680,12 +679,12 @@ app.get('/loginSuccess', function(req, res, next) {
                             }
                                else {
                                   //question not found in database. 
-                                   res.redirect('http://www.google.com');
+                                   res.redirect('/');
                                    
                                }}});}}});}
              else {
                  //user not found.
-                 res.redirect('http://www.google.com');
+                 res.redirect('/');
              }});});
     
 }
