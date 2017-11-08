@@ -177,7 +177,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 {if (doc[i].userid != id){
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
-                                User.findOne({ '_id' : pid}, function(err, puser) {    
+                                 User.findOne({ '_id' : pid}, function(err, puser, callback) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
                           pusername = puser.local.username;
@@ -186,7 +186,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ ':' + pid + ':' + pq);
+                           function callback(){res.send('public'+ ':' + pid + ':' + qnamelist);}
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
