@@ -177,9 +177,22 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 {if (doc[i].userid != id){
                                 questionlist.push(doc[i].poll.question);
                                 
-                                 User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
-                      if (err) {} else {var pusername = psuer.local.username;}});}}
-                            res.render('view.ejs', {questionlist: questionlist, username:pusername, type: type});}}});}
+                                User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
+                      if (err) {} else { res.send('public' + puser.local.username);
+                          
+                          
+                          //var pusername = psuer.local.username;
+                      }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                });}}
+                          // res.render('view.ejs', {questionlist: questionlist, username:pusername, type: type});
+                                             }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
