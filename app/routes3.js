@@ -623,69 +623,8 @@ app.get('/loginSuccess', function(req, res, next) {
      
      var options;
      var question = qUrl.substring(n+1);
-     User.findOne({ 'local.username' : username}, function(err, user) {    
-           if (err) {}
-           else if (user)  
-            { //user found.
-                var id = user._id;  
-                Poll.findOne({ 'userid' : id, 'poll.question': question}, function(err, doc) {    
-                            if (err) {}
-                            else
-                              { if (doc) {   
-                                options = doc.poll.options;
-                                for (var i = 1; i<doc.poll.options.length; i++)
-                                {opt = {option: doc.poll.options[i].option}
-                                ops.push(opt); 
-                                var conditions = {'userid' : id, 'poll.question' : question};
-                                if (sc != '')     
-                                {pub = doc.poll.public;
-                                 var update = { $set:{'poll.showcase': sc}};}
-                                else if (pub != '')      
-                                {sc = doc.poll.showcase;
-                                    var update = { $set:{'poll.public': pub}};
-                                    
-                                }
-                                Poll.update(conditions, update, callback);  
-                                function callback (err, numAffected) {}  
-                               }
-                                  res.redirect('/edit');
- //res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist});     
-                              }
-                               else {
-                                   //append question mark to question and search again.
-                                Poll.findOne({ 'userid' : id, 'poll.question': question + '?'},                                             function(err, doc) {
-                                    
-                                    if (err) {}
-                               else { if (doc) {   
-                               options = doc.poll.options;
-                               for (var i = 1; i<doc.poll.options.length; i++)
-                                {opt = {option: doc.poll.options[i].option}
-                                ops.push(opt); 
-                                var conditions = {'userid' : id, 'poll.question' : question+ '?'};
-                                 if (sc != '')     
-                                {pub = doc.poll.public;
-                                 var update = { $set:{'poll.showcase': sc}};}
-                                else if (pub != '')      
-                                {sc = doc.poll.showcase;
-                                    var update = { $set:{'poll.public': pub}};
-                                    
-                                }
-                                 Poll.update(conditions, update, callback);  
-                                 function callback (err, numAffected) {}  
-                               }
-                                res.redirect('/edit');
-                                //res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist}); 
-                                
-                            }
-                               else {
-                                  //question not found in database. 
-                                   res.redirect('/');
-                                   
-                               }}});}}});}
-             else {
-                 //user not found.
-                 res.redirect('/');
-             }});});
+     res.send('question'+ question);
+     });
     
 }
 
