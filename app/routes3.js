@@ -175,12 +175,13 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 //var pid = doc[1].userid;
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
-                                 var pid= doc[i].userid;  
-                                User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
+                                 var pid= doc[i].userid;
+                                 var pq = doc[i].poll.question;
+                                User.findOne({ '_id' : pid, function(err, puser) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
                           pusername = puser.local.username;
-                          qnameobj = {question: doc[i].poll.question, username: pusername};
+                          qnameobj = {question: pq, username: pusername};
                           qnamelist.push(qnameobj);
                          
                       }});}} 
