@@ -188,7 +188,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                             var nlist = req.namelist;
                            
                           
-                          res.send(nlist); 
+                          res.send('OK'); 
                           
                           }     
                         
