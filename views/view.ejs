@@ -69,7 +69,34 @@
 
 </body>
    <script>     
+    function loaded() {
         
+       var loc = [];
+       var loc2 =[];
+       var voteBtn;
+       var deleteBtn;
+     var type = <%- JSON.stringify(type) %>;  
+     if (type == public) {qnlist = <%- JSON.stringify(qnamelist) %>;
+             var q;  
+             var n;
+             var ql =[];
+             var nl = [];
+             for (var i = 0; i<qnlist.length; i++)            
+             {q = qnlist.question;
+              ql.push(q);
+              n = qnlist.username;
+              nl.push(n);
+             }}
+         else var ql = <%- JSON.stringify(questionlist) %>;
+     for (var q = 0; q < ql.length; q++)
+     { if (type == public)
+         loc.push(nl[q])  + "/" + (ql[q]));
+        else
+         loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
+       //console.log(loc[q]);
+     }
+    
+    
 </script>
  
     
