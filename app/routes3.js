@@ -176,9 +176,9 @@ app.get('/view', isLoggedIn, function(req, res) {
                             User.find({},function(err, puser) { 
                                  if (err) {} else { 
                                    for (var i = 0; i< puser.length; i++)  
-                                   {pusername = puser.local.username;
-                                   nameobj = {id: puser._id, username: pusername};
-                                   namelist.push(nameobj); } 
+                                   {pusername = puser[i].local.username;
+                                    nameobj = {id: puser[i]._id, username: pusername};
+                                    namelist.push(nameobj); } 
 
                                      res.send(namelist); }
                                 
