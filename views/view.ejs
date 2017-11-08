@@ -74,13 +74,13 @@
        var loc = [];
        var loc2 =[];
        var qnlist = [];
+       var ql =[];
        var voteBtn;
        var deleteBtn;
      var viewtype = <%- JSON.stringify(viewtype) %>;  
      if (viewtype == "public") {qnlist = <%- JSON.stringify(qnamelist) %>;
              var q;  
              var n;
-             var ql =[];
              var nl = [];
              for (var i = 0; i<qnlist.length; i++)            
              {q = qnlist.question;
@@ -88,7 +88,8 @@
               n = qnlist.username;
               nl.push(n);
              }}
-         else var ql = <%- JSON.stringify(questionlist) %>;
+     else ql = <%- JSON.stringify(questionlist) %>;
+     console.log('ql'+ql);
      for (var q = 0; q < ql.length; q++)
      { if (viewtype == "public")
          loc.push(nl[q])  + "/" + (ql[q]));
