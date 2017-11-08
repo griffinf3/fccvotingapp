@@ -174,7 +174,13 @@ app.get('/view', isLoggedIn, function(req, res) {
                           var namelist = [];
                           var nameobj = {};
                             User.find({},function(err, puser) { 
-                                 if (err) {} else { res.send(puser); }
+                                 if (err) {} else { 
+                                   for (var i = 0; i< puser.length; i++)  
+                                   {pusername = puser.local.username;
+                                   nameobj = {id: puser._id, username: pusername};
+                                   namelist.push(nameobj); } 
+
+                                     res.send(namelist); }
                                 
                             });
                             
