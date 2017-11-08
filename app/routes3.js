@@ -177,7 +177,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 {if (doc[i].userid != id){
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
-                                User.findOne({ '_id' : pid, function(err, puser) {    
+                                User.findOne({ '_id' : pid}, function(err, puser) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
                           pusername = puser.local.username;
