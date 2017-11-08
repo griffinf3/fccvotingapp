@@ -116,7 +116,12 @@ margin-left:float;
    var sc = <%= sc %>;
                if (sc == true){ document.getElementById('checkbox').checked = true;
    var pub = <%= pub %>;
-               if (pub == true){ document.getElementById('checkbox2').checked = true;}}}
+               if (pub == true){ document.getElementById('checkbox2').checked = true;}}
+   
+   console.log('sc'+ sc);
+    console.log('pub'+ pub);
+   
+   }
     
     function doDelete() {
       if (document.getElementById("myOptions").length >1)
