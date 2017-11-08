@@ -174,9 +174,12 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var questionlist = [];
                                 var str =''; 
                                 for (var i=0; i<lg; i++)
-                                {if (doc[i].userid != id)
-                                questionlist.push(doc[i].poll.question)}
-                            res.render('view.ejs', {questionlist: questionlist, username:username, type: type});}}});}
+                                {if (doc[i].userid != id){
+                                questionlist.push(doc[i].poll.question);
+                                
+                                 Poll.findOne({ 'userid' : doc[i].userid}, function(err, puser) {    
+                      if (err) {} else {var pusername = psuer.username;}});}}
+                            res.render('view.ejs', {questionlist: questionlist, username:pusername, type: type});}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
