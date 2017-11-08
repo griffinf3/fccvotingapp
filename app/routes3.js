@@ -172,7 +172,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var qnamelist = [];
                                 var qnameobj = {};
-                                var pusername = '';
+                                var pid = doc[0].userid;
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
                                     
@@ -185,7 +185,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ ':' + pusername);
+                            res.send('public'+ ':' + pid);
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
