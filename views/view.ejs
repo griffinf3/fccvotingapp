@@ -76,8 +76,9 @@
        var voteBtn;
        var deleteBtn;
      var type = <%- JSON.stringify(type) %>;  
-   
-         }
+     if (type == "public") {qnlist = <%- JSON.stringify(qnamelist) %>;
+             
+                           }}
        
 </script>
  
