@@ -162,12 +162,16 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
 app.get('/view', isLoggedIn, function(req, res) { 
                     var type = req.param('type');
                     var id = req.user._id;
-    
+                    var username = req.user.local.username;
                     if (type== 'public')
-                    {res.send('doing public');}
+                    {   
+                    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {res.send('doing public'+ doc[0]);}
+                    });}
                     else
-                    {var username = req.user.local.username;
-                    Poll.find({ 'userid' : id}, function(err, doc) {    
+                    {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
                         else
                         {    
