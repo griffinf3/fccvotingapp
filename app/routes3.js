@@ -172,12 +172,14 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var qnamelist = [];
                                 var qnameobj = {};
+                                var pusername = '';
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
+                                    
                                 User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
-                          var pusername = psuer.local.username;
+                          pusername = psuer.local.username;
                           qnameobj = {question: doc[i].poll.question, username: pusername};
                           qnamelist.push(qnameobj);
                          
