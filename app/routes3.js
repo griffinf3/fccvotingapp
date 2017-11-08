@@ -195,7 +195,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                             qnamelist.push(qnameobj);
                                                 
                     }}  
-                              res.send(qnamelist);
+                              res.send(list);
                               
                               }
                         
