@@ -617,6 +617,7 @@ app.get('/loginSuccess', function(req, res, next) {
      var n = qUrl.indexOf("/");
      var username = qUrl.substring(0, n);
      var sc = req.body.sc; 
+     var pub = req.body.pub;
      var qlist = req.body.qlist;
      var ops =[];
      var opt = {};
@@ -637,11 +638,18 @@ app.get('/loginSuccess', function(req, res, next) {
                                 {opt = {option: doc.poll.options[i].option}
                                 ops.push(opt); 
                                 var conditions = {'userid' : id, 'poll.question' : question};
-                                var update = { $set:{'poll.showcase': sc}};
+                                if (sc != '')     
+                                {pub = doc.poll.public;
+                                 var update = { $set:{'poll.showcase': sc}};}
+                                else if (pub != '')      
+                                {sc = doc.poll.showcase;
+                                    var update = { $set:{'poll.showcase': pub}};
+                                    
+                                }
                                 Poll.update(conditions, update, callback);  
                                 function callback (err, numAffected) {}  
                                }
- res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, qlist:qlist});     
+ res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist});     
                               }
                                else {
                                    //append question mark to question and search again.
@@ -654,11 +662,18 @@ app.get('/loginSuccess', function(req, res, next) {
                                 {opt = {option: doc.poll.options[i].option}
                                 ops.push(opt); 
                                 var conditions = {'userid' : id, 'poll.question' : question+ '?'};
-                                 var update = { $set:{'poll.showcase': sc}};
+                                 if (sc != '')     
+                                {pub = doc.poll.public;
+                                 var update = { $set:{'poll.showcase': sc}};}
+                                else if (pub != '')      
+                                {sc = doc.poll.showcase;
+                                    var update = { $set:{'poll.showcase': pub}};
+                                    
+                                }
                                  Poll.update(conditions, update, callback);  
                                  function callback (err, numAffected) {}  
                                }
-                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc,  qlist:qlist}); 
+                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist}); 
                                 
                             }
                                else {
