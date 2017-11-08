@@ -191,14 +191,14 @@ app.get('/view', isLoggedIn, function(req, res) {
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
                        var nobj = list.filter(function (list) {return list.id == pid });
-                            qnameobj = {username: nobj.username, question: pq};
+                            qnameobj = {username: nobj[0].username, question: pq};
                             qnamelist.push(qnameobj);
                                                 
                     }}  
                              
                               var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
                               
-                               res.send(obj1);
+                               res.send(obj1[0].username);
                               }
                         
                             
