@@ -610,8 +610,7 @@ app.get('/loginSuccess', function(req, res, next) {
             }}});});
  
 
-    app.post('/*', function(req, res) {    
-     res.send('wearehere')});
+    app.post('/*', function(req, res) {res.send('OK');});
     
 }
 
