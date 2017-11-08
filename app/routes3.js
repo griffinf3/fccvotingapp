@@ -164,7 +164,18 @@ app.get('/view', isLoggedIn, function(req, res) {
                     var id = req.user._id;
                     var username = req.user.local.username;
                     if (type== 'public')
-                    {res.send('OK');
+                    {
+                        Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) {
+                        
+                        res.send('OK');
+                        
+                        }}});
+                        
+                        
+                        
                     }
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
