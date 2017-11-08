@@ -169,8 +169,22 @@ app.get('/view', isLoggedIn, function(req, res) {
                       if (err) {}
                         else
                         {if (doc) {
+                            
+                            
+                          var namelist = [];
+                          var nameobj = {};
+                            User.find({},function(err, puser) { 
+                                 if (err) {} else { res.send(puser); }
+                                
+                            });
+                            
+                            
+                            
+                            
+                            
+                            
                         
-                        res.send(doc);
+                       
                         
                         }}});
                         
