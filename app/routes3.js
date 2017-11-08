@@ -195,7 +195,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                             qnamelist.push(qnameobj);
                                                 
                     }}  
-                              res.send(list);
+                              res.send(list.filter(function (list) {return list.id == pid }););
                               
                               }
                         
