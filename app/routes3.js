@@ -649,7 +649,8 @@ app.get('/loginSuccess', function(req, res, next) {
                                 Poll.update(conditions, update, callback);  
                                 function callback (err, numAffected) {}  
                                }
- res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist});     
+                                  res.redirect('/edit');
+ //res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist});     
                               }
                                else {
                                    //append question mark to question and search again.
@@ -673,7 +674,8 @@ app.get('/loginSuccess', function(req, res, next) {
                                  Poll.update(conditions, update, callback);  
                                  function callback (err, numAffected) {}  
                                }
-                                res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist}); 
+                                res.redirect('/edit');
+                                //res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub: pub, qlist:qlist}); 
                                 
                             }
                                else {
