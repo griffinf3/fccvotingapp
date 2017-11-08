@@ -179,13 +179,13 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
-                          pusername = psuer.local.username;
+                          pusername = puser.local.username;
                           qnameobj = {question: doc[i].poll.question, username: pusername};
                           qnamelist.push(qnameobj);
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ ':' + pid);
+                            res.send('public'+ ':' + qnamelist);
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
