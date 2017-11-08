@@ -179,7 +179,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                           //res.send('public' + puser.local.username);  
                           var pusername = psuer.local.username;
                           qnameobj = {question: doc[i].poll.question, username: pusername};
-                          questionlist.push(qnameobj);
+                          qnamelist.push(qnameobj);
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
