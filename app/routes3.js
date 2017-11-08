@@ -680,12 +680,12 @@ app.get('/loginSuccess', function(req, res, next) {
                             }
                                else {
                                   //question not found in database. 
-                                   res.redirect('/');
+                                   res.redirect('http://www.google.com');
                                    
                                }}});}}});}
              else {
                  //user not found.
-                 res.redirect('/');
+                 res.redirect('http://www.google.com');
              }});});
     
 }
