@@ -83,10 +83,11 @@
              var n;
              var nl = [];
              for (var i = 0; i<qnlist.length; i++)            
-             {q = qnlist.question;
+             {q = qnlist[i].question;
               ql.push(q);
-              n = qnlist.username;
+              n = qnlist[i].username;
               nl.push(n);
+              
              }}
      else ql = <%- JSON.stringify(questionlist) %>;
      console.log('ql'+ql);
@@ -95,7 +96,6 @@
          loc.push(nl[q])  + "/" + (ql[q]);
         else
          loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
-       console.log('nlq'+ nl[q]);
      }
     
      for (var r = 0; r < ql.length; r++)
