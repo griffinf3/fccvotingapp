@@ -97,12 +97,9 @@ body {
      </form>  
     <form id = "form2" action="" method="post">
      <input id="showcase" type="hidden" name="sc" value="" size="30" />
-    <input id="qlist" type="hidden" name="qlist" value="" size="30" /> 
-    </form> 
-    <form id = "form3" action="" method="post">
      <input id="pubvis" type="hidden" name="pub" value="" size="30" />
     <input id="qlist" type="hidden" name="qlist" value="" size="30" /> 
-    </form> 
+    </form>  
  <div id="input2" style="display:none"><input id="newoption" type="text" name="option" value="" size="10"></div>       
  <div style="margin-top:5px;"><button id="done" style="display:none" onclick="doDone()">Done</button> 
     <button id="cancel" style="display:none" onclick="doCancel()">Cancel</button></div>  
@@ -265,8 +262,8 @@ body {
         document.getElementById('pubvis').value = pubOption;
         document.getElementById('showcase').value = '';
         document.getElementById('qlist').value = qlist;
-        document.getElementById('form3').action = '/' + username + '/' + question; 
-        document.getElementById('form3').submit();
+        document.getElementById('form2').action = '/' + username + '/' + question; 
+        document.getElementById('form2').submit();
     }
 </script>
 </body>
