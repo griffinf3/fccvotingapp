@@ -75,8 +75,21 @@
        var loc2 =[];
        var voteBtn;
        var deleteBtn;
-    var viewtype = <%- JSON.stringify(questionlist) %>;  
-     var ql = <%- JSON.stringify(questionlist) %>;
+    var viewtype = <%- JSON.stringify(questionlist) %>;
+    
+    
+    if (viewtype == "public") {qnlist = <%- JSON.stringify(qnamelist) %>;
+             var q;  
+             var n;
+             var ql =[];
+             var nl = [];
+             for (var i = 0; i<qnlist.length; i++)            
+             {q = qnlist.question;
+              ql.push(q);
+              n = qnlist.username;
+              nl.push(n);
+             }}
+         else var ql = <%- JSON.stringify(questionlist) %>;
      for (var q = 0; q < ql.length; q++)
      { loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
        //console.log(loc[q]);
