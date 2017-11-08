@@ -276,8 +276,8 @@ res.redirect('/');
                                 ops.push(opt); 
                                 }
                         
-                               // res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub:pub, qlist:qlist}); 
-                               res.send('pub'+ pub) ;
+                               res.render('create2.ejs', {username: username, logstatus: ' Log out', question:question, options: ops, sc:sc, pub:pub, qlist:qlist}); 
+                             
                                 
                             }
                             else  {
