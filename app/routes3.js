@@ -169,24 +169,28 @@ app.get('/view', isLoggedIn, function(req, res) {
                       if (err) {}
                         else
                         {if (doc) {
-                                var lg = doc.length;
-                                var qnamelist = [];
-                                var qnameobj = {};
-                                //var pid = doc[1].userid;
-                                for (var i=0; i<lg; i++)
+                          var namelist = [];
+                          var nameobj = {};
+                            User.find({},function(err, puser) {    
+                               if (err) {} else {   
+                                   pusername = puser.local.username;
+                                   nameobj = {id: puser._id, username: pusername};
+                                   namelist.push(nameobj);   
+                             }});
+                          var lg = doc.length;
+                          var qnamelist = [];
+                          var qnameobj = {};
+                          for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
                                  var pid= doc[i].userid;
                                  var pq = doc[i].poll.question;
-                                 User.findOne({ '_id' : pid}, function(err, puser, callback) {    
-                      if (err) {} else { 
-                          //res.send('public' + puser.local.username);  
-                          pusername = puser.local.username;
-                          qnameobj = {question: pq, username: pusername};
-                          qnamelist.push(qnameobj);
-                         
-                      }});}} 
+                                 var nobj = namelist.filter(function (namelist) {return namelist.id == pid });
+                                 qnameobj = {username: nobj.username, question = pq};
+                                 qnamelist.push(qnameobj);
+                                                
+                    }} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                           function callback(){res.send('public'+ ':' + pid + ':' + qnamelist);}
+                           res.send('public'+ ':' nobj);
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
