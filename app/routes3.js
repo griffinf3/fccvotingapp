@@ -179,7 +179,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                    {pusername = puser[i].local.username;
                                     nameobj = {id: puser[i]._id, username: pusername};
                                     namelist.push(nameobj); } 
-
+                                            res.send(namelist); 
                                       }
                                 
                             });
@@ -198,7 +198,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                                  qnamelist.push(qnameobj);
                                                 
                     }}       
-                        res.send(namelist); 
+                        
                             
                         }}});
                         
