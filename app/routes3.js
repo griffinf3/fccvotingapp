@@ -170,7 +170,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                         else
                         {if (doc) {
                         
-                        res.send('OK');
+                        res.send(doc);
                         
                         }}});
                         
