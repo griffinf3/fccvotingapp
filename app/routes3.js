@@ -172,11 +172,10 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var lg = doc.length;
                                 var qnamelist = [];
                                 var qnameobj = {};
-                                var pid = doc[1].userid;
                                 for (var i=0; i<lg; i++)
                                 {if (doc[i].userid != id){
-                                    
-                                User.findOne({ '_id' : doc[i].userid}, function(err, puser) {    
+                                 var pid= doc[i].userid;  
+                                User.findOne({ '_id' : pid, function(err, puser) {    
                       if (err) {} else { 
                           //res.send('public' + puser.local.username);  
                           pusername = psuer.local.username;
@@ -185,7 +184,7 @@ app.get('/view', isLoggedIn, function(req, res) {
                          
                       }});}} 
                             //res.render('view.ejs', {qnamelist: qnamelist, type: type});
-                            res.send('public'+ ':' + pid);
+                            res.send('public'+ ':' + pusername);
                         }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
