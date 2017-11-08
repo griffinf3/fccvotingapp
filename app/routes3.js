@@ -197,11 +197,8 @@ app.get('/view', isLoggedIn, function(req, res) {
                                  qnameobj = {username: nobj.username, question: pq};
                                  qnamelist.push(qnameobj);
                                                 
-                    }}   
-                            
-                            
-                            
-                        res.send(qnamelist); 
+                    }}       
+                        res.send(namelist); 
                             
                         }}});
                         
