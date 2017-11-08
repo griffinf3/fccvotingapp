@@ -75,7 +75,7 @@
        var loc2 =[];
        var voteBtn;
        var deleteBtn;
-        
+    var viewtype = <%- JSON.stringify(viewtype) %>;  
      var ql = <%- JSON.stringify(questionlist) %>;
      for (var q = 0; q < ql.length; q++)
      { loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
