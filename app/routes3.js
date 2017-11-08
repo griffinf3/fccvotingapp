@@ -174,19 +174,9 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 var questionlist = [];
                                 var str =''; 
                                 for (var i=0; i<lg; i++)
-                                {str = str+ '::' + id + ':' + doc[i].userid;}
-                            
-                            
-                            
-                            
-                            
-                            res.send('public'+str); 
-                                }
-                            
-
-                            
-                         }
-                    });}
+                                {if (doc[i].userid != id)
+                                questionlist.push(doc[i].poll.question)}
+                            res.render('view.ejs', {questionlist: questionlist, username:username, type: type});}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
