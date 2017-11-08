@@ -68,20 +68,32 @@
 </footer>
 
 </body>
-   <script>     
+<script>     
     function loaded() {
         
        var loc = [];
        var loc2 =[];
+       var qnlist = [];
        var voteBtn;
        var deleteBtn;
-       var qnlist = [];
-       var ql;
-    var viewtype = <%- JSON.stringify(viewtype) %>; 
-    if (viewtype == "public") qnlist = <%- JSON.stringify(qnamelist) %>;
-     else ql = <%- JSON.stringify(questionlist) %>;
+     var viewtype = <%- JSON.stringify(viewtype) %>;  
+     if (viewtype == "public") {qnlist = <%- JSON.stringify(qnamelist) %>;
+             var q;  
+             var n;
+             var ql =[];
+             var nl = [];
+             for (var i = 0; i<qnlist.length; i++)            
+             {q = qnlist.question;
+              ql.push(q);
+              n = qnlist.username;
+              nl.push(n);
+             }}
+         else var ql = <%- JSON.stringify(questionlist) %>;
      for (var q = 0; q < ql.length; q++)
-     { loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
+     { if (viewtype == "public")
+         loc.push(nl[q])  + "/" + (ql[q]));
+        else
+         loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
        //console.log(loc[q]);
      }
     
@@ -139,6 +151,10 @@ function pollType(num){
  }
        
 </script>
+ 
+    
+</html>
+
  
     
 </html>
