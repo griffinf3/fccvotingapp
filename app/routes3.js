@@ -171,10 +171,9 @@ app.get('/view', isLoggedIn, function(req, res) {
                       if (err) {}
                         else
                         {if (doc) {
-                            
-                            
                           var namelist = [];
                           var nameobj = {};
+                          var pusername;
                          User.find({},function(err, puser) { 
                                  if (err) {} else { 
                                    for (var i = 0; i< puser.length; i++)  
@@ -219,19 +218,20 @@ app.get('/view', isLoggedIn, function(req, res) {
   
 //user not logged in and wants to view public listing of polls.
 app.get('/view2', function(req, res) {
-    
-    
-    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+   Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
                         {if (doc) { 
+                          var pusername;
                           var namelist = [];
                           var nameobj = {};
                           User.find({},function(err, puser) { 
-                                 if (err) {} else { res.send('OK'); }});
-                            
-                            
-                            
+                                 if (err) {} else { 
+                                    for (var i = 0; i< puser.length; i++)  
+                                    {pusername = puser[i].local.username;
+                                     nameobj = {id: puser[i]._id, username: pusername};
+                                     namelist.push(nameobj); }  
+                                     res.send('OK'); }});
                         }}});
                     });
     
