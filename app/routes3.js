@@ -359,7 +359,51 @@ app.post('/voting', function(req, res) {
     var message1 = 'Your vote has been recorded.';
     var message2 = "There was an error in recording this vote."
 //record this vote if both the username and question can be found in the polls collection.
-res.send('username'+ username);
+    
+    
+  User.findOne({'local.username' : username}, function(err, user) {    
+           if (err) {res.send('error0');}
+           else
+            if (user) {
+                   var id = user._id;  
+                   var conditions = {'userid' : id, 'poll.question' : question, 'poll.options.option': option};
+                   var update = { $inc: { 'poll.options.$.votes': 1 }};
+                   var options = { multi: false};
+
+                     Poll.update(conditions, update, options, callback);
+                     function callback (err, numAffected) {
+                         
+                         
+                          if (numAffected.n == 0)
+                         
+                       //try again using a trailing question mark.
+                       { var conditions = {'userid' : id, 'poll.question' : question+ '?', 'poll.options.option':option};
+                         var update = { $inc: { 'poll.options.$.votes': 1 }};
+                         var options = { multi: false};
+                         Poll.update(conditions, update, options, callback2);
+                        function callback2 (err, numAffected) {if (numAffected.n == 0)
+                       {
+                           //polling question could not be found; 
+                            var redirectSuffix = '/?alertMessage=' + message2;
+                            res.redirect(redirectSuffix); 
+                            callback3();
+                       }
+                            else {
+                                //vote recorded."
+                               callback3(); 
+                                                       }}
+                       }  
+                        else {
+                            //vote recorded."
+                            callback3(); 
+                        }}}
+            else { 
+                //no username found.
+    callback3(); 
+            }});  
+    
+ function callback(){  
+res.send('username'+ username);}
    });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
