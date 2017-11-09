@@ -153,9 +153,16 @@ function pollType(num){
      }
      //publicly shared
      //not logged in
-     else if (status == " Login/Signup"){window.location = "/view2";} 
+     else if (status == " Login/Signup"){
+         console.log('status1');
+         
+        /// window.location = "/view2";
+     } 
      //logged in
-     else {window.location = "/view?type=public";}  
+     else {
+         console.log('status2');
+        /// window.location = "/view?type=public";
+     }  
  }
     
 function checkPolls(){
