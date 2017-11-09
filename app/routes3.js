@@ -388,21 +388,21 @@ app.post('/voting', function(req, res) {
                        }
                             else {
                                 //vote recorded."
-                              // callback3(); 
+                              callback3("", ""); 
                                                        }}
                        }  
                         else {
                             //vote recorded."
-                            //callback3(); 
+                             callback3("", ""); 
                         }}}
             else { 
                 //no username found.
     //callback3(); 
             }});  
     
- //function callback(){  
+function callback(error, ""){  
 res.send('username'+ username);
-//}
+}
    });
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
