@@ -227,7 +227,12 @@ app.get('/view2', function(req, res) {
                         {if (doc) { 
                           var namelist = [];
                           var nameobj = {};
-                         res.send('OK');}}});
+                          User.find({},function(err, puser) { 
+                                 if (err) {} else { res.send('OK'); }});
+                            
+                            
+                            
+                        }}});
                     });
     
  app.get('/edit', isLoggedIn, function(req, res) {
