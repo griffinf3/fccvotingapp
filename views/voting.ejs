@@ -76,7 +76,7 @@ function loaded()
   theInput.addEventListener('onclick', enableVote);                                         
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
-     console.log('html'+  optionslist.length);                                          
+   //console.log('html'+  optionslist.length);                                          
   theForm.appendChild(label);}
      
   theInput = document.createElement("input"); 
@@ -85,13 +85,11 @@ function loaded()
   theInput.setAttribute('value', "Vote");
   theInput.setAttribute('disabled', true);
   theForm.appendChild(theInput);
-  
-  //var question = document.getElementById('votingform');  
-  //question.appendChild(theForm);  
-    }
+     
   function enableVote(){
       console.log('wegotaclick');
-      document.getElementById('vote').disabled = false;  
+      document.getElementById('vote').disabled = false;    
+    }
   }
         
  </script>
