@@ -34,11 +34,9 @@
       </ul>
         <ul class="nav navbar-nav navbar-right">
         <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Log out</a></li>
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
       </ul>
-        
-        
-        
+  
     </div>
   </div>
 </nav> 
@@ -54,11 +52,11 @@
         <input type="hidden" name="question" value=<%- JSON.stringify(question) %> />
     </form>
 
-<footer class="container-fluid text-center">
-          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
-<div style="display: inline">&copy;</div>
-</footer>
-<script>   
+<footer class="container-fluid text-center">  
+    <% include partials/footer %>
+  </footer>   
+</body>
+    <script>   
 function loaded()   
  { //var optionlist =  '<%= optionlist %>';
   var optionslist = <%- JSON.stringify(optionslist) %>;
@@ -89,6 +87,5 @@ function loaded()
   //var question = document.getElementById('votingform');  
   //question.appendChild(theForm);  
     }
- </script>  
-</body>
+ </script>
 </html>
