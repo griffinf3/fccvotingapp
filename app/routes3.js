@@ -230,8 +230,19 @@ app.get('/view2', function(req, res) {
                                     for (var i = 0; i< puser.length; i++)  
                                     {pusername = puser[i].local.username;
                                      nameobj = {id: puser[i]._id, username: pusername};
-                                     namelist.push(nameobj); }  
-                                     res.send('OK'); }});
+                                     namelist.push(nameobj);} 
+                                     callback("",namelist);
+                                    }});
+                            
+                            
+                            function callback (error, list){    
+                              var lg = doc.length;
+                              var qnamelist = [];
+                              var qnameobj = {};
+                              res.send('OK'); 
+                            
+                            
+                            }
                         }}});
                     });
     
