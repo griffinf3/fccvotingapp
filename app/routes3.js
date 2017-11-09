@@ -218,7 +218,16 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 res.redirect('/');}}});}});
   
 //user not logged in and wants to view public listing of polls.
-app.get('/view2', function(req, res) { res.send('OK');
+app.get('/view2', function(req, res) {
+    
+    
+    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) { 
+                          var namelist = [];
+                          var nameobj = {};
+                         res.send('OK');}}});
                     });
     
  app.get('/edit', isLoggedIn, function(req, res) {
