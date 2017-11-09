@@ -46,11 +46,12 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
 						count = count + 1;
 						} 
 				     }
+                   callback("", allPolls);
 				  }
-                    callback("", allPolls);
+                   
 				  });
  
-callback(error, allPolls){
+  function callback(error, allPolls){
   totalPolls = allPolls.length;  
   Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                   if (err) {}
