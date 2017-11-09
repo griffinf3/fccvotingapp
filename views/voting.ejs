@@ -71,7 +71,7 @@ function loaded()
 
  for (var q = 1; q < optionslist.length; q++) { theInput = document.createElement("input");
   theInput.setAttribute('type',"radio"); 
-  theInput.setAttribute('name', 'option');
+  //theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
