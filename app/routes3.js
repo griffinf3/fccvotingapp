@@ -160,7 +160,7 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
         }); 
        
     });
-        
+    
 app.get('/view', isLoggedIn, function(req, res) { 
                     var viewtype = req.param('type');
                     var id = req.user._id;
@@ -197,18 +197,8 @@ app.get('/view', isLoggedIn, function(req, res) {
                             qnamelist.push(qnameobj);
                                                 
                     }}  
-                             
-                             // var obj1 = list.filter(function (list) {return list.id == "5a032f59dedc8100128fc193" });
                               res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype});
-                             // res.send(qnamelist + ':' + type);
-                              }
-                        
-                            
-                        }}});
-                        
-                        
-                        
-                    }
+                              }}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
@@ -226,6 +216,35 @@ app.get('/view', isLoggedIn, function(req, res) {
                                //We should probably never come here.
                                // res.send(question);
                                 res.redirect('/');}}});}});
+  
+//user not logged in and wants to view public listing of polls.
+app.get('/view2', function(req, res) { 
+                     Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) { 
+                          var namelist = [];
+                          var nameobj = {};
+                          User.find({},function(err, puser) { 
+                                 if (err) {} else { 
+                                   for (var i = 0; i< puser.length; i++)  
+                                   {pusername = puser[i].local.username;
+                                    nameobj = {id: puser[i]._id, username: pusername};
+                                    namelist.push(nameobj); } 
+                                         callback("",namelist);}});
+                            
+                          function callback (error, list){    
+                          var lg = doc.length;
+                          var qnamelist = [];
+                          var qnameobj = {};
+                            
+                          for (var i=0; i<lg; i++)
+                          {var pid= doc[i].userid;
+                           var pq = doc[i].poll.question;
+                           var nobj = list.filter(function (list) {return list.id == pid });
+                           qnameobj = {username: nobj[0].username, question: pq};
+                           qnamelist.push(qnameobj);}  
+                          res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype});}}}});});
     
  app.get('/edit', isLoggedIn, function(req, res) {
                     var id = req.user._id;
