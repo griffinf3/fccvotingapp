@@ -402,7 +402,53 @@ app.post('/voting', function(req, res) {
     
 function callback3(){ 
   var allPolls = req.all3Polls;
-res.send('username'+ allPolls[0]);
+ User.findOne({'local.username' : username}, function(err, userdoc) {    
+           if (err) { res.send('error1');}
+           else
+            {
+            if (userdoc) 
+              {//the user exists but does the poll exist?
+                var id = userdoc._id;
+                 Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {res.send('error2');}
+                  else 
+                  if (doc) {
+                     //the question was found
+                         var opts = [{}];
+                        for (var j=1; j<doc.poll.options.length; j++ )
+                        {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
+                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1});      
+                  }
+                  else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
+                      else { 
+                      if (doc){
+                          //the question was found with ? added.
+                           var opts = [{}];
+                           for (var j=1; j<doc.poll.options.length; j++ )
+                        {
+                            opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});
+                        
+                        }
+                        allPolls[0] = {question: question, options: opts};  
+                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
+                      } else {
+                          //no luck with finding the poll the user was looking for,
+                          res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
+                      }
+                      }                                                                                   
+                                                                                                         
+                    });}
+                 });
+              
+              }
+                else {
+                   //no user with this username 
+                    res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2}); 
+                }
+              }
+        
+            });   
 }
    });
      
