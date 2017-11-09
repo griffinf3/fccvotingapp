@@ -73,7 +73,7 @@ function loaded()
   theInput.setAttribute('type',"radio"); 
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
-  theInput.setAttribute('onclick', enableVote);                                         
+  theInput.addEventListener('onclick', enableVote);                                         
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
      console.log('html'+  optionslist.length);                                          
