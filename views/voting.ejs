@@ -50,6 +50,7 @@
     <form style="margin:25px;" id="votingform" name="form1" action="/voting" method="post">
        <input type="hidden" name="username" value=<%- JSON.stringify(username) %>/>
         <input type="hidden" name="question" value=<%- JSON.stringify(question) %> />
+        <input type="radio" name="test" value="" onclick="enableVote()"/>
     </form>
 
 <footer class="container-fluid text-center">  
