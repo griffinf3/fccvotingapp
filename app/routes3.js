@@ -245,7 +245,10 @@ app.get('/view2', function(req, res) {
                              for (var i=0; i<lg; i++)
                              {pid= doc[i].userid;
                               pq = doc[i].poll.question;
-                              nobj = list.filter(function (list) {return list.id == pid });}
+                              nobj = list.filter(function (list) {return list.id == pid });
+                              qnameobj = {username: nobj[0].username, question: pq};
+                              qnamelist.push(qnameobj);
+                             }
                              res.send('OK'); 
                             }
                         }}});
