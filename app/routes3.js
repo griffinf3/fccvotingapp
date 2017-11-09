@@ -249,7 +249,7 @@ app.get('/view2', function(req, res) {
                               qnameobj = {username: nobj[0].username, question: pq};
                               qnamelist.push(qnameobj);
                              }
-                             res.send('OK'); 
+res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public"});   
                             }
                         }}});
                     });
