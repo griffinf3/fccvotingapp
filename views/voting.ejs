@@ -71,11 +71,13 @@ function loaded()
 
  for (var q = 1; q < optionslist.length; q++) { theInput = document.createElement("input");
   theInput.setAttribute('type',"radio"); 
-  //theInput.setAttribute('name', 'option');
+  theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
+  theInput.onclick = enableVote;
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
-     console.log('html'+  optionslist.length);                                          
+     console.log('html'+  optionslist.length); 
+            
   theForm.appendChild(label);}
      
   theInput = document.createElement("input"); 
@@ -88,5 +90,9 @@ function loaded()
   //var question = document.getElementById('votingform');  
   //question.appendChild(theForm);  
     }
+
+  function enableVote()
+        {console.log('enabling');
+        }
  </script>
 </html>
