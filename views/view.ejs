@@ -70,10 +70,6 @@
 </body>
 <script>     
     function loaded() {
-       var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
-       var status = <%- JSON.stringify(logstatus) %>;     
-       console.log('status'+ status) ;
-
        var loc = [];
        var loc2 =[];
        var qnlist = [];
@@ -154,19 +150,17 @@ function pollType(num){
      }
      //publicly shared
      //not logged in
-     else if (status == " Login/Signup"){
-         console.log('status1');
-         
-        /// window.location = "/view2";
+     else if (status == " Login/Signup"){  
+         window.location = "/view2";
      } 
      //logged in
      else {
-         console.log('status2'+ status);
-        /// window.location = "/view?type=public";
+         window.location = "/view?type=public";
      }  
  }
     
 function checkPolls(){
+           var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
              if (totalPolls == 0) alert("Please log in to create and view your polls");
               else  window.location = "/view?type=local";
          }
