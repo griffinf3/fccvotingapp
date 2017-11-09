@@ -585,8 +585,11 @@ app.get('/loginSuccess', function(req, res, next) {
         });
     });
     
-    app.get('/*', function(req, res, next) {   
-       res.send('user:' + req.user);
+    app.get('/*', function(req, res, next) { 
+        if (req.user)
+        res.send('user:' + req.user);
+        else
+        res.send('no user');   
     });
  
     app.post('/*', function(req, res) {    
