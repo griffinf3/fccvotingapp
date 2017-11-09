@@ -18,7 +18,11 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="/create">Post</a></li>
-        <li><a href="/view">Polls</a></li>
+        <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Locally Created</a>
+    <a id="poll2" onclick = "pollType(2)">Publicly Shared</a>
+            </div></div></li>
         <li><a href="#">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -69,8 +73,7 @@
      if (scl[q]== true) pre = pre + '*'; else pre = pre + '&nbsp;';
      option.innerHTML = pre + '&nbsp;' + ql[q];
     document.getElementById("myPoll").appendChild(option);
-    }
-    }   
+    }}   
         
     function changemade(){   
         document.getElementById('editbtn').disabled=false;
@@ -83,6 +86,16 @@
         console.log('sc'+ document.getElementById("sc").value);
         console.log('pub'+ document.getElementById("pub").value);
     }
-    
+        
+    	
+	function pollType(num){
+     //locally created
+     if (num == 1) {
+         window.location = "/view?type=local";  
+     }
+     //publicly shared  
+     //logged in (or wouldn't be here).
+     else {window.location = "/view?type=public";}  
+ }   
     </script>
 </html>
