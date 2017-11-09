@@ -383,41 +383,30 @@ User.findOne({'local.username' : username}, function(err, user) {
                          Poll.update(conditions, update, options, callback2);
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
-                           //polling question could not be found;
-                           if (req.user)
-                           { 
+                           //polling question could not be found; 
                             var redirectSuffix = '/?alertMessage=' + message2;
-                            res.redirect(redirectSuffix);} 
+                            res.redirect(redirectSuffix); 
+                            callback('','');
                        }
                             else {
                                 //vote recorded."
-                               if (req.user)
-                           { 
-                            var redirectSuffix = '/?alertMessage=' + message1;
-                            res.redirect(redirectSuffix);} 
+                               callback('',''); 
                                                        }}
                        }  
                         else {
                             //vote recorded."
-                               if (req.user)
-                           {
-                            var redirectSuffix = '/?alertMessage=' + message1;
-                            res.redirect(redirectSuffix);} 
+                            callback('',''); 
                         }}}
             else { 
                 //no username found.
-                 if (req.user)
-                           { 
-                            var redirectSuffix = '/?alertMessage=' + message2;
-                            res.redirect(redirectSuffix);} 
+    callback('',''); 
             }});
     
 
+function callback(error,''){
 var allPolls = req.all3Polls;   
     
-    
-if (!req.user)
-   {User.findOne({'local.username' : username}, function(err, userdoc) {    
+User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
            else
             {
