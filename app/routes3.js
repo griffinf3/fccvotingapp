@@ -388,19 +388,19 @@ app.post('/voting', function(req, res) {
                        }
                             else {
                                 //vote recorded."
-                              callback3("", ""); 
+                              callback3(); 
                                                        }}
                        }  
                         else {
                             //vote recorded."
-                             callback3("", ""); 
+                             callback3(); 
                         }}}
             else { 
                 //no username found.
     //callback3(); 
             }});  
     
-function callback3(error, ""){  
+function callback3(){  
 res.send('username'+ username);
 }
    });
