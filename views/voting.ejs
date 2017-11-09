@@ -46,7 +46,6 @@
 <div style="margin:25px;">
  <h2><%= question %></h2>
     <h4>by <%= username %></h4>
-    <div id="demo">Test</div>
 </div>
     <form style="margin:25px;" id="votingform" name="form1" action="/voting" method="post">
        <input type="hidden" name="username" value=<%- JSON.stringify(username) %>/>
@@ -74,20 +73,20 @@ function loaded()
   theInput.setAttribute('type',"radio"); 
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
-  //theInput.onclick = function(){console.log('wegotaclick'); };                                                
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
-   //console.log('html'+  optionslist.length);                                          
+     console.log('html'+  optionslist.length);                                          
   theForm.appendChild(label);}
      
   theInput = document.createElement("input"); 
   theInput.setAttribute('id',"vote");
   theInput.setAttribute('type',"submit"); 
   theInput.setAttribute('value', "Vote");
-  //theInput.setAttribute('disabled', true);
-  //theInput.addEventListener("click", function(){
-   // document.getElementById("demo").innerHTML = "Hello World";
+  theInput.setAttribute('enabled', false);
   theForm.appendChild(theInput);
-  });}   
+  
+  //var question = document.getElementById('votingform');  
+  //question.appendChild(theForm);  
+    }
  </script>
 </html>
