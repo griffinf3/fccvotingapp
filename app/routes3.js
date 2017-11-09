@@ -2,8 +2,6 @@ var User       = require('../app/models/user');
 var Poll       = require('../app/models/poll');
 var Option     = require('../app/models/option');
 
-
-
 module.exports = function(app, passport) {
   
 var all3Polls = function (req, res, next) {
@@ -460,15 +458,15 @@ app.get('/delete/*', isLoggedIn, function(req, res) {
         throw err;
     }
     if(doc){
-        res.redirect('/view');
+        res.redirect('/view?type=local');
     }else{      
         Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc) {
     if(err){
         throw err;
     }
-    if(doc){res.redirect('/view');} else {
+    if(doc){res.redirect('/view?type=local');} else {
         //there was an error findng and removing the document.
-        res.redirect('/view');}
+        res.redirect('/view?type=local');}
         
     });}});}}});});
     
