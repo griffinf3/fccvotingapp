@@ -147,6 +147,7 @@ function confirmIt(r) {
 }
   
 function pollType(num){
+     var status = <%- JSON.stringify(logstatus) %>; 
      //locally created
      if (num == 1) {
          checkPolls()   
