@@ -32,23 +32,19 @@
         <li><a href="/view">Polls</a></li>
         <li><a href="/edit">Edit</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
         <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span></a></li>
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Log out</a></li>
       </ul>
+        
+        
+        
     </div>
   </div>
 </nav> 
-       
-<div class="header">
-    <div class="container text-center">
-<div id="siteName" style="display: inline">Post-n-Poll</div>
-<div style="display: inline">&copy;</div>
-</div>
-    
-    
-    <div id="description"><p>(a Free Code Camp voting application that allows users to log in, post questions, and view participant responses)</p></div>
-  </div>
+<header>
+    <% include partials/header %>
+</header>
 <div style="margin:25px;">
  <h2><%= question %></h2>
     <h4>by <%= username %></h4>
