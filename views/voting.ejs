@@ -75,8 +75,7 @@ function loaded()
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
   //theInput.onclick = function(){console.log('wegotaclick');}; 
-  theInput.addEventListener("click", function(){
-    document.getElementById("demo").innerHTML = "Hello World";
+  
 });                                           
                                                
                                                
@@ -89,7 +88,9 @@ function loaded()
   theInput.setAttribute('id',"vote");
   theInput.setAttribute('type',"submit"); 
   theInput.setAttribute('value', "Vote");
-  theInput.setAttribute('disabled', true);
+  //theInput.setAttribute('disabled', true);
+  theInput.addEventListener("click", function(){
+    document.getElementById("demo").innerHTML = "Hello World";
   theForm.appendChild(theInput);
   }
         
