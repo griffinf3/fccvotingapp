@@ -586,7 +586,8 @@ app.get('/loginSuccess', function(req, res, next) {
     });
     
     app.get('/*', function(req, res, next) { 
-        res.render('create.ejs', {});          
+        res.render('voting.ejs', {});
+                              
                        });
  
 
