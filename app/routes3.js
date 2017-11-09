@@ -106,10 +106,10 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
                               if (err) throw err;
                               return (null, newUserOptions);   
                           });
-                         }   
+                         }
+                    res.redirect('/');
                  }    
-             });
-        res.redirect('/');      
+             });      
     });
     
     app.get('/signlog', isLoggedIn2, function(req, res) {
@@ -469,9 +469,6 @@ app.get('/delete/*', isLoggedIn, function(req, res) {
         res.redirect('/view?type=local');}
         
     });}});}}});});
-    
-    
-     
     
     app.get('/loginFailure', function(req, res, next) {
   res.send('Failed to authenticate');

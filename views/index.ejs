@@ -105,15 +105,8 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-</script>
-      
-      
-    </div> 
-    
- 
-    
-    
-    
+</script>  
+    </div>   
   <div id="col2" class="column" style="background-color:#bbb;">
       <br>
       <div style="display: inline"><h3 style="display: inline"><%= polls[1].question %></h3>
@@ -250,11 +243,6 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-    
-    
-    
-    
-    
     </div>
 </div>
   <footer class="container-fluid text-center">  
@@ -271,16 +259,10 @@ var myChart = new Chart(ctx, {
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
     
-    
     function loaded() {
      var polls = <%- JSON.stringify(polls) %>;
      var aM = <%- JSON.stringify(alertMessage) %>;
      if (aM != undefined && aM != '') alert(aM);
-     //var message = <%- JSON.stringify(alertMessage) %>;
-     
-        //console.log('message'+ aM);
-     
-     
      var q2 = polls[1].question;
      var q3 = polls[2].question;
      if (q2 == 'poll 2') 
@@ -315,11 +297,7 @@ var myChart = new Chart(ctx, {
       ///node.appendChild(postBtn);  
      }
 
-      
-     
      //First question:
-      //var q1 = polls[0].question;
-      //var ops1 = polls[0].options;
         if (polls[0].options.length <= 4)
         {
       for (var i = 1; i < polls[0].options.length; i++)
@@ -330,8 +308,6 @@ var myChart = new Chart(ctx, {
        }}
       
       //Second question:
-     
-      //var ops2 = polls[1].options;
         if (polls[1].options.length <= 4)
         {
       for (var i = 1; i < polls[1].options.length; i++)
@@ -342,9 +318,6 @@ var myChart = new Chart(ctx, {
        }}
         
       //Third question:
-      //var polls = <%- JSON.stringify(polls) %>;
-      //var q3 = polls[2].question;
-      //var ops1 = polls[2].options;
         if (polls[2].options.length <= 4)
         {
       for (var i = 1; i < polls[2].options.length; i++)
@@ -352,15 +325,8 @@ var myChart = new Chart(ctx, {
         textnode = document.createTextNode(polls[2].options[i].option + ' - '  + polls[2].options[i].votes);
        node.appendChild(textnode);     
       document.getElementById("myList3").appendChild(node);  
-       }}
-   
-   // document.querySelector("#col2").style.display = op1;
-   // hide(1);
-    
-   // document.querySelector("#col3").style.display = op2;
-  //  hide(2);
-        
-    var op2 = <%- JSON.stringify(option2) %>; 
+       }}      
+   var op2 = <%- JSON.stringify(option2) %>; 
    var op1 = <%- JSON.stringify(option1) %>;
    if (op1 == 'none') (hide2(1));
    if (op2 == 'none') (hide2(2));  
@@ -372,9 +338,7 @@ var myChart = new Chart(ctx, {
      }
      else {window.location = "/view?type=public";}   
  }
-         
-          
-         
+                 
  function checkEdit(){
              if (totalPolls == 0) alert("There are no polls to edit.");
               else  window.location = "/edit";
@@ -399,15 +363,7 @@ function hide(num){
   var el2 = document.querySelector("#col2");
   var el3 = document.querySelector("#col3");
     if (el2.style.display == '') el2.style.display = 'block';
-    if (el3.style.display == '') el3.style.display = 'block';
-     ///var polls = <%- JSON.stringify(polls) %>;
-    /// var polls1 = polls[0];
-     ///var polls2 = polls[1];
-    /// var polls3 = polls[2];
-    // console.log('polls0optionslg:'+ polls[0].options.length);
-    // var status = <%- JSON.stringify(logstatus) %>;
-     
-    
+    if (el3.style.display == '') el3.style.display = 'block'; 
     if(num ==1)
      {
         
@@ -434,15 +390,11 @@ function hide(num){
      if (el3.style.display == 'none') {el3.style.display = 'block';
     document.getElementById("hide2").textContent="Hide Poll3";
     if (el2.style.display == 'none')
-    {el.style.left="-150px";el3.style.left="-150px";  } else {
-        
-       /// window.location = "/index";
-    }                                                                                                                                } 
+    {el.style.left="-150px";el3.style.left="-150px";}} 
     else {el3.style.display = 'none';
-           document.getElementById("hide2").textContent="Show Poll3";}
+    document.getElementById("hide2").textContent="Show Poll3";}
     if (el2.style.display == 'none')
-    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}          
-     }  
+    {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}}  
     document.getElementById('option1').value = el2.style.display;
     document.getElementById('option2').value = el3.style.display;
     console.log(el2.style.display);
