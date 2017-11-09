@@ -165,6 +165,18 @@ app.get('/view', isLoggedIn, function(req, res) {
                     var viewtype = req.param('type');
                     var id = req.user._id;
                     var username = req.user.local.username;
+                    var totalPolls=0;
+
+Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length;
+                   callback('', totalPolls);} 
+});
+    
+    
+ function callback(error, totalPolls)
+    {
                     if (viewtype== 'public')
                     {
                         Poll.find({ 'poll.public' : true}, function(err, doc) {    
@@ -198,7 +210,11 @@ app.get('/view', isLoggedIn, function(req, res) {
                             qnamelist.push(qnameobj);
                                                 
                     }}  
-                              res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype});
+                              
+                              
+                              
+                              
+                              res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                               }}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
@@ -211,12 +227,15 @@ app.get('/view', isLoggedIn, function(req, res) {
                                 for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                                res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype});
+                                res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                             }
                             else  {
                                //We should probably never come here.
                                // res.send(question);
-                                res.redirect('/');}}});}});
+                                res.redirect('/');}}});}
+    
+    }
+    });
   
 //user not logged in and wants to view public listing of polls.
 app.get('/view2', function(req, res) {
@@ -249,7 +268,7 @@ app.get('/view2', function(req, res) {
                               qnameobj = {username: nobj[0].username, question: pq};
                               qnamelist.push(qnameobj);
                              }
-res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public"});   
+res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             }
                         }}});
                     });

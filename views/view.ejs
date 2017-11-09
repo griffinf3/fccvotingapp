@@ -41,14 +41,14 @@
         <li><a href="/create">Post</a></li>
               <li class="dropbtn"><div class="dropdown"><a>Polls</a>
          <div class="dropdown-content">
-    <a id="poll1" onclick = "pollType(1)">Local</a>
-    <a id="poll2" onclick = "pollType(2)">Other Postings</a>
+    <a id="poll1" onclick = "pollType(1)">Locally Created</a>
+    <a id="poll2" onclick = "pollType(2)">Publicly Shared</a>
             </div></div></li> 
         <li><a href="/edit">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Log out</a></li>
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
       </ul>
     </div>
   </div>
@@ -70,7 +70,7 @@
 </body>
 <script>     
     function loaded() {
-        
+       var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
        var loc = [];
        var loc2 =[];
        var qnlist = [];
@@ -144,8 +144,21 @@ function confirmIt(r) {
 }
   
 function pollType(num){
-     if (num == 2) {window.location = "/view2";}   
+     //locally created
+     if (num == 1) {
+         checkPolls()   
+     }
+     //publicly shared
+     //not logged in
+     else if (status == " Login/Signup"){window.location = "/view2";} 
+     //logged in
+     else {window.location = "/view?type=public";}  
  }
+    
+function checkPolls(){
+             if (totalPolls == 0) alert("Please log in to create and view your polls");
+              else  window.location = "/view?type=local";
+         }
        
 </script>
  
