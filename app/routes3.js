@@ -586,70 +586,8 @@ app.get('/loginSuccess', function(req, res, next) {
     });
     
     app.get('/*', function(req, res, next) { 
-        var status;
-    if (req.user)
-    {
-       status = " Log out"; 
-    }
-    else{status = " Login/Signup";}
-     var _qUrl = req.url;   
-     var qUrl = decodeURIComponent(_qUrl.substring(1));
-     var n = qUrl.indexOf("/");
-     var username = qUrl.substring(0, n);
-     var sc = req.body.showcase; 
-     var question = qUrl.substring(n+1);  
-        
-    User.findOne({ 'local.username' : username}, function(err, user) {    
-           if (err) {}
-           else
-            { if (user) {
-                    var id = user._id; 
-                
-                    Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
-                      if (err) {}
-                        else
-                        {if (doc) {
-                            
-                             var lg = doc.poll.options.length;
-                                var optionlist = [];
-                                var votelist = [];
-                                var optionslist = [{}];
-                                for (i=1; i<lg; i++)
-                                    
-                                {optionlist.push(doc.poll.options[i].option);
-                                votelist.push(doc.poll.options[i].votes);
-    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
-                                
-                                res.render('voting.ejs', {question: question, username: username, 
-                                                          optionlist: optionlist, votelist: votelist,
-                                                         optionslist: optionslist, logstatus: status});
-                            
-                           }   
-                          else {
-                               Poll.findOne({ 'userid' : id, 'poll.question' : question + '?'}, function(err, doc) {  if (err) {}
-                        else {  
-                          if (doc) {
-                              
-                               var lg = doc.poll.options.length;
-                                var optionlist = [];
-                                var votelist = [];
-                                var optionslist = [{}];
-                                for (i=1; i<lg; i++)
-                                    
-                                {optionlist.push(doc.poll.options[i].option);
-                                votelist.push(doc.poll.options[i].votes);
-    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
-                                
-                                res.render('voting.ejs', {question: question + '?', username: username, 
-                                                          optionlist: optionlist, votelist: votelist,
-                                                         optionslist: optionslist, logstatus: status});
-                              
-                         }   
-                          else {res.send('could not locate question in the database; please report this error');}    
-                        }});} 
-                              }
-                        });
-            }}});});
+        res.render('voting.ejs', {});          
+                       });
  
 
     app.post('/*', function(req, res) {    
