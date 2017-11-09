@@ -617,18 +617,23 @@ app.get('/loginSuccess', function(req, res, next) {
     });
     
     app.get('/*', function(req, res, next) { 
-        var status;
+    var status;
     if (req.user)
     {
        status = " Log out"; 
     }
     else{status = " Login/Signup";}
+     var username = '';
+     var question = '';
      var _qUrl = req.url;   
      var qUrl = decodeURIComponent(_qUrl.substring(1));
      var n = qUrl.indexOf("/");
-     var username = qUrl.substring(0, n);
+     username = qUrl.substring(0, n);
      var sc = req.body.showcase; 
-     var question = qUrl.substring(n+1);  
+     question = qUrl.substring(n+1); 
+        
+    if (username == '' || question == ''){res.redirect('/');}
+        else {
         
     User.findOne({ 'local.username' : username}, function(err, user) {    
            if (err) {}
@@ -680,7 +685,7 @@ app.get('/loginSuccess', function(req, res, next) {
                         }});} 
                               }
                         });
-            }}});});
+            }}});}});
  
 
     app.post('/*', function(req, res) {    

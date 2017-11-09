@@ -268,33 +268,17 @@ var myChart = new Chart(ctx, {
      if (q2 == 'poll 2') 
      {
      var hideBtn = document.createElement("button");
-      hideBtn.innerHTML = "Hide";
-      //hideBtn.setAttribute('style', 'display: inline');  
-         
-      hideBtn.addEventListener ("click", function() {hide(1);});
-      
-      ///var postBtn = document.createElement("button");  
-     /// postBtn.innerHTML = "Post";
-     /// postBtn.addEventListener ("click", function() {post()});
-        
+      hideBtn.innerHTML = "Hide";    
+      hideBtn.addEventListener ("click", function() {hide(1);});   
       var node = document.getElementById("secondPost");
-      node.appendChild(hideBtn);}
-     /// node.appendChild(postBtn);
-       
-         if (q3 == 'poll 3') 
+      node.appendChild(hideBtn);} 
+    if (q3 == 'poll 3') 
      {
       var hideBtn = document.createElement("button");
       hideBtn.innerHTML = "Hide";
-      //hideBtn.setAttribute('style', 'display: inline');  
-      hideBtn.addEventListener ("click", function() {hide(2);});
-      
-     /// var postBtn = document.createElement("button");  
-    ///  postBtn.innerHTML = "Post";
-    ///  postBtn.addEventListener ("click", function() {post()});
-        
+      hideBtn.addEventListener ("click", function() {hide(2);});  
       var node = document.getElementById("thirdPost");
-      node.appendChild(hideBtn);
-      ///node.appendChild(postBtn);  
+      node.appendChild(hideBtn); 
      }
 
      //First question:
@@ -388,8 +372,6 @@ function hide(num){
     if (el3.style.display == 'none')
     {el.style.marginLeft = "275px";} else {el.style.marginLeft = "150px";}
      }
-    
-    
     else
      {
      if (el3.style.display == 'none') {el3.style.display = 'block';
