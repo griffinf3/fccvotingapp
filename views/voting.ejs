@@ -73,8 +73,7 @@ function loaded()
   theInput.setAttribute('type',"radio"); 
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
-  theInput.onclick = function(){console.log('wegotaclick');
-      document.getElementById('vote').disabled = false;};                                        
+  theInput.onclick = function(){console.log('wegotaclick');};                                        
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
    //console.log('html'+  optionslist.length);                                          
