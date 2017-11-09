@@ -384,7 +384,7 @@ app.post('/voting', function(req, res) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found; 
-                            //callback3();
+                            callback3();
                        }
                             else {
                                 //vote recorded."
@@ -397,11 +397,12 @@ app.post('/voting', function(req, res) {
                         }}}
             else { 
                 //no username found.
-    //callback3(); 
+    callback3(); 
             }});  
     
-function callback3(){  
-res.send('username'+ username);
+function callback3(){ 
+  var allPolls = req.all3Polls;
+res.send('username'+ allPolls[0]);
 }
    });
      
