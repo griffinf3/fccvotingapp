@@ -74,11 +74,7 @@ function loaded()
   theInput.setAttribute('type',"radio"); 
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
-  //theInput.onclick = function(){console.log('wegotaclick');}; 
-  
-});                                           
-                                               
-                                               
+  //theInput.onclick = function(){console.log('wegotaclick'); };                                                
   label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
    //console.log('html'+  optionslist.length);                                          
@@ -92,7 +88,6 @@ function loaded()
   theInput.addEventListener("click", function(){
     document.getElementById("demo").innerHTML = "Hello World";
   theForm.appendChild(theInput);
-  }
-        
+  });}   
  </script>
 </html>
