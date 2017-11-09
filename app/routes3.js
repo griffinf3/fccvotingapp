@@ -186,12 +186,14 @@ app.get('/view', isLoggedIn, function(req, res) {
                           var lg = doc.length;
                           var qnamelist = [];
                           var qnameobj = {};
-                            
+                          var pid;
+                          var pq;
+                          var nobj;
                           for (var i=0; i<lg; i++)
                           {if (doc[i].userid != id){
-                                 var pid= doc[i].userid;
-                                 var pq = doc[i].poll.question;
-                       var nobj = list.filter(function (list) {return list.id == pid });
+                                 pid= doc[i].userid;
+                                 pq = doc[i].poll.question;
+                                 nobj = list.filter(function (list) {return list.id == pid });
                             qnameobj = {username: nobj[0].username, question: pq};
                             qnamelist.push(qnameobj);
                                                 
@@ -233,15 +235,18 @@ app.get('/view2', function(req, res) {
                                      namelist.push(nameobj);} 
                                      callback("",namelist);
                                     }});
-                            
-                            
                             function callback (error, list){    
                               var lg = doc.length;
                               var qnamelist = [];
                               var qnameobj = {};
-                              res.send('OK'); 
-                            
-                            
+                              var pid;
+                              var pq;
+                              var nobj;
+                             for (var i=0; i<lg; i++)
+                             {pid= doc[i].userid;
+                              pq = doc[i].poll.question;
+                              nobj = list.filter(function (list) {return list.id == pid });}
+                             res.send('OK'); 
                             }
                         }}});
                     });
