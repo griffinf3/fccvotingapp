@@ -60,13 +60,9 @@ margin-left:float;
   </div>
 </nav> 
       
-<div class="header">
-    <div class="container text-center">
-<div id="siteName" style="display: inline">Post-n-Poll</div>
-<div style="display: inline">&copy;</div>
-</div>
-    
-  </div>
+<header>
+    <% include partials/header %>
+</header>
 <div id = "poll">
     <form id = "form1" action="/create" method="post">
    Question:<br>
@@ -94,8 +90,7 @@ margin-left:float;
     <button id="repost" style="margin-left:50px; display:inline" onclick="confirmIt()">Re-Post</button>
 </div>
 <footer class="container-fluid text-center">
-          <div id="siteName" style="display: inline; font-size: 10px">'Post-n-Poll' by Franklin Griffin 2017</div>
-<div style="display: inline">&copy;</div>
+    <% include partials/footer %>
 </footer>
 <script>
     var newValue = document.getElementById('newoption'); 
@@ -213,16 +208,8 @@ margin-left:float;
     
     function confirmIt() {
     var r = confirm("Are you sure? Note that when you repost, the voting results will be set to zero for all options.");
-    if (r == true) {
-        
-            var x = document.getElementById("myOptions");
-        // console.log(x.options[0].text);
-        // console.log(x.options[0].value); 
-        // console.log(x.options[1].text);
-        // console.log(x.options[1].value); 
-        // console.log(x.options[2].text);
-        // console.log(x.options[2].value); 
-        
+    if (r == true) {  
+        var x = document.getElementById("myOptions"); 
        selectAll(); document.getElementById("form1").submit();
     } else {};
 }
