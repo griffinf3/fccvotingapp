@@ -84,6 +84,7 @@
              var nl = [];
              for (var i = 0; i<qnlist.length; i++)            
              {q = qnlist[i].question;
+              console.log('question'+ q);
               ql.push(q);
               n = qnlist[i].username;
               nl.push(n);
@@ -108,21 +109,16 @@
          var node = document.createElement("li");
          textnode = document.createTextNode(ql[r]);
          node.appendChild(textnode);  
-         
-          //var button = document.createElement("button"); 
       
-      
+       if (viewtype == "local")
+       {
          deleteBtn = document.createElement("a");
          deleteBtn.setAttribute("href","javascript:confirmIt("+r+");");
          deleteBtn.setAttribute("class", 'button');
          deleteBtn.innerHTML = "Delete";
-      
-          //button.innerHTML = "Delete";
-      
-
-      node.appendChild(deleteBtn);
-      //button.addEventListener ("click", function() {confirmIt();});
-         
+         node.appendChild(deleteBtn);
+       }
+              
       node.appendChild(voteBtn);
       
      link = document.createElement("span");    
