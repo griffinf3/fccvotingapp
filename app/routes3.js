@@ -384,8 +384,6 @@ app.post('/voting', function(req, res) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found; 
-                            var redirectSuffix = '/?alertMessage=' + message2;
-                            res.redirect(redirectSuffix); 
                             callback3();
                        }
                             else {
