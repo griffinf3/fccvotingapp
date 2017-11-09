@@ -1,5 +1,5 @@
 {
-  "name": "node-authentication",
+  "name": "fccvoting",
   "main": "server.js",
   "start": "node server.js",
   "dependencies": {
