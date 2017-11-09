@@ -94,7 +94,7 @@
      console.log('ql'+ql);
      for (var q = 0; q < ql.length; q++)
      { if (viewtype == "public")
-         loc.push(nl[q])  + "/" + (ql[q]);
+         loc.push(nl[q]  + "/" + (ql[q]);
         else
          loc.push(<%- JSON.stringify(username) %> + "/" + (ql[q]));
      }
