@@ -28,7 +28,7 @@ app.get('/', isLoggedIn, function (req, res) {
 var allPolls = req.all3Polls;  
 var op1;
 var op2;
-var totalPolls;
+var totalPolls=0;
 
 Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
@@ -47,9 +47,12 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
 						} 
 				     }
 				  }
+                    callback("", allPolls);
 				  });
-               
-Option.find({ 'userid' :  req.user._id }, function(err, doc) {
+ 
+callback(error, allPolls){
+  totalPolls = allPolls.length;  
+  Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                   if (err) {}
                   else
                   {
@@ -63,7 +66,7 @@ Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                     {
                      op1 = 'block';
                      op2 = 'block';   
-             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: aM});}}});});
+             res.render('index.ejs', {logstatus: ' Log out', polls: allPolls, option1: op1, option2: op2, totalPolls:totalPolls, alertMessage: aM});}}});}});
 
 app.get('/index', function(req, res) {res.redirect('/');});
     
