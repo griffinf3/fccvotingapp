@@ -400,7 +400,7 @@ app.post('/voting', function(req, res) {
     //callback3(); 
             }});  
     
-function callback(error, ""){  
+function callback3(error, ""){  
 res.send('username'+ username);
 }
    });
