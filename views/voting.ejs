@@ -2,15 +2,90 @@
 <html lang="en">
 <head>
     <% include partials/head %>
-</head> 
-    <div>test</div>
-<body>
+</head>
+<style>     
+#optionsList{
+    margin-left: 50px;
+}
+
+#vote{
+    margin-left: 200px;
+    margin-bottom: 20px;
+    width: 150px;
+}
+</style>
+<body onload="loaded()">
+
+   <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/create">Post</a></li>
+        <li><a href="/view">Polls</a></li>
+        <li><a href="/edit">Edit</a></li>
+      </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <li> 
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
+      </ul>
+  
+    </div>
+  </div>
+</nav> 
 <header>
     <% include partials/header %>
 </header>
+<div style="margin:25px;">
+ <h2><%= question %></h2>
+    <h4>by <%= username %></h4>
+</div>
+    <form style="margin:25px;" id="votingform" name="form1" action="/voting" method="post">
+       <input type="hidden" name="username" value=<%- JSON.stringify(username) %>/>
+        <input type="hidden" name="question" value=<%- JSON.stringify(question) %> />
+    </form>
 
 <footer class="container-fluid text-center">  
     <% include partials/footer %>
   </footer>   
 </body>
+    <script>   
+function loaded()   
+ { //var optionlist =  '<%= optionlist %>';
+  var optionslist = <%- JSON.stringify(optionslist) %>;
+  var label = document.createElement( 'label');
+  //-- we iterate over each value and create a input for it and we add the value
+   
+// var theForm = document.createElement("form");
+   //-- we set the forms name
+ //  theForm.setAttribute('name','form1');
+ var theForm = document.getElementById('votingform');
+ var theInput;
+
+ for (var q = 1; q < optionslist.length; q++) { theInput = document.createElement("input");
+  theInput.setAttribute('type',"radio"); 
+  theInput.setAttribute('name', 'option');
+  theInput.setAttribute('value', optionslist[q].option);
+  label.appendChild(theInput);
+  label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
+     console.log('html'+  optionslist.length);                                          
+  theForm.appendChild(label);}
+     
+  theInput = document.createElement("input"); 
+  theInput.setAttribute('id',"vote");
+  theInput.setAttribute('type',"submit"); 
+  theInput.setAttribute('value', "Vote");
+  theForm.appendChild(theInput);
+  
+  //var question = document.getElementById('votingform');  
+  //question.appendChild(theForm);  
+    }
+ </script>
 </html>
