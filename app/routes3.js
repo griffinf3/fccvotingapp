@@ -229,7 +229,8 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                 for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                                res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                               // res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                                res.send('tp'+ totalPolls);
                             }
                             else  {
                                //We should probably never come here.
