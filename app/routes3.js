@@ -633,7 +633,7 @@ app.get('/loginSuccess', function(req, res, next) {
         status = " Login/Signup";
         callback('', totalPolls); }
         
-    function callbackcallback('', totalPolls){
+    function callback('', totalPolls){
      var username = '';
      var question = '';
      var _qUrl = req.url;   
