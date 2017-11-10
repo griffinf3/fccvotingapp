@@ -237,9 +237,26 @@ app.get('/view2', function(req, res) {
                           var pusername;
                           var namelist = [];
                           var nameobj = {};
-                          res.send('OK');
+                          User.find({},function(err, puser) { 
+                                 if (err) {} else { res.send('OK');
+                                    
+                                    }});
+                              function callback (error, list){    
+                              var lg = doc.length;
+                              var qnamelist = [];
+                              var qnameobj = {};
+                              var pid;
+                              var pq;
+                              var nobj;
+                             for (var i=0; i<lg; i++)
+                             {pid= doc[i].userid;
+                              pq = doc[i].poll.question;
+                              nobj = list.filter(function (list) {return list.id == pid });
+                              qnameobj = {username: nobj[0].username, question: pq};
+                              qnamelist.push(qnameobj);
+                             } 
 //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
-                            } 
+                            } }
                          else { res.send('no doc');}
                         } });
 });
