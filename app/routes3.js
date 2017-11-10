@@ -169,9 +169,9 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                  if (err) {}
                  else
                  { totalPolls = polls.length;
-                   //callback('', totalPolls);
-                 res.send('total'+ totalPolls);} 
-});
+                   callback('', totalPolls);
+                  } 
+}); 
       
  function callback(error, totalPolls)
     {
@@ -211,7 +211,11 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                  }}}      
                                
                              res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); } 
-                            }}});}
+                            }
+                        else
+                            {res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});}
+                            
+                            }});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
