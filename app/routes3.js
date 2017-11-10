@@ -399,11 +399,13 @@ app.post('/voting', function(req, res) {
        Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
                  else
-                 {totalPolls = polls.length;}});   
+                 {totalPolls = polls.length;
+                  res.send('tp'+ totalPolls);}});   
     }
     else{status = " Login/Signup";
+         res.send('tp'+ totalPolls);
        }  
-    res.send('tp'+ totalPolls);
+    
     
 });
      
