@@ -630,7 +630,15 @@ app.get('/loginSuccess', function(req, res, next) {
      question = qUrl.substring(n+1); 
         
     if (username == '' || question == ''){res.redirect('/');}
-    else {res.send('OK');
+    else {
+        
+        var status;
+        var totalPolls =0;
+        
+    if (req.user)
+    {status = " Log out";}
+    else {}    
+      res.send('OK');
     }});
  
 
