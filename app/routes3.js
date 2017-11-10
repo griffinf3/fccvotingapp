@@ -204,19 +204,20 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                           {if (doc[i].userid != id){
                                  pid= doc[i].userid;
                                  pq = doc[i].poll.question;
-                                 if (list.id == pid)
+                                 if (list[i].id == pid)
                                  {nobj = list.filter(function (list) {return list.id ==  pid });
                                   qnameobj = {username: nobj[0].username, question: pq};
                                   qnamelist.push(qnameobj);
                                  }}}      
-                               res.send('qnl1' + qnamelist);
-                            // res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
+                               //res.send('qnl1' + lg + ':'+ pid +':'+ pq);
+                            res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
                         } 
                             }
                         else
-                            { res.send('qnl2' + qnamelist);
+                            {
+                                //res.send('qnl2' + qnamelist);
                                 
-                               // res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                               res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                             }
                             
                             }});}
@@ -269,7 +270,7 @@ app.get('/view2', function(req, res) {
                              for (var i=0; i<lg; i++)
                              {pid= doc[i].userid;
                               pq = doc[i].poll.question;
-                              if (list.id == pid)
+                              if (list[i].id == pid)
                               {
                               nobj = list.filter(function (list) {return list.id == pid });
                               qnameobj = {username: nobj[0].username, question: pq};
