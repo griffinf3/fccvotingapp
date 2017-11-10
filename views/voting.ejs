@@ -28,9 +28,13 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
-        <li><a href="/create">Post</a></li>
-        <li><a href="/view">Polls</a></li>
-        <li><a href="/edit">Edit</a></li>
+        <li><a onclick = "checkPost()">Post</a></li>
+        <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Locally Created</a>
+    <a id="poll2" onclick = "pollType(2)">Publicly Shared</a>
+            </div></div></li> 
+        <li><a onclick = "checkEdit()">Edit</a></li>
       </ul>
         <ul class="nav navbar-nav navbar-right">
         <li> 
@@ -58,41 +62,33 @@
 </body>
     <script>   
 function loaded()   
- { //var optionlist =  '<%= optionlist %>';
-  var optionslist = <%- JSON.stringify(optionslist) %>;
+ {var optionslist = <%- JSON.stringify(optionslist) %>;
   var label = document.createElement( 'label');
-  //-- we iterate over each value and create a input for it and we add the value
-   
-// var theForm = document.createElement("form");
-   //-- we set the forms name
- //  theForm.setAttribute('name','form1');
- var theForm = document.getElementById('votingform');
- var theInput;
-
+  var theForm = document.getElementById('votingform');
+  var theInput;
  for (var q = 1; q < optionslist.length; q++) { theInput = document.createElement("input");
   theInput.setAttribute('type',"radio"); 
   theInput.setAttribute('name', 'option');
   theInput.setAttribute('value', optionslist[q].option);
-  theInput.setAttribute('onclick', 'enableVote()');                                             
-  label.appendChild(theInput);
+  theInput.setAttribute('onclick', 'enableVote()');                                 label.appendChild(theInput);
   label.innerHTML += "<span> " + optionslist[q].option + "</span><br>";
-     console.log('html'+  optionslist.length); 
-            
-  theForm.appendChild(label);}
-     
+  theForm.appendChild(label);}     
   theInput = document.createElement("input"); 
   theInput.setAttribute('id',"vote");
   theInput.setAttribute('type',"submit"); 
   theInput.setAttribute('value', "Vote");
   theInput.setAttribute('disabled', true);
-  theForm.appendChild(theInput);
-  
-  //var question = document.getElementById('votingform');  
-  //question.appendChild(theForm);  
+  theForm.appendChild(theInput);  
     }
 
   function enableVote()
         {document.getElementById('vote').disabled = false;
         }
+        
+  function checkPost(){
+    if (status == " Login/Signup"){alert("You cannot post a poll without first logging in.");}
+    else
+     window.location = "/create"
+}
  </script>
 </html>

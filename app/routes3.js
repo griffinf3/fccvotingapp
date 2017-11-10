@@ -375,9 +375,13 @@ app.post('/voting', function(req, res) {
     var option = req.body.option;
     var message1 = 'Your vote has been recorded.';
     var message2 = "There was an error in recording this vote."
-//record this vote if both the username and question can be found in the polls collection.
-    
-    
+    var status;
+    if (req.user)
+    {
+       status = " Log out"; 
+    }
+    else{status = " Login/Signup";}  
+//record this vote if both the username and question can be found in the polls collection.  
   User.findOne({'local.username' : username}, function(err, user) {    
            if (err) {res.send('error0');}
            else
@@ -435,7 +439,7 @@ function callback3(){
                         for (var j=1; j<doc.poll.options.length; j++ )
                         {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
                         allPolls[0] = {question: question, options: opts};
-                       res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1});      
+                       res.render('viewOne.ejs', {polls: allPolls, logstatus: status, alertMessage: message1});      
                   }
                   else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
                       else { 
@@ -448,7 +452,7 @@ function callback3(){
                         
                         }
                         allPolls[0] = {question: question, options: opts};  
-                        res.render('viewOne.ejs', {polls: allPolls, alertMessage: message1}); 
+                        res.render('viewOne.ejs', {polls: allPolls, logstatus: status, alertMessage: message1}); 
                       } else {
                           //no luck with finding the poll the user was looking for,
                           res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     

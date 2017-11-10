@@ -46,7 +46,8 @@
 
          <ul class="nav navbar-nav navbar-right">
         <li> 
-            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login/Signup</a></li>
+          
+            <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
       </ul>
            
     </div>
@@ -128,6 +129,7 @@ var myChart = new Chart(ctx, {
   </footer>    
 </body>
      <script>
+var status = <%- JSON.stringify(logstatus) %>;
 function loaded() {
         alert(<%- JSON.stringify(alertMessage) %>);
         var polls = <%- JSON.stringify(polls) %>;
