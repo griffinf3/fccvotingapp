@@ -257,10 +257,10 @@ app.get('/view2', function(req, res) {
                              {pid= doc[i].userid;
                               pq = doc[i].poll.question;
                               nobj = list.filter(function (list) {return list.id == pid });
-                              qnameobj = {username: nobj[0].username, question: pq};
-                              qnamelist.push(qnameobj);
+                             // qnameobj = {username: nobj[0].username, question: pq};
+                             // qnamelist.push(qnameobj);
                              } 
-                              res.send('OK' + pid +':'+ pq + ':' + nobj + ':'+ qnameobj+ ':'+ qnamelist);
+                              res.send('OK' + pid +':'+ pq + ':' + nobj);
 //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { res.send('no doc');}
