@@ -229,43 +229,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
   
 //user not logged in and wants to view public listing of polls.
 app.get('/view2', function(req, res) {
-   Poll.find({ 'poll.public' : true}, function(err, doc) {    
-                      if (err) {}
-                        else
-                        {if (doc) { 
-                          var pusername;
-                          var namelist = [];
-                          var nameobj = {};
-                          User.find({},function(err, puser) { 
-                                 if (err) {} else { 
-                                    for (var i = 0; i< puser.length; i++)  
-                                    {pusername = puser[i].local.username;
-                                     nameobj = {id: puser[i]._id, username: pusername};
-                                     namelist.push(nameobj);} 
-                                     callback("",namelist);
-                                    }});
-                            function callback (error, list){    
-                              var lg = doc.length;
-                              var qnamelist = [];
-                              var qnameobj = {};
-                              var pid;
-                              var pq;
-                              var nobj;
-                             for (var i=0; i<lg; i++)
-                             {pid= doc[i].userid;
-                              pq = doc[i].poll.question;
-                              nobj = list.filter(function (list) {return list.id == pid });
-                              qnameobj = {username: nobj[0].username, question: pq};
-                              qnamelist.push(qnameobj);
-                             }
-res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
-                            }
-                        }
-                        else 
-                        {var allPolls = req.all3Polls;
-                         res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: 'Currently there are no polls available for viewing on this website.'});}
-                        
-                        }});
+   res.send('OK');
                     });
     
  app.get('/edit', isLoggedIn, function(req, res) {
