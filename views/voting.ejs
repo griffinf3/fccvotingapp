@@ -60,7 +60,8 @@
     <% include partials/footer %>
   </footer>   
 </body>
-    <script>   
+<script>  
+   var status = <%- JSON.stringify(status) %>; 
 function loaded()   
  {var optionslist = <%- JSON.stringify(optionslist) %>;
   var label = document.createElement( 'label');
