@@ -175,7 +175,11 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
  function callback(error, totalPolls)
     {
                     if (viewtype== 'public')
-                    {res.send('Ok');}
+                    {
+                        Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) {res.send('Ok');}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
