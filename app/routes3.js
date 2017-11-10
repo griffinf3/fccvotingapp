@@ -628,7 +628,10 @@ app.get('/loginSuccess', function(req, res, next) {
                  if (err) {}
                  else
                  { totalPolls = polls.length;
-                   callback('', totalPolls);} });}
+                   //callback('', totalPolls);
+                 res.send('OK');
+                 
+                 } });}
     else{totalPolls = 0;
         status = " Login/Signup";
         res.send('OK'); }
