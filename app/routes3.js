@@ -13,7 +13,15 @@ var all3Polls = function (req, res, next) {
   next()
 }
 
-app.use(all3Polls)
+var totPolls = function(req, res, next)
+{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 {req.totPolls = polls.length;} 
+});} 
+
+app.use(totPolls);
+app.use(all3Polls);
 
 app.get('/', isLoggedIn, function (req, res) {
    var message = req.param('alertMessage');
@@ -209,14 +217,12 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                               {qnameobj = {username: nobj[0].username, question: pq};
                                   qnamelist.push(qnameobj);
                                  }}}      
-                           res.send('tp'+ totalPolls);
-                            //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
+                            res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
                         } 
                             }
                         else
                             {
-                         res.send('tp'+ totalPolls);
-                                //  res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                            res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                             }
                             
                             }});}
@@ -231,8 +237,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                 for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)}                         
-                               // res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
-                                res.send('tp'+ totalPolls);
+                                res.render('view.ejs', {questionlist: questionlist, qnamelist: [], username: username, viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                             }
                             else  {
                                //We should probably never come here.
@@ -395,11 +400,14 @@ app.post('/voting', function(req, res) {
     var message1 = 'Your vote has been recorded.';
     var message2 = "There was an error in recording this vote."
     var status;
+    var totalPolls =0;
     if (req.user)
     {
        status = " Log out"; 
     }
-    else{status = " Login/Signup";}  
+    else{status = " Login/Signup";
+       }  
+    
 //record this vote if both the username and question can be found in the polls collection.  
   User.findOne({'local.username' : username}, function(err, user) {    
            if (err) {res.send('error0');}
@@ -424,23 +432,30 @@ app.post('/voting', function(req, res) {
                         function callback2 (err, numAffected) {if (numAffected.n == 0)
                        {
                            //polling question could not be found; 
-                            callback3();
+                            callback3('', 0);
                        }
                             else {
+                                if (status == " Login/Signup")
+                                totalPolls = req.totPolls;
+                                else totalPolls = 0;
                                 //vote recorded."
-                              callback3(); 
+                              callback3('', totalPolls); 
                                                        }}
                        }  
                         else {
+                            if (status == " Login/Signup")
+                                totalPolls = req.totPolls;
+                              else totalPolls = 0;
+                                //vote recorded."
                             //vote recorded."
-                             callback3(); 
+                             callback3('', totalPolls); 
                         }}}
             else { 
                 //no username found.
-    callback3(); 
+    callback3('', 0); 
             }});  
     
-function callback3(){ 
+function callback3(error, totalPolls){ 
   var allPolls = req.all3Polls;
  User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
@@ -458,7 +473,7 @@ function callback3(){
                         for (var j=1; j<doc.poll.options.length; j++ )
                         {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
                         allPolls[0] = {question: question, options: opts};
-                       res.render('viewOne.ejs', {polls: allPolls, logstatus: status, alertMessage: message1});      
+                       res.render('viewOne.ejs', {polls: allPolls, logstatus: status, totalPolls: totalPolls, alertMessage: message1});      
                   }
                   else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err, doc) {                        if (err) {res.send('error3');}
                       else { 
@@ -471,7 +486,7 @@ function callback3(){
                         
                         }
                         allPolls[0] = {question: question, options: opts};  
-                        res.render('viewOne.ejs', {polls: allPolls, logstatus: status, alertMessage: message1}); 
+                        res.render('viewOne.ejs', {polls: allPolls, logstatus: status, totalPolls: totalPolls, alertMessage: message1}); 
                       } else {
                           //no luck with finding the poll the user was looking for,
                           res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: message2});     
