@@ -621,7 +621,20 @@ app.get('/loginSuccess', function(req, res, next) {
     app.get('/*', function(req, res, next) { 
     var status;
     var totalPolls;
-    res.send('OK');});
+        
+    if (req.user)
+    {status = " Log out"; 
+     Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length;
+                   callback('', totalPolls);} });}
+    else{totalPolls = 0;
+        status = " Login/Signup";
+        callback('', totalPolls); }
+        
+    function callback('', totalPolls){      
+    res.send('OK');}});
  
 
     app.post('/*', function(req, res) {    
