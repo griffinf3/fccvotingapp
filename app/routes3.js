@@ -13,14 +13,6 @@ var all3Polls = function (req, res, next) {
   next()
 }
 
-var totPolls = function(req, res, next)
-{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-                 if (err) {}
-                 else
-                 {req.totPolls = polls.length;} 
-});} 
-
-app.use(totPolls);
 app.use(all3Polls);
 
 app.get('/', isLoggedIn, function (req, res) {
@@ -404,8 +396,18 @@ app.post('/voting', function(req, res) {
     if (req.user)
     {
        status = " Log out"; 
+       var totPolls = function(req, res, next)
+{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 {req.totPolls = polls.length;} 
+});} 
+ 
+        
+        
     }
     else{status = " Login/Signup";
+         var totPolls= 0;
        }  
 totalPolls = 0;
     //req.totPolls;
