@@ -187,7 +187,11 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                             var pusername;
                             User.find({},function(err, puser) { 
                                  if (err) {} else { 
-                                   res.send('OK');}});
+                                   for (var i = 0; i< puser.length; i++)  
+                                   {pusername = puser[i].local.username;
+                                    nameobj = {id: puser[i]._id, username: pusername};
+                                    namelist.push(nameobj); } 
+                        callback2("",namelist);}});
                             
                         function callback2(error, list){    
                           var lg = doc.length;
@@ -205,11 +209,15 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                   qnameobj = {username: nobj[0].username, question: pq};
                                   qnamelist.push(qnameobj);
                                  }}}      
-                               
-                             res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); } 
+                               res.send('qnl1' + qnamelist);
+                            // res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
+                        } 
                             }
                         else
-                            {res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});}
+                            { res.send('qnl2' + qnamelist);
+                                
+                               // res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                            }
                             
                             }});}
                     else
