@@ -22,7 +22,6 @@ app.get('/', isLoggedIn, function (req, res) {
    if (message != undefined && message != '')
        aM = message; else  aM = ""; 
       
-  
 var allPolls = req.all3Polls;  
 var op1;
 var op2;
@@ -44,13 +43,12 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
 						count = count + 1;
 						} 
 				     }
-                   callback("", allPolls);
+                   callback("", allPolls, totalPolls);
 				  }
                    
 				  });
  
-  function callback(error, allPolls){
-  totalPolls = allPolls.length;  
+  function callback(error, allPolls, totalPolls){ 
   Option.find({ 'userid' :  req.user._id }, function(err, doc) {
                   if (err) {}
                   else
