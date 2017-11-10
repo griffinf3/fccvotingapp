@@ -276,8 +276,8 @@ app.get('/view2', function(req, res) {
                               qnameobj = {username: nobj[0].username, question: pq};
                               qnamelist.push(qnameobj);
                              } }
-                             
-res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
+                             res.send('lg'+ lg);
+//res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { 
                          
