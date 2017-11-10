@@ -641,13 +641,17 @@ app.get('/loginSuccess', function(req, res, next) {
                  if (err) {}
                  else
                  { totalPolls = polls.length;
-                   //callback('', totalPolls);
+                   callback('', totalPolls);
                  
                  } });
     
     }
-    else {}    
-      res.send('OK');
+    else {res.send('OK');}    
+      
+      function callback(error, totalPolls)  
+        {res.send('OK');}
+        
+        
     }});
  
 
