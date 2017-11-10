@@ -199,7 +199,16 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                           var pid;
                           var pq;
                           var nobj;
-                          res.send('Ok' +list); } 
+                               
+                          {if (doc[i].userid != id){
+                                 pid= doc[i].userid;
+                                 pq = doc[i].poll.question;
+                                 if (list.id == pid)
+                                 {nobj = list.filter(function (list) {return list.id == pid });
+                                  qnameobj = {username: nobj[0].username, question: pq};
+                                  qnamelist.push(qnameobj);}}}      
+                               
+                          res.send('Ok' +gamelist); } 
                             }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
