@@ -192,14 +192,14 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                     namelist.push(nameobj); } 
                         callback2("",namelist);}});
                             
-                           function callback2(error, list){    
+                        function callback2(error, list){    
                           var lg = doc.length;
                           var qnamelist = [];
                           var qnameobj = {};
                           var pid;
                           var pq;
                           var nobj;
-                               
+                          for (var i=0; i<lg; i++)    
                           {if (doc[i].userid != id){
                                  pid= doc[i].userid;
                                  pq = doc[i].poll.question;
