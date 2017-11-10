@@ -411,7 +411,7 @@ app.post('/voting', function(req, res) {
        }  
 totalPolls = 0;
     //req.totPolls;
-    res.send('tp'+ totalPolls);
+    res.send('tp'+ totPolls);
     
 });
      
