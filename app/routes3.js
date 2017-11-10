@@ -13,12 +13,12 @@ var all3Polls = function (req, res, next) {
   next()
 }
 
-//var totPolls = function(req, res, next)
-//{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-  //               if (err) {}
-    //             else
-         //        {req.totPolls = polls.length;} 
-//});} 
+var totPolls = function(req, res, next)
+{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 {req.totPolls = polls.length;} 
+});} 
 
 //app.use(totPolls);
 app.use(all3Polls);
