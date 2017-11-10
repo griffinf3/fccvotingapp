@@ -620,11 +620,15 @@ app.get('/loginSuccess', function(req, res, next) {
     
     app.get('/*', function(req, res, next) { 
     var status;
-    var totalPolls;
+    var totalPolls =0;
         
     if (req.user)
     {status = " Log out"; 
-     callback("", 0); 
+     Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length;
+                   callback('', totalPolls);} });
     }
     else{totalPolls = 0;
         status = " Login/Signup";
