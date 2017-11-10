@@ -191,9 +191,9 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                    {pusername = puser[i].local.username;
                                     nameobj = {id: puser[i]._id, username: pusername};
                                     namelist.push(nameobj); } 
-                        callback2("",namelist);}});
+                        callback2("",namelist, totalPolls);}});
                             
-                        function callback2(error, list){    
+                        function callback2(error, list, totalPolls){    
                           var lg = doc.length;
                           var qnamelist = [];
                           var qnameobj = {};
