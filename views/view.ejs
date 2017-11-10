@@ -68,7 +68,8 @@
 </footer>
 
 </body>
-<script>     
+<script>  
+    var status = <%- JSON.stringify(logstatus) %>; 
     function loaded() {
        var loc = [];
        var loc2 =[];
@@ -143,7 +144,6 @@ function confirmIt(r) {
 }
   
 function pollType(num){
-     var status = <%- JSON.stringify(logstatus) %>; 
      //locally created
      if (num == 1) {
          checkPolls()   
@@ -162,8 +162,7 @@ function pollType(num){
 function checkPolls(){
            var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
              if (totalPolls == 0) 
-             {var status = <%- JSON.stringify(logstatus) %>; 
-                 if (status == " Login/Signup")  
+             {if (status == " Login/Signup")  
                alert("Please log in to create and view your polls");
                 else alert("No local polls have been created.");
              }
