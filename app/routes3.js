@@ -179,7 +179,28 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                         Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
-                        {if (doc) {res.send('Ok' +doc);}}});}
+                        {if (doc) {
+                            
+                            var namelist = [];
+                            var nameobj = {};
+                            var pusername;
+                            User.find({},function(err, puser) { 
+                                 if (err) {} else { 
+                                   for (var i = 0; i< puser.length; i++)  
+                                   {pusername = puser[i].local.username;
+                                    nameobj = {id: puser[i]._id, username: pusername};
+                                    namelist.push(nameobj); } 
+                        callback2("",namelist);}});
+                            
+                           function callback2(error, list){    
+                          var lg = doc.length;
+                          var qnamelist = [];
+                          var qnameobj = {};
+                          var pid;
+                          var pq;
+                          var nobj;
+                          res.send('Ok' +list); } 
+                            }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
