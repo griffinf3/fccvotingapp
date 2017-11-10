@@ -256,11 +256,11 @@ app.get('/view2', function(req, res) {
                              {pid= doc[i].userid;
                               pq = doc[i].poll.question;
                               nobj = list.filter(function (list) {return list.id == pid });
-                              if (nboj.length >0)
+                              if (nobj[0].username != '')
                               { qnameobj = {username: nobj[0].username, question: pq};
                                 qnamelist.push(qnameobj);}
                              } 
-                              res.send('OK' + list[1].id + ':'+ pid);
+                              res.send('OK');
 //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { res.send('no doc');}
