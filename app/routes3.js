@@ -634,9 +634,70 @@ app.get('/loginSuccess', function(req, res, next) {
         status = " Login/Signup";
         callback("", 0);  }
         
-    function callback(error, totalPolls){      
-    res.send('OK');}
-    });
+    function callback('', totalPolls){
+     var username = '';
+     var question = '';
+     var _qUrl = req.url;   
+     var qUrl = decodeURIComponent(_qUrl.substring(1));
+     var n = qUrl.indexOf("/");
+     username = qUrl.substring(0, n);
+     var sc = req.body.showcase; 
+     question = qUrl.substring(n+1); 
+        
+    if (username == '' || question == ''){res.redirect('/');}
+        else {
+        
+    User.findOne({ 'local.username' : username}, function(err, user) {    
+           if (err) {}
+           else
+            { if (user) {
+                    var id = user._id; 
+                
+                    Poll.findOne({ 'userid' : id, 'poll.question' : question}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) {
+                            
+                             var lg = doc.poll.options.length;
+                                var optionlist = [];
+                                var votelist = [];
+                                var optionslist = [{}];
+                                for (i=1; i<lg; i++)
+                                    
+                                {optionlist.push(doc.poll.options[i].option);
+                                votelist.push(doc.poll.options[i].votes);
+    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
+                                
+                                res.render('voting.ejs', {question: question, username: username, 
+                                                          optionlist: optionlist, votelist: votelist,
+                              optionslist: optionslist, logstatus: status, totalPolls: totalPolls});
+                            
+                           }   
+                          else {
+                               Poll.findOne({ 'userid' : id, 'poll.question' : question + '?'}, function(err, doc) {  if (err) {}
+                        else {  
+                          if (doc) {
+                              
+                               var lg = doc.poll.options.length;
+                                var optionlist = [];
+                                var votelist = [];
+                                var optionslist = [{}];
+                                for (i=1; i<lg; i++)
+                                    
+                                {optionlist.push(doc.poll.options[i].option);
+                                votelist.push(doc.poll.options[i].votes);
+    optionslist.push({option: doc.poll.options[i].option, votes:doc.poll.options[i].votes})}
+                                
+                                res.render('voting.ejs', {question: question + '?', username: username, 
+                                                          optionlist: optionlist, votelist: votelist,
+                                                         optionslist: optionslist, logstatus: status, totalPolls: totalPolls});
+                              
+                         }   
+                          else {res.send('could not locate question in the database; please report this error');}    
+                        }});} 
+                              }
+                        });
+            }}});}}});
  
 
     app.post('/*', function(req, res) {    
