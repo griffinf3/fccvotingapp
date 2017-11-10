@@ -630,8 +630,9 @@ app.get('/loginSuccess', function(req, res, next) {
         status = " Login/Signup";
         res.send('OK'); }
         
-    function callback('', totalPolls){      
-    res.send('OK');}});
+    //function callback('', totalPolls){      
+    //res.send('OK');}
+    });
  
 
     app.post('/*', function(req, res) {    
