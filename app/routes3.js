@@ -204,7 +204,10 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                  pid= doc[i].userid;
                                  pq = doc[i].poll.question;
                                  if (list.id == pid)
-                                 {nobj = list.filter(function (list) {return list.id ==  pid });}}}      
+                                 {nobj = list.filter(function (list) {return list.id ==  pid });
+                                  qnameobj = {username: nobj[0].username, question: pq};
+                                 
+                                 }}}      
                                
                           res.send('Ok'); } 
                             }}});}
