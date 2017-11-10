@@ -255,12 +255,13 @@ app.get('/view2', function(req, res) {
                              for (var i=0; i<lg; i++)
                              {pid= doc[i].userid;
                               pq = doc[i].poll.question;
+                              if (list.id == pid)
+                              {
                               nobj = list.filter(function (list) {return list.id == pid });
-                              if (nobj[0].username != '')
-                              { qnameobj = {username: nobj[0].username, question: pq};
-                                qnamelist.push(qnameobj);}
-                             } 
-                              res.send('OK');
+                              qnameobj = {username: nobj[0].username, question: pq};
+                              qnamelist.push(qnameobj);
+                             } }
+                              res.send('OK'+ qnamelist);
 //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { res.send('no doc');}
