@@ -331,8 +331,11 @@ app.post('/create', findDelete, function(req, res) {
     var showCase =  req.body.showcase;
     var SC= false;
     if (showCase =='showcase') SC = true; 
+    var makePublic = req.body.visibility;
+    var mP = false;
+    if (makePublic =='public') mP = true; 
 // create new poll document for the user.  
-var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: true}}); 
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: mP}}); 
                        
 // save  
 newPollUser.save(function(err) {
