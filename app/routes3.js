@@ -233,7 +233,8 @@ app.get('/view2', function(req, res) {
     Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
-                        {if (doc) { var pusername;
+                        {if (doc) { 
+                          var pusername;
                           var namelist = [];
                           var nameobj = {};
                           User.find({},function(err, puser) { 
@@ -244,7 +245,7 @@ app.get('/view2', function(req, res) {
                                      namelist.push(nameobj);} 
                                      callback("",namelist);
                                     }});
-                            function callback (error, list){    
+                             function callback (error, list){    
                               var lg = doc.length;
                               var qnamelist = [];
                               var qnameobj = {};
@@ -257,8 +258,8 @@ app.get('/view2', function(req, res) {
                               nobj = list.filter(function (list) {return list.id == pid });
                               qnameobj = {username: nobj[0].username, question: pq};
                               qnamelist.push(qnameobj);
-                             }
-res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
+                             } res.send('OK');
+//res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { res.send('no doc');}
                         } });
