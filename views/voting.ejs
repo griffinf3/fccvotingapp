@@ -112,6 +112,11 @@ function checkPolls(){
                 else alert("No local polls have been created.");
              }
               else  window.location = "/view?type=local";
-         }  
+         } 
+    
+ function checkEdit(){
+             if (totalPolls == 0) alert("There are no polls to edit.");
+              else  window.location = "/edit";
+         }
  </script>
 </html>
