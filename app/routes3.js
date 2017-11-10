@@ -252,14 +252,8 @@ app.get('/view2', function(req, res) {
                               var pid;
                               var pq;
                               var nobj;
-                             for (var i=0; i<lg; i++)
-                             {pid= doc[i].userid;
-                              pq = doc[i].poll.question;
-                              nobj = list.filter(function (list) {return list.id == pid });
-                              qnameobj = {username: nobj[0].username, question: pq};
-                              qnamelist.push(qnameobj);
-                             } 
-                              res.send('OK');
+                             
+                              res.send('doclg='+lg);
 //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
                          else { res.send('no doc');}
