@@ -229,8 +229,14 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
   
 //user not logged in and wants to view public listing of polls.
 app.get('/view2', function(req, res) {
-   res.send('OK');
-                    });
+    
+    Poll.find({ 'poll.public' : true}, function(err, doc) {    
+                      if (err) {}
+                        else
+                        {if (doc) { res.send('found doc'); }
+                         else { res.send('no doc');}
+                        } });
+});
     
  app.get('/edit', isLoggedIn, function(req, res) {
                     var id = req.user._id;
