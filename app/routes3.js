@@ -13,14 +13,14 @@ var all3Polls = function (req, res, next) {
   next()
 }
 
-var totPolls = function(req, res, next)
-{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-                 if (err) {}
-                 else
-                 {req.totPolls = polls.length;} 
-});} 
+//var totPolls = function(req, res, next)
+//{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+  //               if (err) {}
+    //             else
+         //        {req.totPolls = polls.length;} 
+//});} 
 
-app.use(totPolls);
+//app.use(totPolls);
 app.use(all3Polls);
 
 app.get('/', isLoggedIn, function (req, res) {
@@ -407,7 +407,8 @@ app.post('/voting', function(req, res) {
     }
     else{status = " Login/Signup";
        }  
-totalPolls = req.totPolls;
+totalPolls = 0;
+    //req.totPolls;
     res.send('tp'+ totalPolls);
     
 });
