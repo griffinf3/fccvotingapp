@@ -175,39 +175,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
  function callback(error, totalPolls)
     {
                     if (viewtype== 'public')
-                    {Poll.find({ 'poll.public' : true}, function(err, doc) {    
-                      if (err) {}
-                        else
-                        {if (doc) {
-                          var namelist = [];
-                          var nameobj = {};
-                          var pusername;
-                         User.find({},function(err, puser) { 
-                                 if (err) {} else { 
-                                   for (var i = 0; i< puser.length; i++)  
-                                   {pusername = puser[i].local.username;
-                                    nameobj = {id: puser[i]._id, username: pusername};
-                                    namelist.push(nameobj); } 
-                                         callback2("",namelist);}});
-                            
-                          function callback2(error, list){    
-                          var lg = doc.length;
-                          var qnamelist = [];
-                          var qnameobj = {};
-                          var pid;
-                          var pq;
-                          var nobj;
-                          for (var i=0; i<lg; i++)
-                          {if (doc[i].userid != id){
-                                 pid= doc[i].userid;
-                                 pq = doc[i].poll.question;
-                                 if (list.id == pid)
-                                 {nobj = list.filter(function (list) {return list.id == pid });
-                                  qnameobj = {username: nobj[0].username, question: pq};
-                                  qnamelist.push(qnameobj);}}} 
-                              
-                             res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
-                              }}}});}
+                    {res.send('Ok');}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
