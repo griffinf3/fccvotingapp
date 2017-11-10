@@ -261,10 +261,14 @@ app.get('/view2', function(req, res) {
                               qnameobj = {username: nobj[0].username, question: pq};
                               qnamelist.push(qnameobj);
                              } }
-                              res.send('OK'+ qnamelist);
-//res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
+                             
+res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             } }
-                         else { res.send('no doc');}
+                         else { 
+                         
+res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});
+                         
+                         }
                         } });
 });
     
