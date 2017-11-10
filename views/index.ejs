@@ -334,6 +334,7 @@ var myChart = new Chart(ctx, {
          }
                 
  function checkPolls(){
+           console.log('tp:' + totalPolls);
            var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
              if (totalPolls == 0) 
              {var status = <%- JSON.stringify(logstatus) %>; 
