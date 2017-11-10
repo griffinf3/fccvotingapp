@@ -396,22 +396,17 @@ app.post('/voting', function(req, res) {
     if (req.user)
     {
        status = " Log out"; 
-       var totPolls = function(req, res, next)
-{Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+       Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
                  else
-                 {req.totPolls = polls.length;} 
-});} 
- 
-        
-        
+                 {req.totPolls = polls.length;}});   
     }
     else{status = " Login/Signup";
-         var totPolls= 0;
+         var req.totPolls= 0;
        }  
 totalPolls = 0;
     //req.totPolls;
-    res.send('tp'+ totPolls);
+    res.send('tp'+ req.totPolls);
     
 });
      
