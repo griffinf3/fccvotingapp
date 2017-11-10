@@ -20,7 +20,7 @@ var totPolls = function(req, res, next)
                  {req.totPolls = polls.length;} 
 });} 
 
-//app.use(totPolls);
+app.use(totPolls);
 app.use(all3Polls);
 
 app.get('/', isLoggedIn, function (req, res) {
