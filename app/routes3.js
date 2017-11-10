@@ -624,14 +624,8 @@ app.get('/loginSuccess', function(req, res, next) {
         
     if (req.user)
     {status = " Log out"; 
-     Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-                 if (err) {}
-                 else
-                 { totalPolls = polls.length;
-                   //callback('', totalPolls);
-                 res.send('OK');
-                 
-                 } });}
+     res.send('OK'); 
+    }
     else{totalPolls = 0;
         status = " Login/Signup";
         res.send('OK'); }
