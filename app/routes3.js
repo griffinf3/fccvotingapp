@@ -204,11 +204,9 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                  pid= doc[i].userid;
                                  pq = doc[i].poll.question;
                                  if (list.id == pid)
-                                 {nobj = list.filter(function (list) {return list.id == pid });
-                                  qnameobj = {username: nobj[0].username, question: pq};
-                                  qnamelist.push(qnameobj);}}}      
+                                 {}}}      
                                
-                          res.send('Ok' +gamelist); } 
+                          res.send('Ok'); } 
                             }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
