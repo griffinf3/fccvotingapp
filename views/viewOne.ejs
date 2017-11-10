@@ -128,8 +128,10 @@ var myChart = new Chart(ctx, {
     <% include partials/footer %>
   </footer>    
 </body>
-     <script>
+<script>
 var status = <%- JSON.stringify(logstatus) %>;
+var totalPolls = <%- JSON.stringify(totalPolls) %>;
+
 function loaded() {
         alert(<%- JSON.stringify(alertMessage) %>);
         var polls = <%- JSON.stringify(polls) %>;
