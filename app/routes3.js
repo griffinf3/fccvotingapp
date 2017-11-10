@@ -260,7 +260,12 @@ app.get('/view2', function(req, res) {
                              }
 res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: "public", logstatus: ' Login/Signup',totalPolls:0});   
                             }
-                        }}});
+                        }
+                        else 
+                        {var allPolls = req.all3Polls;
+                         res.render('index.ejs', { logstatus: ' Login/Signup', polls: allPolls, option1: 'block', option2: 'block', totalPolls:0, alertMessage: 'Currently there are no polls available for viewing on this website.'});}
+                        
+                        }});
                     });
     
  app.get('/edit', isLoggedIn, function(req, res) {
