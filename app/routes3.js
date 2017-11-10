@@ -171,8 +171,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                  { totalPolls = polls.length;
                    callback('', totalPolls);} 
 });
-    
-    
+      
  function callback(error, totalPolls)
     {
                     if (viewtype== 'public')
@@ -202,9 +201,12 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                           {if (doc[i].userid != id){
                                  pid= doc[i].userid;
                                  pq = doc[i].poll.question;
-                                 nobj = list.filter(function (list) {return list.id == pid });
-                            qnameobj = {username: nobj[0].username, question: pq};
-                            qnamelist.push(qnameobj);}}  res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                                 if (list.id == pid)
+                                 {nobj = list.filter(function (list) {return list.id == pid });
+                                  qnameobj = {username: nobj[0].username, question: pq};
+                                  qnamelist.push(qnameobj);}}} 
+                              
+                             res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                               }}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
