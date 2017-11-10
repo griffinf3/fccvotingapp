@@ -179,7 +179,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                         Poll.find({ 'poll.public' : true}, function(err, doc) {    
                       if (err) {}
                         else
-                        {if (doc) {res.send('Ok');}}});}
+                        {if (doc) {res.send('Ok' +doc);}}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
                       if (err) {}
