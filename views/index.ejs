@@ -332,11 +332,17 @@ var myChart = new Chart(ctx, {
              if (totalPolls == 0) alert("There are no polls to edit.");
               else  window.location = "/edit";
          }
-         
-  function checkPolls(){
-             if (totalPolls == 0) alert("Please log in to create and view your polls");
+                
+ function checkPolls(){
+           var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
+             if (totalPolls == 0) 
+             {var status = <%- JSON.stringify(logstatus) %>; 
+                 if (status == " Login/Signup")  
+               alert("Please log in to create and view your polls");
+                else alert("No local polls have been created.");
+             }
               else  window.location = "/view?type=local";
-         }
+         }      
          
 function checkPost(){
     if (status == " Login/Signup"){alert("You cannot post a poll without first logging in.");}
