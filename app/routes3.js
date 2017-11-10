@@ -624,13 +624,13 @@ app.get('/loginSuccess', function(req, res, next) {
         
     if (req.user)
     {status = " Log out"; 
-     callback("", ""); 
+     callback("", 0); 
     }
     else{totalPolls = 0;
         status = " Login/Signup";
-        callback("", "");  }
+        callback("", 0);  }
         
-    function callback('', totalPolls){      
+    function callback(error, totalPolls){      
     res.send('OK');}
     });
  
