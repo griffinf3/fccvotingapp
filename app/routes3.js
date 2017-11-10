@@ -209,12 +209,14 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                               {qnameobj = {username: nobj[0].username, question: pq};
                                   qnamelist.push(qnameobj);
                                  }}}      
-                            res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
+                           res.send('tp'+ totalPolls);
+                            //res.render('view.ejs', {questionlist: [], qnamelist: qnamelist, username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls}); 
                         } 
                             }
                         else
                             {
-                            res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
+                         res.send('tp'+ totalPolls);
+                                //  res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype: viewtype, logstatus: ' Log out', totalPolls: totalPolls});
                             }
                             
                             }});}
