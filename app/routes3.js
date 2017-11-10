@@ -630,26 +630,8 @@ app.get('/loginSuccess', function(req, res, next) {
      question = qUrl.substring(n+1); 
         
     if (username == '' || question == ''){res.redirect('/');}
-    else {
-    var status;
-    var totalPolls =0;
-        
-    if (req.user)
-    {status = " Log out"; 
-     Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
-                 if (err) {}
-                 else
-                 { totalPolls = polls.length;
-                   callback('', totalPolls);} });
-    }
-    else{totalPolls = 0;
-        status = " Login/Signup";
-        callback("", 0);  }
-        
-    function callback('', totalPolls){
-        res.send('OK');
-        
-    }}});
+    else {res.send('OK');
+    }});
  
 
     app.post('/*', function(req, res) {    
