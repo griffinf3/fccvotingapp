@@ -636,7 +636,16 @@ app.get('/loginSuccess', function(req, res, next) {
         var totalPolls =0;
         
     if (req.user)
-    {status = " Log out";}
+    {status = " Log out";
+         Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length;
+                   //callback('', totalPolls);
+                 
+                 } });
+    
+    }
     else {}    
       res.send('OK');
     }});
