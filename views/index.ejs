@@ -334,10 +334,8 @@ var myChart = new Chart(ctx, {
          }
                 
  function checkPolls(){ 
-           var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
            if (totalPolls == 0) 
-             {var status = <%- JSON.stringify(logstatus) %>; 
-                 if (status == " Login/Signup")  
+             {if (status == " Login/Signup")  
                alert("Please log in to create and view your polls.");
                 else alert("No local polls have been created.");
              }
@@ -351,7 +349,6 @@ function checkPost(){
 }
          
 function hide(num){
-   var status =  <%- JSON.stringify(logstatus) %>;
    if (status == ' Log out')
    {
   var el = document.querySelector("#col1");
@@ -399,7 +396,6 @@ function hide(num){
 }
          
 function hide2(num){
-   var status =  <%- JSON.stringify(logstatus) %>;
    if (status == ' Log out')
    {
   var el = document.querySelector("#col1");

@@ -620,11 +620,20 @@ app.get('/loginSuccess', function(req, res, next) {
     
     app.get('/*', function(req, res, next) { 
     var status;
+    var totalPolls;
     if (req.user)
-    {
-       status = " Log out"; 
-    }
-    else{status = " Login/Signup";}
+    {status = " Log out"; 
+     Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
+                 if (err) {}
+                 else
+                 { totalPolls = polls.length;
+                   callback('', totalPolls);} });}
+    else{
+        totalPolls = 0;
+        status = " Login/Signup";
+        callback('', totalPolls); }
+        
+    function callbackcallback('', totalPolls){
      var username = '';
      var question = '';
      var _qUrl = req.url;   
@@ -660,7 +669,7 @@ app.get('/loginSuccess', function(req, res, next) {
                                 
                                 res.render('voting.ejs', {question: question, username: username, 
                                                           optionlist: optionlist, votelist: votelist,
-                                                         optionslist: optionslist, logstatus: status});
+                              optionslist: optionslist, logstatus: status, totalPolls: totalPolls});
                             
                            }   
                           else {
@@ -680,14 +689,14 @@ app.get('/loginSuccess', function(req, res, next) {
                                 
                                 res.render('voting.ejs', {question: question + '?', username: username, 
                                                           optionlist: optionlist, votelist: votelist,
-                                                         optionslist: optionslist, logstatus: status});
+                                                         optionslist: optionslist, logstatus: status, totalPolls: totalPolls});
                               
                          }   
                           else {res.send('could not locate question in the database; please report this error');}    
                         }});} 
                               }
                         });
-            }}});}});
+            }}});}}});
  
 
     app.post('/*', function(req, res) {    

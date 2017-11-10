@@ -62,6 +62,7 @@
 </body>
 <script>  
    var status = <%- JSON.stringify(logstatus) %>; 
+   var totalPolls = <%- JSON.stringify(totalPolls) %>; 
 function loaded()   
  {var optionslist = <%- JSON.stringify(optionslist) %>;
   var label = document.createElement( 'label');
@@ -91,5 +92,26 @@ function loaded()
     else
      window.location = "/create"
 }
+    
+function pollType(num){
+     //locally created
+     if (num == 1) {
+         checkPolls()   
+     }
+     //publicly shared
+     //not logged in
+     else if (status == " Login/Signup"){window.location = "/view2";} 
+     //logged in
+     else {window.location = "/view?type=public";}  
+ }
+    
+function checkPolls(){ 
+           if (totalPolls == 0) 
+             { if (status == " Login/Signup")  
+               alert("Please log in to create and view your polls.");
+                else alert("No local polls have been created.");
+             }
+              else  window.location = "/view?type=local";
+         }  
  </script>
 </html>
