@@ -209,7 +209,7 @@ Poll.find({ 'userid' :  req.user._id }, function(err, polls) {
                                   qnamelist.push(qnameobj);
                                  }}}      
                                
-                          res.send('Ok'+ qnamelist); } 
+                          res.send('Ok'+ id + ':' + doc[0].userid + ':' + doc[1].userid); } 
                             }}});}
                     else
                     {Poll.find({ 'userid' : id}, function(err, doc) {    
