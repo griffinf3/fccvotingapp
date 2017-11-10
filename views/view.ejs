@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
-        <li><a href="/create">Post</a></li>
+        <li><a onclick = "checkPost()">Post</a></li>
               <li class="dropbtn"><div class="dropdown"><a>Polls</a>
          <div class="dropdown-content">
     <a id="poll1" onclick = "pollType(1)">Locally Created</a>
@@ -169,12 +169,11 @@ function checkPolls(){
              }
               else  window.location = "/view?type=local";
          }
-       
-</script>
- 
     
-</html>
-
- 
-    
+function checkPost(){
+    if (status == " Login/Signup"){alert("You cannot post a poll without first logging in.");}
+    else
+     window.location = "/create"
+}      
+</script> 
 </html>
