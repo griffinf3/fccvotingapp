@@ -631,7 +631,7 @@ app.get('/loginSuccess', function(req, res, next) {
                    callback('', totalPolls);} });}
     else{totalPolls = 0;
         status = " Login/Signup";
-        callback('', totalPolls); }
+        res.send('OK'); }
         
     function callback('', totalPolls){      
     res.send('OK');}});
