@@ -32,7 +32,6 @@
 }
 
 .opSet1{
-    width: 10px;
     height: 5px;
    
 }
@@ -325,7 +324,7 @@ var myChart = new Chart(ctx, {
          node2 = document.createElement("div");
          node2.setAttribute('class', 'opSet1');
          node2.setAttribute("style", "background-color:" + colors[i]);  
-         node2.setAttribute("style", "display: inline");
+         node2.setAttribute("style", "width: 20px");
          node.appendChild(node2);      
     textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
          node.appendChild(textnode); 
