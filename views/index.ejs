@@ -293,7 +293,12 @@ var myChart = new Chart(ctx, {
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
-    var colors = ['red', 'yellow', 'blue', 'green', 'white', 'orange', 'purple'];
+    var colors = ['rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'];
     
     function loaded() {
      var polls = <%- JSON.stringify(polls) %>;
@@ -326,7 +331,7 @@ var myChart = new Chart(ctx, {
         {node = document.createElement("li");
          node2 = document.createElement("div");
          node2.setAttribute('class', 'opSet1');
-         node2.setAttribute("style", "background-color: rgba(255, 99, 132, 0.2)");  
+         node2.setAttribute("style", "background-color:" + colors[i]);  
          //node2.setAttribute("style", "width: 20px");     
        // textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
         // node2.appendChild(textnode);
