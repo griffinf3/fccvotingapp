@@ -18,17 +18,17 @@
 }
  
 #myChart{
-    margin-top:-20px;
+    margin-top:-15px;
     
 }
     
 #myChart2{
-    margin-top:-20px;
+    margin-top:-15px;
     
 }
 
 #myChart3{
-    margin-top:-20px;
+    margin-top:-15px;
     
 }
 
@@ -155,8 +155,8 @@ var myChart = new Chart(ctx, {
           <span id="secondPost"></span></div>
      <h4 style="background-color:#bbb;">Current Voting Tally: </h4> 
      <div style="background-color:#bbb;"  class="row2 oplist">
-         <ul id="myList2">
-         </ul>
+         <ol id="myList2">
+         </ol>
      </div> 
     
     
@@ -225,8 +225,8 @@ var myChart = new Chart(ctx, {
       
      <h4 style="background-color:#ccc;">Current Voting Tally: </h4> 
      <div style="background-color:#ccc;"  class="row2 oplist">
-         <ul id="myList3">
-         </ul>
+         <ol id="myList3">
+         </ol>
      </div>
     
     
@@ -336,45 +336,39 @@ var myChart = new Chart(ctx, {
         var h;
         var t;
       for (var i = 1; i < polls[0].options.length; i++)
-        {node1 = document.createElement("li");
-         //node1.setAttribute('class', 'opSet1a');
-        // node1.setAttribute("style", "background-color:" + colors[i-1]); 
-         
+        {node1 = document.createElement("li"); 
          h = document.createElement("H5");
          h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
          liText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes; 
          t = document.createTextNode(liText);  
          h.appendChild(t);
-         node1.appendChild(h);
-           
-         document.getElementById("myList1").appendChild(node1);  
-         
-         //node2 = document.createElement("div");
-         //document.getElementById("myList1").appendChild(node2); 
-        
-        // node2.setAttribute('class', 'opSet1b');
-        // node2.setAttribute("style", "background-color:red"); 
+         node1.appendChild(h);  
+         document.getElementById("myList1").appendChild(node1);   
        }
       
-      //Second question:
-        if (polls[1].options.length <= 4)
-        {
+      //Second question: 
       for (var i = 1; i < polls[1].options.length; i++)
-        {var node = document.createElement("li");
-        textnode = document.createTextNode(polls[1].options[i].option + ' - '  + polls[1].options[i].votes);
-      node.appendChild(textnode);     
-     document.getElementById("myList2").appendChild(node);  
-       }}
+        {node1 = document.createElement("li"); 
+         h = document.createElement("H5");
+         h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
+         liText = polls[1].options[i].option + ' - '  + polls[1].options[i].votes; 
+         t = document.createTextNode(liText);  
+         h.appendChild(t);
+         node1.appendChild(h);  
+         document.getElementById("myList2").appendChild(node1); 
+       }
         
       //Third question:
-        if (polls[2].options.length <= 4)
-        {
       for (var i = 1; i < polls[2].options.length; i++)
-        {var node = document.createElement("li");
-        textnode = document.createTextNode(polls[2].options[i].option + ' - '  + polls[2].options[i].votes);
-       node.appendChild(textnode);     
-      document.getElementById("myList3").appendChild(node);  
-       }}      
+        {node1 = document.createElement("li"); 
+         h = document.createElement("H5");
+         h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
+         liText = polls[2].options[i].option + ' - '  + polls[2].options[i].votes; 
+         t = document.createTextNode(liText);  
+         h.appendChild(t);
+         node1.appendChild(h);  
+         document.getElementById("myList3").appendChild(node1);  
+       }      
    var op2 = <%- JSON.stringify(option2) %>; 
    var op1 = <%- JSON.stringify(option1) %>;
    if (op1 == 'none') (hide2(1));
