@@ -449,6 +449,7 @@ function callback0(error, totPolls){
             }});  
     
 function callback3(error, totalPolls){ 
+   var allPolls = req.all3Polls;
    User.findOne({'local.username' : username}, function(err, userdoc) {    
            if (err) { res.send('error1');}
            else
