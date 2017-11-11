@@ -329,9 +329,9 @@ var myChart = new Chart(ctx, {
         
       for (var i = 1; i < polls[0].options.length; i++)
         {node = document.createElement("li");
-         node2 = document.createElement("div");
-         node2.setAttribute('class', 'opSet1');
-         node2.setAttribute("style", "background-color:" + colors[i-1]);  
+         ///node2 = document.createElement("div");
+       ///  node2.setAttribute('class', 'opSet1');
+         ///node2.setAttribute("style", "background-color:" + colors[i-1]);  
          //node2.setAttribute("style", "width: 20px"); 
          node3 = document.createElement("div");
          node3.setAttribute("style", "background-color: yellow");
@@ -341,8 +341,8 @@ var myChart = new Chart(ctx, {
          
          textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
         // node3.appendChild(textnode);
-         node2.appendChild(node3);
-         node.appendChild(node2);
+         ///node2.appendChild(node3);
+         node.appendChild(node3);
          document.getElementById("myList1").appendChild(node);  
        }
       
