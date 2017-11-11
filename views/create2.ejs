@@ -49,7 +49,11 @@ margin-left:float;
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="create">Post</a></li>
-        <li><a href="/view">Polls</a></li>
+       <li class="dropbtn"><div class="dropdown"><a>Polls</a>
+         <div class="dropdown-content">
+    <a id="poll1" onclick = "pollType(1)">Locally Created</a>
+    <a id="poll2" onclick = "pollType(2)">Publicly Shared</a>
+            </div></div></li> 
         <li><a href="/edit">Edit</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -117,6 +121,13 @@ margin-left:float;
    if (pub == 'true'){ document.getElementById('checkbox2').checked = true;console.log('pub1'+pub);}     
     console.log('pub2'+pub);
    }
+    
+    function pollType(num){
+     if (num == 1) {
+         window.location = "/view?type=local";  
+     }
+     else window.location = "/view?type=public"; 
+    } 
     
     function doDelete() {
       if (document.getElementById("myOptions").length >1)
