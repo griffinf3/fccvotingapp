@@ -48,7 +48,7 @@
     <% include partials/header %>
 </header>   
 <div class="row" style="margin:20px;">
-  <div id="col1" class="column" style="background-color:#aaa;"><p class='qstion'><h3><%= polls[0].question %></h3></p>
+  <div id="col1" class="column" style="background-color:#aaa;"><h3  class='qstion'><%= polls[0].question %></h3>
       
       
       
@@ -117,7 +117,7 @@ var myChart = new Chart(ctx, {
     </div>   
   <div id="col2" class="column" style="background-color:#bbb;">
       <br>
-      <div style="display: inline"><p class='qstion'><h3 style="display: inline"><%= polls[1].question %></h3></p>
+      <div style="display: inline"><h3 class='qstion' style="display: inline"><%= polls[1].question %></h3>
           <span id="secondPost"></span></div>
      <h4 style="background-color:#bbb;">Current Voting Tally: </h4> 
      <div style="background-color:#bbb;"  class="row2">
@@ -185,7 +185,7 @@ var myChart = new Chart(ctx, {
     </div>
   <div id ="col3" class="column" style="background-color:#ccc;">  
       <br>
-    <div style="display: inline"><p class='qstion'><h3  style="display: inline"><%= polls[2].question %></h3></p>
+    <div style="display: inline"><h3 class='qstion' style="display: inline"><%= polls[2].question %></h3>
       <span id="thirdPost"></span></div>
       
       
