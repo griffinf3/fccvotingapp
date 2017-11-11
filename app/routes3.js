@@ -455,12 +455,13 @@ function callback3(error, totalPolls){
             {
             if (userdoc) 
               {//the user exists but does the poll exist?
-                var id = userdoc._id;
+                 var id = userdoc._id;
                  Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
                   if (err) {res.send('error2');}
                   else 
                   if (doc) {
                      //the question was found 
+                      res.send('tp'+ totalPolls) ; 
                   }
                 else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err,    doc) {if (err) {res.send('error3');}
                       else { 
