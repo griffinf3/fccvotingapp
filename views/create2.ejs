@@ -201,7 +201,11 @@ margin-left:float;
    
     //if passes test, select All and submit
     if (OK)
-    {selectAll();
+    {//We will keep the original question in the database
+        //since this is a new post. To avoid deletion,
+        //set oldQuestion value to empty string.
+        document.getElementById("input3").value =''; 
+        selectAll();
     document.getElementById("form1").submit();
     }
     else alert("Questions posted must be unique.");   
