@@ -336,13 +336,14 @@ var myChart = new Chart(ctx, {
         
       for (var i = 1; i < polls[0].options.length; i++)
         {node1 = document.createElement("div");
-         document.getElementById("myList1").appendChild(node1);  
-         node2 = document.createElement("div");
-         document.getElementById("myList1").appendChild(node2); 
          node1.setAttribute('class', 'opSet1a');
          node1.setAttribute("style", "background-color:" + colors[i-1]); 
-         node2.setAttribute('class', 'opSet1b');
-         node2.setAttribute("style", "background-color:red"); 
+         document.getElementById("myList1").appendChild(node1);  
+         //node2 = document.createElement("div");
+         //document.getElementById("myList1").appendChild(node2); 
+        
+        // node2.setAttribute('class', 'opSet1b');
+        // node2.setAttribute("style", "background-color:red"); 
        }
       
       //Second question:
