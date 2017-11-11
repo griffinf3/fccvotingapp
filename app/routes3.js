@@ -448,9 +448,33 @@ function callback0(error, totPolls){
     callback3('', 0); 
             }});  
     
-function callback3(error, totalPolls){ res.send('tp'+ totalPolls);}
+function callback3(error, totalPolls){ 
+   User.findOne({'local.username' : username}, function(err, userdoc) {    
+           if (err) { res.send('error1');}
+           else
+            {
+            if (userdoc) 
+              {//the user exists but does the poll exist?
+                var id = userdoc._id;
+                 Poll.findOne({ 'userid' :  id, 'poll.question' : question}, function(err, doc) {    
+                  if (err) {res.send('error2');}
+                  else 
+                  if (doc) {
+                     //the question was found 
+                  }
+                else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err,    doc) {if (err) {res.send('error3');}
+                      else { 
+                      if (doc){
+                          //the question was found with ? added.
+                        res.send('tp'+ totalPolls) ;            
+                                     
+                      }}});}});
+                                     
+                                     
+                                     
+                                     }
 }
-});
+});}}});
      
 app.get('/delete/*', isLoggedIn, function(req, res) {
      var _qUrl = req.url;
