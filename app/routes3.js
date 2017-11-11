@@ -313,22 +313,45 @@ res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype:
     
 function findDelete(req, res, next) {
     var id = req.user._id;      
-    var question = req.body.question;
-    Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc, next) {
+    var question = req.body.oldQuestion;
+    if (question != '')
+    {Poll.findOneAndRemove({'userid' : id, 'poll.question' : question}, function (err, doc, next) {
     if(err)throw err;
 	else if (!doc) {
     Poll.findOneAndRemove({'userid' : id, 'poll.question' : question+ '?'}, function (err, doc, next) {
     if(err)throw err;});    
     }  
-    });   
+    }); 
+    }
 return next(); 
 }
     
 app.post('/create', findDelete, function(req, res) { 
     var id = req.user._id;      
-    var question = req.body.question;
+    var question = req.body.newQuestion;
+    var options = [{}]; 
+  for (i=0; i<req.body.options.length; i++)
+  {options.push({option: req.body.options[i], votes: 0});}
+    var showCase =  req.body.showcase;
+    var SC= false;
+    if (showCase =='showcase') SC = true; 
+    var makePublic = req.body.visibility;
+    var mP = false;
+    if (makePublic =='public') mP = true; 
+// create new poll document for the user.  
+var newPollUser = new Poll({userid: req.user._id, poll: {question: question, showcase: SC,options: options, public: mP}}); 
+                       
+// save  
+newPollUser.save(function(err) {
+                              if (err) throw err;
+res.redirect('/');
    
-  res.send(question);
+});
+  
+    
+    
+    
+
 });
       
  app.post('/create2', isLoggedIn2, function(req, res) { 

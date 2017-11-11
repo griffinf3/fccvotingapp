@@ -66,7 +66,8 @@ margin-left:float;
 <div id = "poll">
     <form id = "form1" action="/create" method="post">
    Question:<br>
-  <input id="input1" type="text" name="question" value="" size="30" />
+  <input id="input1" type="text" name="newQuestion" value="" size="30" />
+  <input id="input3" type="hidden" name="oldQuestion" value=""/>
   <input id="checkbox" type="checkbox" name="showcase" value="showcase"/>Showcase on Home Page&nbsp;
         <div id="scBtn"><a class="button" onclick="apply()">Update Showcase Option</a></div><br>
         <input style="margin-left: 247px; margin-top:5px;" id="checkbox2" type="checkbox" name="pubvis" value="pubvis"/>Allow public viewing&nbsp;&nbsp;<div id="powBtn"><a class="button" onclick="apply2()">Update viewing option</a></div>
@@ -98,7 +99,8 @@ margin-left:float;
     var qlist=<%- JSON.stringify(qlist) %>;
     
    function loaded() {
-    document.getElementById("input1").value =<%- JSON.stringify(question) %>; 
+    document.getElementById("input1").value =<%- JSON.stringify(question) %>;
+    document.getElementById("input3").value =<%- JSON.stringify(question) %>; 
     var ol = <%- JSON.stringify(options) %>;
     for (var q = 0; q < ol.length; q++)
     { var option = document.createElement("option");
