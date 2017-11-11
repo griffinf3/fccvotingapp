@@ -345,7 +345,7 @@ var newPollUser = new Poll({userid: req.user._id, poll: {question: question, sho
 newPollUser.save(function(err) {
                               if (err) throw err;
 //res.redirect('/');
-    res.send('public'+ req.body.visibility;);
+    res.send('public'+ req.body.visibility);
    
 });});
       
