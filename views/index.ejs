@@ -168,7 +168,8 @@ var maxY = 0;
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[1].options.length; i++)
-{labelsArray.push(polls[1].options[i].option);
+{//labelsArray.push(polls[1].options[i].option);
+ labelsArray.push("option " + [i]);
  dataArray.push(polls[1].options[i].votes);
  if (polls[1].options[i].votes>maxY) maxY = polls[1].options[i].votes;}
     
@@ -238,7 +239,8 @@ var maxY = 0;
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[2].options.length; i++)
-{labelsArray.push(polls[2].options[i].option);
+{//labelsArray.push(polls[2].options[i].option);
+ labelsArray.push("option " + [i]);
  dataArray.push(polls[2].options[i].votes);
  if (polls[2].options[i].votes>maxY) maxY = polls[2].options[i].votes;}
 
