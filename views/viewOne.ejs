@@ -40,7 +40,6 @@
   </style>
 </head>
 <body onload=loaded();>
-
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -61,18 +60,14 @@
             </div></div></li>
         <li><a onclick = "checkEdit()">Edit</a></li>
       </ul>
-
          <ul class="nav navbar-nav navbar-right">
         <li> 
-          
             <a href="/signlog"><span class="glyphicon glyphicon-log-in"></span><%= logstatus %></a></li>
       </ul>
            
     </div>
   </div>
-</nav>  
-    
-    
+</nav>    
  <header>
     <% include partials/header %>
 </header>    
@@ -139,9 +134,7 @@ var myChart = new Chart(ctx, {
 });
 </script>
     </div>   
-     </div> 
-  
-    
+     </div>   
 <footer class="container-fluid text-center">  
     <% include partials/footer %>
   </footer>    
@@ -153,6 +146,13 @@ var totalPolls = <%- JSON.stringify(totalPolls) %>;
 function loaded() {
         alert(<%- JSON.stringify(alertMessage) %>);
         var polls = <%- JSON.stringify(polls) %>;
+              
+ var colors = ['rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'];
               
 //First question:
        // if (polls[0].options.length <= 4)

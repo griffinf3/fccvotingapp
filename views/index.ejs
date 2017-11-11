@@ -31,23 +31,6 @@
     margin-top:-15px;
     
 }
-
-.opSet1a{
-    height: 15px;
-    width: 20px;
-    margin-top:-20px;
-
- 
-}
-    
-.opSet1b{
-    height: 15px;
-    width: 20px;
-    margin-top:-20px;
-    margin-left: 25px;
- 
-}
-
 </style>
 
 <body onload=loaded();>
@@ -87,7 +70,7 @@
     <% include partials/header %>
 </header>   
 <div class="row" style="margin:20px;">
-  <div id="col1" class="column" style="background-color:#aaa;"><h3  class='qstion'><%= polls[0].question %></h3>
+  <div id="col1" class="column" style="background-color:#aaa;"><h3 class='qstion'><%= polls[0].question %></h3>
       <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
      <div style="background-color:#aaa;" class="row2 oplist">
          <ol id="myList1"></ol>
@@ -100,8 +83,7 @@ var maxY = 0;
 var labelsArray = [];
 var dataArray = [];   
 for (var i = 1; i< polls[0].options.length; i++)
-{
-    //labelsArray.push(polls[0].options[i].option);
+{//labelsArray.push(polls[0].options[i].option);
     labelsArray.push("option " + [i]);
  dataArray.push(polls[0].options[i].votes);
  if (polls[0].options[i].votes>maxY) maxY = polls[0].options[i].votes;
@@ -215,22 +197,15 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-    
- 
     </div>
   <div id ="col3" class="column" style="background-color:#ccc;"> 
     <div style="display: inline"><h3 class="qstion"><%= polls[2].question %></h3>
       <span id="thirdPost"></span></div>
-      
-      
-      
      <h4 style="background-color:#ccc;">Current Voting Tally: </h4> 
      <div style="background-color:#ccc;"  class="row2 oplist">
          <ol id="myList3">
          </ol>
      </div>
-    
-    
     <canvas id="myChart3" width="400" height="380"></canvas>
 <script>
 var ctx = document.getElementById("myChart3").getContext('2d');
@@ -291,12 +266,10 @@ var myChart = new Chart(ctx, {
   <footer class="container-fluid text-center">  
     <% include partials/footer %>
   </footer> 
-    
     <form id = "form1" action="/updateOptions" method="post">     
     <input id= "option1" type="hidden" name="option1" value="" />
     <input id= "option2" type="hidden" name="option2" value="" />
     </form>
-
 </body>
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
