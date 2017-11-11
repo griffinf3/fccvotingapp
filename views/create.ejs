@@ -106,7 +106,7 @@
     
     function doAdd() {
       var lg = document.getElementById("myOptions").length;
-      if (lg <= 6)
+      if (lg <= 5)
       {
       var x = document.getElementById("myOptions");
       var option = document.createElement("option");
@@ -116,7 +116,7 @@
       var lg = document.getElementById("myOptions").length;
         document.getElementById("myOptions").options[lg-1].selected = true;
       }
-        else alert('The maximum number of voting options allowed in PollnPost is 6.')
+        else alert('The maximum number of voting options allowed is six.')
     }
     
     function doEdit() {
