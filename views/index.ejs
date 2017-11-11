@@ -341,7 +341,8 @@ var myChart = new Chart(ctx, {
          //node1.setAttribute('class', 'opSet1a');
         // node1.setAttribute("style", "background-color:" + colors[i-1]); 
          
-         h = document.createElement("H3")               
+         h = document.createElement("H4");
+         h.setAttribute("style", "background-color:" + colors[i-1]);
          t = document.createTextNode("Hello World");  
          h.appendChild(t);
          node1.appendChild(h);
