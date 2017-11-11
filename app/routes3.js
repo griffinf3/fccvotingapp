@@ -461,7 +461,7 @@ function callback3(error, totalPolls){
                   else 
                   if (doc) {
                      //the question was found 
-                      res.send('tp'+ totalPolls) ; 
+                      res.send('tpnoextra'+ totalPolls) ; 
                   }
                 else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err,    doc) {if (err) {res.send('error3');}
                       else { 
