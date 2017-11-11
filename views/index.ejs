@@ -333,12 +333,21 @@ var myChart = new Chart(ctx, {
        // if (polls[0].options.length <= 4)
         var node1;
         var node2;
-        
+        var liText;
+        var h;
+        var t;
       for (var i = 1; i < polls[0].options.length; i++)
         {node1 = document.createElement("li");
          //node1.setAttribute('class', 'opSet1a');
         // node1.setAttribute("style", "background-color:" + colors[i-1]); 
+         
+         h = document.createElement("H1")               
+         t = document.createTextNode("Hello World");  
+         h.appendChild(t);
+         node1.appendChild(h);
+
          document.getElementById("myList1").appendChild(node1);  
+         
          //node2 = document.createElement("div");
          //document.getElementById("myList1").appendChild(node2); 
         
