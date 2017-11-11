@@ -461,7 +461,11 @@ function callback3(error, totalPolls){
                   else 
                   if (doc) {
                      //the question was found 
-                      res.send('tpnoextra'+ question) ; 
+                      var opts = [{}];
+                        for (var j=1; j<doc.poll.options.length; j++ )
+                        {opts.push({option: doc.poll.options[j].option, votes: doc.poll.options[j].votes});}
+                        allPolls[0] = {question: question, options: opts};
+                       res.render('viewOne.ejs', {polls: allPolls, logstatus: status, totalPolls: totalPolls, alertMessage: message1});    
                   }
                 else { Poll.findOne({ 'userid' : id, 'poll.question' : question+ '?'}, function(err,    doc) {if (err) {res.send('error3');}
                       else { 
