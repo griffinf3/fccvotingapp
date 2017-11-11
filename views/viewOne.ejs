@@ -148,13 +148,16 @@ function loaded() {
        }}           
             
 } 
-                    
- function checkEdit(){
-             alert("There are no polls to edit.");
-         }
-                
+    
+function checkEdit(){
+             if (totalPolls == 0) alert("There are no polls to edit.");
+              else  window.location = "/edit";
+         } 
+                     
 function checkPost(){
-alert("You cannot post a poll without first logging in.");
+    if (status == " Login/Signup"){alert("You cannot post a poll without first logging in.");}
+    else
+     window.location = "/create"
 }
          
 function pollType(num){
