@@ -31,11 +31,19 @@
     
 }
 
-.opSet1{
+.opSet1a{
     height: 15px;
     width: 20px;
     margin-top:-20px;
-    position: relative;
+
+ 
+}
+    
+.opSet1b{
+    height: 15px;
+    width: 20px;
+    margin-top:-20px;
+    margin-left: 20px;
  
 }
 
@@ -330,11 +338,11 @@ var myChart = new Chart(ctx, {
       for (var i = 1; i < polls[0].options.length; i++)
         {node = document.createElement("li");
          node2 = document.createElement("div");
-         node2.setAttribute('class', 'opSet1');
+         node2.setAttribute('class', 'opSet1a');
          node2.setAttribute("style", "background-color:" + colors[i-1]);  
          //node2.setAttribute("style", "width: 20px"); 
          node3 = document.createElement("div");
-         node3.setAttribute('class', 'opSet1');
+         node3.setAttribute('class', 'opSet1b');
          node3.setAttribute("style", "background-color: red"); 
         // node3.setAttribute("style", "left: 5px"); 
          textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
