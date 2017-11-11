@@ -31,9 +31,10 @@
     
 }
 
-#opSet1{
+.opSet1{
     background-color:yellow;
     width: 20px;
+    height: 20px;
 }
 
 </style>
@@ -323,7 +324,7 @@ var myChart = new Chart(ctx, {
        // textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
         // node.appendChild(textnode); 
          node2 = document.createElement("div");
-         node2.setAttribute('id', 'opSet1');
+         node2.setAttribute('class', 'opSet1');
         // node.appendChild(node2);
           document.getElementById("myList1").appendChild(node2);  
        }
