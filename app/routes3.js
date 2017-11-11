@@ -330,12 +330,6 @@ app.post('/create', findDelete, function(req, res) {
    
   res.send(question);
 });
-  
-    
-    
-    
-
-});
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
     var questionNo = req.body.question;
