@@ -43,7 +43,7 @@
     height: 15px;
     width: 20px;
     margin-top:-20px;
-    margin-left: 20px;
+    margin-left: 25px;
  
 }
 
@@ -343,10 +343,10 @@ var myChart = new Chart(ctx, {
          //node2.setAttribute("style", "width: 20px"); 
          node3 = document.createElement("div");
          node3.setAttribute('class', 'opSet1b');
-         node3.setAttribute("style", "background-color: red"); 
+         //node3.setAttribute("style", "background-color: red"); 
         // node3.setAttribute("style", "left: 5px"); 
          textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
-        // node3.appendChild(textnode);
+         node3.appendChild(textnode);
          ///node2.appendChild(node3);
          node.appendChild(node2);
          node.appendChild(node3);
