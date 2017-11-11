@@ -83,8 +83,8 @@
  
     <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
      <div style="background-color:#aaa;" class="row2 oplist">
-         <ul id="myList1">
-         </ul>
+         <ol id="myList1">
+         </ol>
      </div> 
       <canvas id="myChart" width="400" height="380"></canvas>
 <script>
@@ -321,14 +321,14 @@ var myChart = new Chart(ctx, {
         var node2;
         
       for (var i = 1; i < polls[0].options.length; i++)
-        {///node = document.createElement("li");
-       // textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
-        // node.appendChild(textnode); 
+        {node = document.createElement("li");
          node2 = document.createElement("div");
          node2.setAttribute('class', 'opSet1');
-         node2.setAttribute("style", "background-color:" + colors[i]);
-        // node.appendChild(node2);
-          document.getElementById("myList1").appendChild(node2);  
+         node2.setAttribute("style", "background-color:" + colors[i]);        
+         node.appendChild(node2);      
+    textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
+         node.appendChild(textnode); 
+          document.getElementById("myList1").appendChild(node);  
        }
       
       //Second question:
