@@ -32,9 +32,8 @@
 }
 
 .opSet1{
-    background-color:yellow;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 5px;
 }
 
 </style>
@@ -291,6 +290,7 @@ var myChart = new Chart(ctx, {
      <script>
     var totalPolls =  <%- JSON.stringify(totalPolls) %>; 
     var status = <%- JSON.stringify(logstatus) %>;
+    var colors = [red, yellow, blue, green, white, orange, purple];
     
     function loaded() {
      var polls = <%- JSON.stringify(polls) %>;
@@ -325,6 +325,7 @@ var myChart = new Chart(ctx, {
         // node.appendChild(textnode); 
          node2 = document.createElement("div");
          node2.setAttribute('class', 'opSet1');
+         node2.setAttribute('background-color', colors[i]);
         // node.appendChild(node2);
           document.getElementById("myList1").appendChild(node2);  
        }
