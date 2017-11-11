@@ -333,11 +333,11 @@ var myChart = new Chart(ctx, {
          node2.setAttribute('class', 'opSet1');
          node2.setAttribute("style", "background-color:" + colors[i-1]);  
          //node2.setAttribute("style", "width: 20px"); 
-         node3 = document.createElement("div");
-         textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
-         node3.appendChild(textnode);
+        // node3 = document.createElement("div");
+         //textnode = document.createTextNode(polls[0].options[i].option + ' - '  + polls[0].options[i].votes);
+        // node3.appendChild(textnode);
          node.appendChild(node2);
-         node.appendChild(node3);
+        // node.appendChild(node3);
          document.getElementById("myList1").appendChild(node);  
        }
       
