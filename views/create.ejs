@@ -105,6 +105,9 @@
     }
     
     function doAdd() {
+      var lg = document.getElementById("myOptions").length;
+      if (lg <= 6)
+      {
       var x = document.getElementById("myOptions");
       var option = document.createElement("option");
       option.text = "Next Option";
@@ -112,6 +115,8 @@
         
       var lg = document.getElementById("myOptions").length;
         document.getElementById("myOptions").options[lg-1].selected = true;
+      }
+        else alert('The maximum number of options allowed is 6.')
     }
     
     function doEdit() {
