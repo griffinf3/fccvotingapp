@@ -93,7 +93,7 @@
  
     <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
      <div style="background-color:#aaa;" class="row2 oplist">
-         <div id="myList1"></div>
+         <ol id="myList1"></ol>
      </div> 
       <canvas id="myChart" width="400" height="380"></canvas>
 <script>
@@ -335,9 +335,9 @@ var myChart = new Chart(ctx, {
         var node2;
         
       for (var i = 1; i < polls[0].options.length; i++)
-        {node1 = document.createElement("div");
-         node1.setAttribute('class', 'opSet1a');
-         node1.setAttribute("style", "background-color:" + colors[i-1]); 
+        {node1 = document.createElement("li");
+         //node1.setAttribute('class', 'opSet1a');
+        // node1.setAttribute("style", "background-color:" + colors[i-1]); 
          document.getElementById("myList1").appendChild(node1);  
          //node2 = document.createElement("div");
          //document.getElementById("myList1").appendChild(node2); 
