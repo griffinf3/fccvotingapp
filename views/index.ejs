@@ -8,6 +8,7 @@
     max-height: 44px;
     overflow: auto;
     font-size: 20px;
+    margin-top:-5px;
 }
     
 .oplist {
@@ -70,7 +71,7 @@
     <% include partials/header %>
 </header>   
 <div class="row" style="margin:20px;">
-  <div id="col1" class="column" style="background-color:#aaa; margin-top:-15px;"><h3 class='qstion'><%= polls[0].question %></h3>
+  <div id="col1" class="column" style="background-color:#aaa;"><h3 class='qstion'><%= polls[0].question %></h3>
       <h4 style="background-color:#aaa;">Current Voting Tally: </h4> 
      <div style="background-color:#aaa;" class="row2 oplist">
          <ol id="myList1"></ol>
@@ -128,7 +129,7 @@ var myChart = new Chart(ctx, {
                 }}]}}});
 </script>  
     </div> 
-  <div id="col2" class="column" style="background-color:#bbb; margin-top:-15px;">
+  <div id="col2" class="column" style="background-color:#bbb;">
       <div style="display: inline"><h3 class='qstion'><%= polls[1].question %></h3>
           <span id="secondPost"></span></div>
      <h4 style="background-color:#bbb;">Current Voting Tally: </h4> 
@@ -188,7 +189,7 @@ var myChart = new Chart(ctx, {
                 }}]}}});
 </script>
     </div>
-  <div id ="col3" class="column" style="background-color:#ccc; margin-top:-15px;"> 
+  <div id ="col3" class="column" style="background-color:#ccc;"> 
     <div style="display: inline"><h3 class="qstion"><%= polls[2].question %></h3>
       <span id="thirdPost"></span></div>
      <h4 style="background-color:#ccc;">Current Voting Tally: </h4> 
