@@ -78,6 +78,7 @@
     
     function loaded() {
        var qlist=<%- JSON.stringify(qlist) %>;
+       console.log('qlist'+ qlist);
        document.getElementById("myOptions").options[0].selected = true;  
     }
     
@@ -145,7 +146,7 @@
     }
     
     function checkOK()
-    {//quesiton being submitted must be unique and not match any previous poll quesitons.
+    {//question being submitted must be unique and not match any previous poll quesitons.
        var question = document.getElementById("input1").value;
        var OK = true;
        for (var i=0; i< qlist.length; i++)
