@@ -65,7 +65,7 @@
     <button id= "add" onclick="doAdd()">Add</button> 
     <button id= "edit" onclick="doEdit()">Edit</button> 
     <button id= "delete" onclick="doDelete()">Delete</button> 
-    <button style="margin-left:130px;" onclick="checkOK">Post this Poll</button>
+    <button style="margin-left:130px;" onclick="checkOK()">Post this Poll</button>
         </div>
    <div style="margin-bottom: 5px;"><button id="done" style="display:none" onclick="doDone()">Done</button></div>
 </div>
@@ -146,6 +146,7 @@
     
     function checkOK()
     {//question being submitted must be unique and not match any previous poll quesitons.
+        console.log('checking');
        var question = document.getElementById("input1").value;
        var OK = true;
        for (var i=0; i< qlist.length; i++)
