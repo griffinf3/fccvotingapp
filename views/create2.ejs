@@ -139,6 +139,9 @@ margin-left:float;
     }
     
     function doAdd() {
+      var lg = document.getElementById("myOptions").length;
+      if (lg <= 5)
+      {
       var x = document.getElementById("myOptions");
       var option = document.createElement("option");
       option.text = "Next Option";
@@ -146,6 +149,8 @@ margin-left:float;
         
       var lg = document.getElementById("myOptions").length;
         document.getElementById("myOptions").options[lg-1].selected = true;
+      }
+        else alert('The maximum number of voting options allowed is six.')
     }
     
     function doEdit() {
