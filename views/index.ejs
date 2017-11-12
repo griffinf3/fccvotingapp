@@ -303,45 +303,41 @@ var myChart = new Chart(ctx, {
       node.appendChild(hideBtn); 
      }
 
-     //First question:
-       // if (polls[0].options.length <= 4)
+    //First question:
         var node1;
         var node2;
-        var liText;
-        var h;
+        var nText;
+        var n;
         var t;
       for (var i = 1; i < polls[0].options.length; i++)
         {node1 = document.createElement("li"); 
-         h = document.createElement("H5");
-         h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
-         liText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes; 
-         t = document.createTextNode(liText);  
-         h.appendChild(t);
-         node1.appendChild(h);  
+         n = document.createElement("input");
+         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         nText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes;
+         n.setAttribute("value", nText);
+         node1.appendChild(n);  
          document.getElementById("myList1").appendChild(node1);   
-       }
+       } 
       
       //Second question: 
       for (var i = 1; i < polls[1].options.length; i++)
         {node1 = document.createElement("li"); 
-         h = document.createElement("H5");
-         h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
-         liText = polls[1].options[i].option + ' - '  + polls[1].options[i].votes; 
-         t = document.createTextNode(liText);  
-         h.appendChild(t);
-         node1.appendChild(h);  
+         n = document.createElement("input");
+         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         nText = polls[1].options[i].option + ' - '  + polls[1].options[i].votes; 
+         n.setAttribute("value", nText);  
+         node1.appendChild(n);  
          document.getElementById("myList2").appendChild(node1); 
        }
         
       //Third question:
-      for (var i = 1; i < polls[2].options.length; i++)
+        for (var i = 1; i < polls[2].options.length; i++)
         {node1 = document.createElement("li"); 
-         h = document.createElement("H5");
-         h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
-         liText = polls[2].options[i].option + ' - '  + polls[2].options[i].votes; 
-         t = document.createTextNode(liText);  
-         h.appendChild(t);
-         node1.appendChild(h);  
+         n = document.createElement("input");
+         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         nText = polls[2].options[i].option + ' - '  + polls[2].options[i].votes;
+         n.setAttribute("value", nText);
+         node1.appendChild(n);    
          document.getElementById("myList3").appendChild(node1);  
        }      
    var op2 = <%- JSON.stringify(option2) %>; 

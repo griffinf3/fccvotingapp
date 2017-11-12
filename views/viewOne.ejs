@@ -160,17 +160,17 @@ function loaded() {
         var node1;
         var node2;
         var nText;
-        var h;
+        var n;
         var t;
       for (var i = 1; i < polls[0].options.length; i++)
         {node1 = document.createElement("li"); 
-         h = document.createElement("input");
-         h.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         n = document.createElement("input");
+         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
          nText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes; 
          //t = document.createTextNode(liText);  
         //h.appendChild(t);
-         h.setAttribute("value", nText);
-         node1.appendChild(h);  
+         n.setAttribute("value", nText);
+         node1.appendChild(n);  
          document.getElementById("myList1").appendChild(node1);   
        }                      
 } 
