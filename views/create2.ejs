@@ -35,8 +35,7 @@ margin-left:float;
   display: inline;
     </style>
 <body onload="loaded()">
-
-   <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -62,8 +61,7 @@ margin-left:float;
       </ul>
     </div>
   </div>
-</nav> 
-      
+</nav>     
 <header>
     <% include partials/header %>
 </header>
@@ -76,8 +74,8 @@ margin-left:float;
   <input id="checkbox" type="checkbox" name="showcase" value="showcase"/>Showcase on Home Page&nbsp;
         <div id="scBtn"><a class="button" onclick="apply()">Update Showcase Option</a></div><br>
         <input style="margin-top:5px;" id="checkbox2" type="checkbox" name="pubvis" value="pubvis"/>Allow public viewing&nbsp;&nbsp;<div id="powBtn"><a class="button" onclick="apply2()">Update viewing option</a></div>
-            </div>
-        <br><br><br>
+</div>
+<br><br><br>
    Options:<br>
    <select id="myOptions" name="options[]" multiple="multiple">
         </select><br>
@@ -113,15 +111,13 @@ margin-left:float;
       option.value = ol[q].option;;
       option.innerHTML = ol[q].option;
       document.getElementById("myOptions").appendChild(option);
-      console.log('index'+ q +'option' + ol[q].option);
     }
        
    document.getElementById("myOptions").options[0].selected = true;  
    var sc = <%- JSON.stringify(sc) %>; 
    if (sc == 'true'){ document.getElementById('checkbox').checked = true;}
    var pub = <%- JSON.stringify(pub) %>; 
-   if (pub == 'true'){ document.getElementById('checkbox2').checked = true;console.log('pub1'+pub);}     
-    console.log('pub2'+pub);
+   if (pub == 'true'){ document.getElementById('checkbox2').checked = true;}     
    }
     
     function pollType(num){
@@ -256,7 +252,6 @@ margin-left:float;
         var question = <%- JSON.stringify(question) %>;
         var username = <%- JSON.stringify(username) %>;
         if (document.getElementById('checkbox2').checked == true) pubOption = true; else pubOption = false;
-        
         document.getElementById('pubvis').value = pubOption;
         document.getElementById('showcase').value = '';
         document.getElementById('qlist').value = qlist;

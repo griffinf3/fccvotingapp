@@ -4,8 +4,7 @@
     <% include partials/head %>
 </head>
 <body onload="loaded()">
-
-   <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -83,16 +82,14 @@
         var o = s.options[s.selectedIndex].value;
         document.getElementById("sc").value= scl[o-1];
         document.getElementById("pub").value= publ[o-1];
-        console.log('sc'+ document.getElementById("sc").value);
-        console.log('pub'+ document.getElementById("pub").value);
     }
         	
 	function pollType(num){
-     //locally created
+     //locally created.
      if (num == 1) {
          window.location = "/view?type=local";  
      }
-     //publicly shared  
+     //publicly shared. 
      //logged in (or wouldn't be here).
      else {window.location = "/view?type=public";}  
  }   

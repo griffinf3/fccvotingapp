@@ -9,10 +9,9 @@
     margin-top: 5px;
 }
     
-    </style>
+</style>
 <body onload="loaded()">
-
-   <nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -38,14 +37,12 @@
       </ul>
     </div>
   </div>
-</nav> 
-      
+</nav>    
 <header>
     <% include partials/header %>
 </header>
 <div id = "poll">
-    
-    <form id = "form1" action="/create" method="post">
+<form id = "form1" action="/create" method="post">
    Question:<br>
         <input id="input1" type="text" name="newQuestion" value="What is your favorite ...?" size="30">
         <input id="input3" type="hidden" name="oldQuestion" value="">   
@@ -69,7 +66,6 @@
         </div>
    <div style="margin-bottom: 5px;"><button id="done" style="display:none" onclick="doDone()">Done</button></div>
 </div>
-
 <footer class="container-fluid text-center">
     <% include partials/footer %>
 </footer>
@@ -113,8 +109,7 @@
       var x = document.getElementById("myOptions");
       var option = document.createElement("option");
       option.text = "Next Option";
-      x.add(option);
-        
+      x.add(option); 
       var lg = document.getElementById("myOptions").length;
         document.getElementById("myOptions").options[lg-1].selected = true;
       }
@@ -145,7 +140,6 @@
     
     function checkOK()
     {//question being submitted must be unique and not match any previous poll quesitons.
-        console.log('checking');
        var question = document.getElementById("input1").value;
        var OK = true;
        for (var i=0; i< qlist.length; i++)
@@ -155,13 +149,8 @@
    
     //if passes test, select All and submit
     if (OK)
-    {//We will keep the original question in the database
-        //since this is a new post. To avoid deletion,
-        //set oldQuestion value to empty string.
-        //document.getElementById("input3").value =''; 
-        console.log('allOK');
-        selectAll();
-    document.getElementById("form1").submit();
+    { selectAll();
+      document.getElementById("form1").submit();
     }
     else alert("Questions posted must be unique.");   
     }
@@ -179,7 +168,6 @@
     x.options[x.selectedIndex].text = newValue.value;
     x.options[x.selectedIndex].value = newValue.value;  
     }
-
 </script>
 </body>
 </html>

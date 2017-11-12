@@ -84,14 +84,12 @@
              var nl = [];
              for (var i = 0; i<qnlist.length; i++)            
              {q = qnlist[i].question;
-              console.log('question'+ q);
               ql.push(q);
               n = qnlist[i].username;
               nl.push(n);
               
              }}
      else ql = <%- JSON.stringify(questionlist) %>;
-     console.log('ql'+ql);
      for (var q = 0; q < ql.length; q++)
      { if (viewtype == "public")
          loc.push(nl[q]  + "/" + (ql[q]));
@@ -132,29 +130,26 @@
      link.setAttribute("href", loc2);
      link.innerHTML = loc2;
          node.appendChild(link);
-             document.getElementById("myList").appendChild(node);}
-     
-}
+             document.getElementById("myList").appendChild(node);}}
        
 function confirmIt(r) {
     var ql = <%- JSON.stringify(questionlist) %>;
     var locQuestion = ql[r]; 
     var r = confirm("Are you sure you want to delete the poll, " + '"' + ql[r] + '"' + ", from the database?");
   if (r == true)  window.location = "/delete/" + <%- JSON.stringify(username) %> + "/" + locQuestion; 
-    //else window.location = "/view";
 }
   
 function pollType(num){
-     //locally created
+     //locally created.
      if (num == 1) {
          checkPolls()   
      }
-     //publicly shared
-     //not logged in
+     //publicly shared.
+     //not logged in.
      else if (status == " Login/Signup"){  
          window.location = "/view2";
      } 
-     //logged in
+     //logged in.
      else {
          window.location = "/view?type=public";
      }  

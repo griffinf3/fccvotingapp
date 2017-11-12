@@ -16,6 +16,5 @@ var pollSchema = mongoose.Schema({
   }
 });
 
-
 // create the model for polls and expose it to our app
 module.exports = mongoose.model('Poll', pollSchema);
