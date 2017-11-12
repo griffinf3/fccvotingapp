@@ -74,10 +74,9 @@
     <% include partials/footer %>
 </footer>
 <script>
-    
+     var qlist=<%- JSON.stringify(qlist) %>;
     
     function loaded() {
-       var qlist=<%- JSON.stringify(qlist) %>;
        document.getElementById("myOptions").options[0].selected = true;  
     }
     
