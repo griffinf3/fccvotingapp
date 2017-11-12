@@ -101,10 +101,12 @@
     
      for (var r = 0; r < ql.length; r++)
      {   loc2=loc[r]; 
-         voteBtn = document.createElement("a");
-         voteBtn.setAttribute("href", loc2);
-         voteBtn.setAttribute("class", 'button');
-         voteBtn.innerHTML = "Vote";
+         if (status != " Login/Signup")
+         {
+            voteBtn = document.createElement("a");
+            voteBtn.setAttribute("href", loc2);
+            voteBtn.setAttribute("class", 'button');
+            voteBtn.innerHTML = "Vote";}
         
          var node = document.createElement("li");
          textnode = document.createTextNode(ql[r]);
@@ -119,7 +121,8 @@
          node.appendChild(deleteBtn);
        }
               
-      node.appendChild(voteBtn);
+      if (status != " Login/Signup")
+         {node.appendChild(voteBtn);}
       
      link = document.createElement("span");    
      link.innerHTML = " Link: ";
@@ -129,10 +132,7 @@
      link.setAttribute("href", loc2);
      link.innerHTML = loc2;
          node.appendChild(link);
-             document.getElementById("myList").appendChild(node);     
-         
-        
-      }
+             document.getElementById("myList").appendChild(node);}
      
 }
        
