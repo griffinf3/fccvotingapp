@@ -148,16 +148,17 @@ app.post('/updateOptions', isLoggedIn, function(req, res) {
             failureFlash : true // allow flash messages
         }));
     
-     app.get('/create', isLoggedIn, function(req, res) {
-        var totalPolls =0;
+app.get('/create', isLoggedIn, function(req, res) {
+        var totalPolls =0; var questionlist = [];
         Poll.find({ 'userid' :  req.user._id }, function(err, polls) {    
                  if (err) {}
-                 else{totalPolls = polls.length;}
-        
-         res.render('create.ejs', {totalPolls: totalPolls, question: 'poll 1'});
-        }); 
-       
-    });
+                 else{if (polls)
+                      totalPolls = polls.length;
+                      for (var i=0; i<totalPolls; i++)
+                         {questionlist.push(polls[i].poll.question);} 
+                     }
+         res.render('create.ejs', {totalPolls: totalPolls, qlist: questionlist});
+        });});
     
 app.get('/view', isLoggedIn, function(req, res) { 
                     var viewtype = req.param('type');
@@ -296,7 +297,7 @@ res.render('view.ejs', {questionlist: [], qnamelist: [], username: '', viewtype:
                                 var questionlist = [];
                                 var sclist = [];
                                 var publist = [];
-                                for (i=0; i<lg; i++)
+                                for (var i=0; i<lg; i++)
                                 {
                                 questionlist.push(doc[i].poll.question)
                                 sclist.push(doc[i].poll.showcase)
@@ -330,7 +331,7 @@ app.post('/create', findDelete, function(req, res) {
     var id = req.user._id;      
     var question = req.body.newQuestion;
     var options = [{}]; 
-  for (i=0; i<req.body.options.length; i++)
+  for (var i=0; i<req.body.options.length; i++)
   {options.push({option: req.body.options[i], votes: 0});}
     var showCase =  req.body.showcase;
     var SC= false;
@@ -348,6 +349,7 @@ res.redirect('/');
 });});
       
  app.post('/create2', isLoggedIn2, function(req, res) { 
+     //here we go form the question selector page (edit.ejs) to the editing page (create2.ejs).
     var questionNo = req.body.question;
     var sc =  req.body.sc;
     var pub = req.body.pub;

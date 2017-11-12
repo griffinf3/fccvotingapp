@@ -58,8 +58,6 @@
    <select id="myOptions" name="options[]" multiple="multiple">
     <option value="Option1">Option 1</option>
         </select>
-       
-   <input style="margin-left:130px;" type="submit" onclick="selectAll()" value="Post this Poll">
      </form>   
        
  <div id="input2" style="display:none"><input id="newoption" type="text" name="option" value="" size="10"></div>
@@ -67,6 +65,7 @@
     <button id= "add" onclick="doAdd()">Add</button> 
     <button id= "edit" onclick="doEdit()">Edit</button> 
     <button id= "delete" onclick="doDelete()">Delete</button> 
+    <button style="margin-left:130px;" onclick="checkOK">Post this Poll</button>
         </div>
    <div style="margin-bottom: 5px;"><button id="done" style="display:none" onclick="doDone()">Done</button></div>
 </div>
@@ -75,8 +74,11 @@
     <% include partials/footer %>
 </footer>
 <script>
+    
+    
     function loaded() {
-   document.getElementById("myOptions").options[0].selected = true;  
+       var qlist=<%- JSON.stringify(qlist) %>;
+       document.getElementById("myOptions").options[0].selected = true;  
     }
     
     function pollType(num){
@@ -140,6 +142,27 @@
     document.getElementById('add').style.display = 'inline';
     document.getElementById('delete').style.display = 'inline';
     document.getElementById('done').style.display = 'none';     
+    }
+    
+    function checkOK()
+    {//quesiton being submitted must be unique and not match any previous poll quesitons.
+       var question = document.getElementById("input1").value;
+       var OK = true;
+       for (var i=0; i< qlist.length; i++)
+       {if (question == qlist[i]) 
+        {OK = false;
+        break;}}
+   
+    //if passes test, select All and submit
+    if (OK)
+    {//We will keep the original question in the database
+        //since this is a new post. To avoid deletion,
+        //set oldQuestion value to empty string.
+        document.getElementById("input3").value =''; 
+        selectAll();
+    document.getElementById("form1").submit();
+    }
+    else alert("Questions posted must be unique.");   
     }
     
     function selectAll() 

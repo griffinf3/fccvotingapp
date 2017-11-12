@@ -201,7 +201,7 @@ margin-left:float;
     {//quesiton being submitted must be unique and not match any previous poll quesitons.
        var question = document.getElementById("input1").value;
        var OK = true;
-       for (i=0; i< qlist.length; i++)
+       for (var i=0; i< qlist.length; i++)
        {if (question == qlist[i]) 
         {OK = false;
         break;}}
