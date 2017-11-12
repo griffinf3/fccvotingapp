@@ -166,8 +166,9 @@ function loaded() {
          h = document.createElement("input");
          h.setAttribute("style", "height: 12px; background-color:" + colors[i-1]);
          liText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes; 
-         t = document.createTextNode(liText);  
-         h.appendChild(t);
+         //t = document.createTextNode(liText);  
+        //h.appendChild(t);
+         h.setAttribute("value", liText);
          node1.appendChild(h);  
          document.getElementById("myList1").appendChild(node1);   
        }                      
