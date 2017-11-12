@@ -33,7 +33,6 @@
     
 }
 </style>
-
 <body onload=loaded();>
    <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -76,7 +75,7 @@
      <div style="background-color:#aaa;" class="row2 oplist">
          <ol id="myList1"></ol>
      </div> 
-      <canvas id="myChart" width="400" height="380"></canvas>
+<canvas id="myChart" width="400" height="380"></canvas>
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
@@ -126,11 +125,7 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     beginAtZero:true,
                     stepSize: sSize
-                }
-            }]
-        }
-    }
-});
+                }}]}}});
 </script>  
     </div> 
   <div id="col2" class="column" style="background-color:#bbb;">
@@ -140,10 +135,8 @@ var myChart = new Chart(ctx, {
      <div style="background-color:#bbb;"  class="row2 oplist">
          <ol id="myList2">
          </ol>
-     </div> 
-    
-    
-    <canvas id="myChart2" width="400" height="380"></canvas>
+     </div>    
+<canvas id="myChart2" width="400" height="380"></canvas>
 <script>
 var ctx = document.getElementById("myChart2").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
@@ -192,11 +185,7 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     beginAtZero:true,
                     stepSize: sSize
-                }
-            }]
-        }
-    }
-});
+                }}]}}});
 </script>
     </div>
   <div id ="col3" class="column" style="background-color:#ccc;"> 
@@ -207,7 +196,7 @@ var myChart = new Chart(ctx, {
          <ol id="myList3">
          </ol>
      </div>
-    <canvas id="myChart3" width="400" height="380"></canvas>
+<canvas id="myChart3" width="400" height="380"></canvas>
 <script>
 var ctx = document.getElementById("myChart3").getContext('2d');
 var polls = <%- JSON.stringify(polls) %>;
@@ -256,11 +245,7 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     beginAtZero:true,
                     stepSize: sSize
-                }
-            }]
-        }
-    }
-});
+                }}]}}});
 </script>
     </div>
 </div>
@@ -314,7 +299,7 @@ var myChart = new Chart(ctx, {
         {node1 = document.createElement("li"); 
          node1.setAttribute("style", "display: inline");
          n = document.createElement("input");
-         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         n.setAttribute("style", "height: 23px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
          nText = polls[0].options[i].option + ' - '  + polls[0].options[i].votes;
          n.setAttribute("value", nText);
          node1.appendChild(n);  
@@ -326,7 +311,7 @@ var myChart = new Chart(ctx, {
         {node1 = document.createElement("li"); 
          node1.setAttribute("style", "display: inline");
          n = document.createElement("input");
-         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         n.setAttribute("style", "height: 23px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
          nText = polls[1].options[i].option + ' - '  + polls[1].options[i].votes; 
          n.setAttribute("value", nText);  
          node1.appendChild(n);  
@@ -338,7 +323,7 @@ var myChart = new Chart(ctx, {
         {node1 = document.createElement("li"); 
          node1.setAttribute("style", "display: inline");
          n = document.createElement("input");
-         n.setAttribute("style", "height: 22px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
+         n.setAttribute("style", "height: 23px; width: 210px; readonly='readonly'; border: 0; background-color:" + colors[i-1]);
          nText = polls[2].options[i].option + ' - '  + polls[2].options[i].votes;
          n.setAttribute("value", nText);
          node1.appendChild(n);    
@@ -351,14 +336,14 @@ var myChart = new Chart(ctx, {
     }
          
  function pollType(num){
-     //locally created
+     //locally created.
      if (num == 1) {
          checkPolls()   
      }
-     //publicly shared
-     //not logged in
+     //publicly shared.
+     //not logged in.
      else if (status == " Login/Signup"){window.location = "/view2";} 
-     //logged in
+     //logged in.
      else {window.location = "/view?type=public";}  
  }
                   
@@ -391,27 +376,19 @@ function hide(num){
     if (el2.style.display == '') el2.style.display = 'block';
     if (el3.style.display == '') el3.style.display = 'block'; 
     if(num ==1)
-     {
-        
-     if (el2.style.display == 'none')
-     { 
-         el2.style.display = 'block';
-    document.getElementById("hide1").textContent="Hide Poll2";
+     { if (el2.style.display == 'none')
+     {el2.style.display = 'block';
+     document.getElementById("hide1").textContent="Hide Poll2";
      if (el3.style.display == 'none')
-    {el.style.left="-150px";el2.style.left="-150px"; } else {  
-        
-       /// window.location = "/index";
-    }
+    {el.style.left="-150px";el2.style.left="-150px"; }
      }
-    else {
-    el2.style.display = 'none';
+    else {el2.style.display = 'none';
     document.getElementById("hide1").textContent="Show Poll2";}    
     if (el3.style.display == 'none')
     {el.style.marginLeft = "330px";} else {el.style.marginLeft = "150px";}
-     }
+    }
     else
-     {
-     if (el3.style.display == 'none') {el3.style.display = 'block';
+     {if (el3.style.display == 'none') {el3.style.display = 'block';
     document.getElementById("hide2").textContent="Hide Poll3";
     if (el2.style.display == 'none')
     {el.style.left="-150px";el3.style.left="-150px";}} 
@@ -421,68 +398,39 @@ function hide(num){
     {el.style.marginLeft = "330px";} else {el.style.marginLeft = "150px";}}  
     document.getElementById('option1').value = el2.style.display;
     document.getElementById('option2').value = el3.style.display;
-    console.log(el2.style.display);
-    console.log(el3.style.display);
     document.getElementById('form1').submit();
    } else
-   {alert("Please login to utilize this feature.");}
-   
-}
+   {alert("Please login to utilize this feature.");}}
          
 function hide2(num){
    if (status == ' Log out')
-   {
-  var el = document.querySelector("#col1");
-  var el2 = document.querySelector("#col2");
-  var el3 = document.querySelector("#col3");
+   {var el = document.querySelector("#col1");
+    var el2 = document.querySelector("#col2");
+    var el3 = document.querySelector("#col3");
     if (el2.style.display == '') el2.style.display = 'block';
     if (el3.style.display == '') el3.style.display = 'block';
     if(num ==1)
-     {
-        
-     if (el2.style.display == 'none')
-     { 
-         el2.style.display = 'block';
+     {if (el2.style.display == 'none')
+     {el2.style.display = 'block';
     document.getElementById("hide1").textContent="Hide Poll2";
      if (el3.style.display == 'none')
-    {el.style.left="-150px";el2.style.left="-150px"; } else {  
-        
-       /// window.location = "/index";
-    }
+    {el.style.left="-150px";el2.style.left="-150px"; } 
      }
-    else {
-        
-        
-        el2.style.display = 'none';
-        
-            document.getElementById("hide1").textContent="Show Poll2";}
-         
-         
+    else {el2.style.display = 'none';
+    document.getElementById("hide1").textContent="Show Poll2";}
     if (el3.style.display == 'none')
     {el.style.marginLeft = "330px";} else {el.style.marginLeft = "150px";}
      }
-    
-    
-    else
-     {
-     if (el3.style.display == 'none') {el3.style.display = 'block';
+     else
+     {if (el3.style.display == 'none') {el3.style.display = 'block';
     document.getElementById("hide2").textContent="Hide Poll3";
     if (el2.style.display == 'none')
-    {el.style.left="-150px";el3.style.left="-150px";  } else {
-        
-       /// window.location = "/index";
-    }                                                                                                                                } 
-        else {el3.style.display = 'none';
-           document.getElementById("hide2").textContent="Show Poll3";}
+    {el.style.left="-150px";el3.style.left="-150px";}} 
+    else {el3.style.display = 'none';
+    document.getElementById("hide2").textContent="Show Poll3";}
     if (el2.style.display == 'none')
     {el.style.marginLeft = "330px";} else {el.style.marginLeft = "150px";}          
-     }  
-    //document.getElementById('option1').value = el2.style.display;
-   // document.getElementById('option2').value = el3.style.display;
-  //  document.getElementById('form1').submit();
-   } else
-   {alert("Please login to create and view polls.");}
-   
-}
+    }} else
+   {alert("Please login to create and view polls.");}}
 </script>
 </html>
