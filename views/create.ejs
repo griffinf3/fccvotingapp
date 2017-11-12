@@ -45,7 +45,7 @@
 </header>
 <div id = "poll">
     
-    <form action="/create" method="post">
+    <form id = "form1" action="/create" method="post">
    Question:<br>
         <input id="input1" type="text" name="newQuestion" value="What is your favorite ...?" size="30">
         <input id="input3" type="hidden" name="oldQuestion" value="">   
@@ -78,7 +78,6 @@
     
     function loaded() {
        var qlist=<%- JSON.stringify(qlist) %>;
-       console.log('qlist'+ qlist);
        document.getElementById("myOptions").options[0].selected = true;  
     }
     
@@ -159,7 +158,7 @@
     {//We will keep the original question in the database
         //since this is a new post. To avoid deletion,
         //set oldQuestion value to empty string.
-        document.getElementById("input3").value =''; 
+        //document.getElementById("input3").value =''; 
         selectAll();
     document.getElementById("form1").submit();
     }
